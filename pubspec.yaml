@@ -58,6 +58,11 @@ dependencies:
   
   # Loading indicators
   flutter_spinkit: ^5.2.0
+  
+  # Internationalization
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:

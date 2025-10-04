@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../theme/app_colors.dart';
 import '../widgets/theme_toggle.dart';
+import '../widgets/language_toggle.dart';
+import '../l10n/app_localizations.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -16,6 +18,7 @@ class DashboardScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         actions: [
+          const LanguageToggle(),
           const ThemeToggle(),
           IconButton(
             icon: const Icon(Icons.notifications_outlined),
@@ -90,7 +93,7 @@ class DashboardScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Welcome back!',
+                        AppLocalizations.of(context)!.welcomeBack,
                         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -119,7 +122,7 @@ class DashboardScreen extends StatelessWidget {
                 
                 // Quick Actions
                 Text(
-                  'Quick Actions',
+                  AppLocalizations.of(context)!.quickActions,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.grey[800],
@@ -133,8 +136,8 @@ class DashboardScreen extends StatelessWidget {
                       child: _buildActionCard(
                         context,
                         icon: Icons.add_circle_outline,
-                        title: 'New Project',
-                        subtitle: 'Start a new ceremony project',
+                        title: AppLocalizations.of(context)!.newProject,
+                        subtitle: AppLocalizations.of(context)!.startNewCeremony,
                         color: Colors.blue,
                         onTap: () {
                           // TODO: Navigate to create project
@@ -146,8 +149,8 @@ class DashboardScreen extends StatelessWidget {
                       child: _buildActionCard(
                         context,
                         icon: Icons.folder_outlined,
-                        title: 'My Projects',
-                        subtitle: 'View all your projects',
+                        title: AppLocalizations.of(context)!.myProjects,
+                        subtitle: AppLocalizations.of(context)!.viewAllProjects,
                         color: Colors.green,
                         onTap: () {
                           // TODO: Navigate to projects list
@@ -165,8 +168,8 @@ class DashboardScreen extends StatelessWidget {
                       child: _buildActionCard(
                         context,
                         icon: Icons.group_outlined,
-                        title: 'Organizations',
-                        subtitle: 'Manage organizations',
+                        title: AppLocalizations.of(context)!.organizations,
+                        subtitle: AppLocalizations.of(context)!.manageOrganizations,
                         color: Colors.purple,
                         onTap: () {
                           // TODO: Navigate to organizations
@@ -178,8 +181,8 @@ class DashboardScreen extends StatelessWidget {
                       child: _buildActionCard(
                         context,
                         icon: Icons.analytics_outlined,
-                        title: 'Reports',
-                        subtitle: 'View analytics',
+                        title: AppLocalizations.of(context)!.reports,
+                        subtitle: AppLocalizations.of(context)!.viewAnalytics,
                         color: Colors.orange,
                         onTap: () {
                           // TODO: Navigate to reports
@@ -193,7 +196,7 @@ class DashboardScreen extends StatelessWidget {
                 
                 // Recent Activity
                 Text(
-                  'Recent Activity',
+                  AppLocalizations.of(context)!.recentActivity,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.grey[800],
@@ -225,14 +228,14 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        'No recent activity',
+                        AppLocalizations.of(context)!.noRecentActivity,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: Colors.grey[600],
                         ),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Start by creating your first project',
+                        AppLocalizations.of(context)!.startFirstProject,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.grey[500],
                         ),
