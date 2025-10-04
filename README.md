@@ -1,16 +1,126 @@
-# haaju_mobile
+# Ceremo Mobile App
 
-A new Flutter project.
+A Flutter mobile application for ceremony and project management, integrated with the existing Haaju backend API.
+
+## Features
+
+- 🔐 **Authentication Flow** - Login and signup with beautiful UI
+- 🏢 **Organization Management** - Multi-tenant support
+- 📊 **Project Management** - Create and manage ceremony projects
+- 📱 **Modern UI** - Material 3 design with orange theme
+- 🔌 **API Integration** - GraphQL client with authentication
+
+## Tech Stack
+
+- **Flutter** - Cross-platform mobile development
+- **GraphQL** - API communication with backend
+- **Provider** - State management
+- **SharedPreferences** - Local storage
+- **Material 3** - Modern UI design
+
+## Project Structure
+
+```
+lib/
+├── services/           # API services
+│   ├── api_config.dart
+│   ├── graphql_client.dart
+│   ├── auth_service.dart
+│   ├── organization_service.dart
+│   └── project_service.dart
+├── providers/          # State management
+│   └── auth_provider.dart
+├── screens/            # UI screens
+│   ├── login_screen.dart
+│   ├── signup_screen.dart
+│   └── dashboard_screen.dart
+├── widgets/            # Reusable widgets
+│   ├── loading_screen.dart
+│   └── error_screen.dart
+└── main.dart           # App entry point
+```
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+- Flutter SDK (3.29.2 or later)
+- iOS Simulator or Android Emulator
+- Backend API running on localhost:8001
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. **Install dependencies:**
+   ```bash
+   flutter pub get
+   ```
+
+2. **Run the app:**
+   ```bash
+   flutter run
+   ```
+
+### Backend Integration
+
+The app is configured to connect to the Haaju backend API:
+
+- **GraphQL Endpoint:** `http://localhost:8001/graphql/`
+- **Authentication:** JWT token-based
+- **Organization Support:** Multi-tenant architecture
+
+## API Services
+
+### Authentication Service
+- User login/logout
+- User registration
+- Token management
+- User profile management
+
+### Organization Service
+- List user organizations
+- Create new organizations
+- Manage organization members
+
+### Project Service
+- List user projects
+- Create new projects
+- Update project details
+- View project analytics
+
+## Development
+
+### Running on iOS Simulator
+```bash
+flutter run -d "iPhone 16 Plus"
+```
+
+### Running on Android Emulator
+```bash
+flutter run -d "emulator-5554"
+```
+
+### Hot Reload
+The app supports hot reload for fast development:
+```bash
+# Press 'r' in the terminal or use your IDE
+```
+
+## Features in Development
+
+- [ ] Project creation and management
+- [ ] Organization switching
+- [ ] Real-time notifications
+- [ ] Offline support
+- [ ] Push notifications
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is part of the Haaju project ecosystem.

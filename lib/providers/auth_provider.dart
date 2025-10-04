@@ -1,0 +1,148 @@
+import 'package:flutter/foundation.dart';
+import '../services/auth_service.dart';
+
+class AuthProvider with ChangeNotifier {
+  bool _isLoading = false;
+  bool _isAuthenticated = false;
+  Map<String, dynamic>? _user;
+  String? _error;
+
+  // Getters
+  bool get isLoading => _isLoading;
+  bool get isAuthenticated => _isAuthenticated;
+  Map<String, dynamic>? get user => _user;
+  String? get error => _error;
+
+  // Initialize auth state
+  Future<void> initialize() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      _isAuthenticated = await AuthService.isLoggedIn();
+      if (_isAuthenticated) {
+        _user = await AuthService.getCurrentUserData();
+      }
+    } catch (e) {
+      _error = e.toString();
+      _isAuthenticated = false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // Login
+  Future<bool> login({
+    required String email,
+    required String password,
+  }) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+
+    try {
+      final result = await AuthService.login(
+        email: email,
+        password: password,
+      );
+
+      if (result != null) {
+        _isAuthenticated = true;
+        _user = result['user'];
+        _error = null;
+        notifyListeners();
+        return true;
+      }
+      return false;
+    } catch (e) {
+      _error = e.toString();
+      _isAuthenticated = false;
+      notifyListeners();
+      return false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // Register
+  Future<bool> register({
+    required String email,
+    required String password,
+    required String name,
+    String? country,
+    String? currency,
+  }) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+
+    try {
+      final result = await AuthService.register(
+        email: email,
+        password: password,
+        name: name,
+        country: country,
+        currency: currency,
+      );
+
+      if (result != null) {
+        _isAuthenticated = true;
+        _user = result['user'];
+        _error = null;
+        notifyListeners();
+        return true;
+      }
+      return false;
+    } catch (e) {
+      _error = e.toString();
+      _isAuthenticated = false;
+      notifyListeners();
+      return false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // Logout
+  Future<void> logout() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      await AuthService.logout();
+      _isAuthenticated = false;
+      _user = null;
+      _error = null;
+    } catch (e) {
+      _error = e.toString();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // Clear error
+  void clearError() {
+    _error = null;
+    notifyListeners();
+  }
+
+  // Refresh user data
+  Future<void> refreshUser() async {
+    if (!_isAuthenticated) return;
+
+    try {
+      final userData = await AuthService.getCurrentUser();
+      if (userData != null) {
+        _user = userData;
+        notifyListeners();
+      }
+    } catch (e) {
+      _error = e.toString();
+      notifyListeners();
+    }
+  }
+}
