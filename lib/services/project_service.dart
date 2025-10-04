@@ -5,7 +5,7 @@ class ProjectService {
   // GraphQL Queries and Mutations
   static const String myProjectsQuery = '''
     query MyProjects {
-      myProjects {
+      projects {
         id
         name
         description
@@ -15,23 +15,8 @@ class ProjectService {
         currentBalance
         country
         currency
-        isPublic
         createdAt
         updatedAt
-        closedAt
-        owner {
-          id
-          name
-          email
-        }
-        organization {
-          id
-          name
-          slug
-        }
-        totalContributions
-        totalExpenses
-        progressPercentage
       }
     }
   ''';
@@ -155,21 +140,55 @@ class ProjectService {
   // Project methods
   static Future<List<Map<String, dynamic>>> getMyProjects() async {
     try {
+      print('Attempting to fetch projects...');
+      
+      // First, let's try a simple query to test authentication
+      const String testQuery = '''
+        query TestAuth {
+          me {
+            id
+            email
+            name
+          }
+        }
+      ''';
+      
+      final testResult = await CeremoGraphQLClient.client.query(
+        QueryOptions(
+          document: gql(testQuery),
+          fetchPolicy: FetchPolicy.networkOnly,
+        ),
+      );
+      
+      print('Auth test result: ${testResult.data}');
+      print('Auth test exceptions: ${testResult.exception}');
+      
+      if (testResult.hasException) {
+        throw Exception('Authentication failed: ${testResult.exception.toString()}');
+      }
+      
+      // Now try to get projects
       final result = await CeremoGraphQLClient.client.query(
         QueryOptions(
           document: gql(myProjectsQuery),
+          fetchPolicy: FetchPolicy.networkOnly,
         ),
       );
+      
+      print('GraphQL result: ${result.data}');
+      print('GraphQL exceptions: ${result.exception}');
       
       if (result.hasException) {
         throw Exception('Failed to get projects: ${result.exception.toString()}');
       }
       
-      final data = result.data?['myProjects'];
+      final data = result.data?['projects'];
       if (data == null) {
+        print('No projects data found');
         return [];
       }
       
+      print('Found ${data.length} projects');
       return List<Map<String, dynamic>>.from(data);
     } catch (e) {
       print('Get projects error: $e');
