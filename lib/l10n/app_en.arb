@@ -1,0 +1,207 @@
+{
+  "@@locale": "en",
+  "appTitle": "Ceremo",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcome": "Welcome to Ceremo",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  "signInToManage": "Sign in to manage your ceremonies",
+  "@signInToManage": {
+    "description": "Subtitle for login screen"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  "enterEmail": "Enter your email",
+  "@enterEmail": {
+    "description": "Email field placeholder"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  "enterPassword": "Enter your password",
+  "@enterPassword": {
+    "description": "Password field placeholder"
+  },
+  "signIn": "Sign In",
+  "@signIn": {
+    "description": "Sign in button text"
+  },
+  "dontHaveAccount": "Don't have an account? ",
+  "@dontHaveAccount": {
+    "description": "Text before sign up link"
+  },
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Sign up link text"
+  },
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Create account button text"
+  },
+  "joinCeremo": "Join Ceremo to start managing your ceremonies",
+  "@joinCeremo": {
+    "description": "Sign up screen subtitle"
+  },
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  "enterFullName": "Enter your full name",
+  "@enterFullName": {
+    "description": "Full name field placeholder"
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  "confirmYourPassword": "Confirm your password",
+  "@confirmYourPassword": {
+    "description": "Confirm password field placeholder"
+  },
+  "country": "Country (Optional)",
+  "@country": {
+    "description": "Country field label"
+  },
+  "currency": "Currency (Optional)",
+  "@currency": {
+    "description": "Currency field label"
+  },
+  "alreadyHaveAccount": "Already have an account? ",
+  "@alreadyHaveAccount": {
+    "description": "Text before sign in link"
+  },
+  "welcomeBack": "Welcome back!",
+  "@welcomeBack": {
+    "description": "Dashboard welcome message"
+  },
+  "quickActions": "Quick Actions",
+  "@quickActions": {
+    "description": "Quick actions section title"
+  },
+  "newProject": "New Project",
+  "@newProject": {
+    "description": "New project action"
+  },
+  "startNewCeremony": "Start a new ceremony project",
+  "@startNewCeremony": {
+    "description": "New project description"
+  },
+  "myProjects": "My Projects",
+  "@myProjects": {
+    "description": "My projects action"
+  },
+  "viewAllProjects": "View all your projects",
+  "@viewAllProjects": {
+    "description": "My projects description"
+  },
+  "organizations": "Organizations",
+  "@organizations": {
+    "description": "Organizations action"
+  },
+  "manageOrganizations": "Manage organizations",
+  "@manageOrganizations": {
+    "description": "Organizations description"
+  },
+  "reports": "Reports",
+  "@reports": {
+    "description": "Reports action"
+  },
+  "viewAnalytics": "View analytics",
+  "@viewAnalytics": {
+    "description": "Reports description"
+  },
+  "recentActivity": "Recent Activity",
+  "@recentActivity": {
+    "description": "Recent activity section title"
+  },
+  "noRecentActivity": "No recent activity",
+  "@noRecentActivity": {
+    "description": "No activity message"
+  },
+  "startFirstProject": "Start by creating your first project",
+  "@startFirstProject": {
+    "description": "No activity description"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile menu item"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings menu item"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout menu item"
+  },
+  "initializingCeremo": "Initializing Ceremo...",
+  "@initializingCeremo": {
+    "description": "Loading screen message"
+  },
+  "loginSuccessful": "Login successful!",
+  "@loginSuccessful": {
+    "description": "Login success message"
+  },
+  "accountCreatedSuccessfully": "Account created successfully!",
+  "@accountCreatedSuccessfully": {
+    "description": "Registration success message"
+  },
+  "loginFailed": "Login failed",
+  "@loginFailed": {
+    "description": "Login error message"
+  },
+  "registrationFailed": "Registration failed",
+  "@registrationFailed": {
+    "description": "Registration error message"
+  },
+  "pleaseEnterEmail": "Please enter your email",
+  "@pleaseEnterEmail": {
+    "description": "Email validation error"
+  },
+  "pleaseEnterValidEmail": "Please enter a valid email",
+  "@pleaseEnterValidEmail": {
+    "description": "Email format validation error"
+  },
+  "pleaseEnterPassword": "Please enter your password",
+  "@pleaseEnterPassword": {
+    "description": "Password validation error"
+  },
+  "passwordMinLength": "Password must be at least 6 characters",
+  "@passwordMinLength": {
+    "description": "Password length validation error"
+  },
+  "pleaseEnterName": "Please enter your name",
+  "@pleaseEnterName": {
+    "description": "Name validation error"
+  },
+  "nameMinLength": "Name must be at least 2 characters",
+  "@nameMinLength": {
+    "description": "Name length validation error"
+  },
+  "pleaseConfirmPassword": "Please confirm your password",
+  "@pleaseConfirmPassword": {
+    "description": "Confirm password validation error"
+  },
+  "passwordsDoNotMatch": "Passwords do not match",
+  "@passwordsDoNotMatch": {
+    "description": "Password confirmation validation error"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light theme option"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark theme option"
+  },
+  "system": "System",
+  "@system": {
+    "description": "System theme option"
+  }
+}
