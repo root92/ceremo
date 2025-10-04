@@ -6,6 +6,9 @@ import 'services/graphql_client.dart';
 import 'providers/auth_provider.dart';
 import 'providers/theme_provider.dart';
 import 'providers/locale_provider.dart';
+import 'providers/projects_provider.dart';
+import 'providers/organizations_provider.dart';
+import 'providers/organization_context_provider.dart';
 import 'screens/login_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'widgets/loading_screen.dart';
@@ -27,11 +30,14 @@ class CeremoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => LocaleProvider()),
-      ],
+             providers: [
+               ChangeNotifierProvider(create: (_) => AuthProvider()),
+               ChangeNotifierProvider(create: (_) => ThemeProvider()),
+               ChangeNotifierProvider(create: (_) => LocaleProvider()),
+               ChangeNotifierProvider(create: (_) => ProjectsProvider()),
+               ChangeNotifierProvider(create: (_) => OrganizationsProvider()),
+               ChangeNotifierProvider(create: (_) => OrganizationContextProvider()),
+             ],
       child: GraphQLProvider(
         client: ValueNotifier(CeremoGraphQLClient.client),
         child: Consumer2<ThemeProvider, LocaleProvider>(
@@ -70,10 +76,22 @@ class _AuthWrapperState extends State<AuthWrapper> {
   void initState() {
     super.initState();
     // Initialize providers
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<AuthProvider>().initialize();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await context.read<AuthProvider>().initialize();
       context.read<ThemeProvider>().initialize();
       context.read<LocaleProvider>().initialize();
+      
+      // Only initialize organization context if user is authenticated
+      if (context.read<AuthProvider>().isAuthenticated) {
+        print('Main: User is authenticated, initializing organization context...');
+        await context.read<OrganizationContextProvider>().initialize();
+        
+        // Initialize projects provider after organization context is set
+        print('Main: Initializing projects provider...');
+        await context.read<ProjectsProvider>().loadProjects();
+      } else {
+        print('Main: User is not authenticated, skipping organization context initialization');
+      }
     });
   }
 

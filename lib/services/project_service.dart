@@ -3,6 +3,18 @@ import 'graphql_client.dart';
 
 class ProjectService {
   // GraphQL Queries and Mutations
+  static const String myOrganizationsQuery = '''
+    query MyOrganizations {
+      myOrganizations {
+        id
+        name
+        slug
+        description
+        createdAt
+      }
+    }
+  ''';
+
   static const String myProjectsQuery = '''
     query MyProjects {
       myProjects {
@@ -15,23 +27,13 @@ class ProjectService {
         currentBalance
         country
         currency
-        isPublic
         createdAt
         updatedAt
-        closedAt
-        owner {
-          id
-          name
-          email
-        }
         organization {
           id
           name
           slug
         }
-        totalContributions
-        totalExpenses
-        progressPercentage
       }
     }
   ''';
@@ -152,14 +154,62 @@ class ProjectService {
     }
   ''';
   
+  // Organization methods
+  static Future<List<Map<String, dynamic>>> getMyOrganizations() async {
+    try {
+      print('Attempting to fetch organizations...');
+      final result = await CeremoGraphQLClient.client.query(
+        QueryOptions(
+          document: gql(myOrganizationsQuery),
+          fetchPolicy: FetchPolicy.networkOnly,
+        ),
+      );
+      
+      print('Organizations result: ${result.data}');
+      print('Organizations exceptions: ${result.exception}');
+      
+      if (result.hasException) {
+        throw Exception('Failed to get organizations: ${result.exception.toString()}');
+      }
+      
+      final data = result.data?['myOrganizations'];
+      if (data == null) {
+        print('No organizations data found');
+        return [];
+      }
+      
+      print('Found ${data.length} organizations');
+      return List<Map<String, dynamic>>.from(data);
+    } catch (e) {
+      print('Get organizations error: $e');
+      rethrow;
+    }
+  }
+
   // Project methods
   static Future<List<Map<String, dynamic>>> getMyProjects() async {
     try {
+      print('Attempting to fetch projects...');
+      
+      // First, check if user has organizations
+      final organizations = await getMyOrganizations();
+      if (organizations.isEmpty) {
+        print('User has no organizations, cannot access projects');
+        throw Exception('You need to be part of an organization to access projects. Please join an organization first.');
+      }
+      
+      print('User has ${organizations.length} organizations, fetching projects...');
+      
+      // Now try to get projects
       final result = await CeremoGraphQLClient.client.query(
         QueryOptions(
           document: gql(myProjectsQuery),
+          fetchPolicy: FetchPolicy.networkOnly,
         ),
       );
+      
+      print('GraphQL result: ${result.data}');
+      print('GraphQL exceptions: ${result.exception}');
       
       if (result.hasException) {
         throw Exception('Failed to get projects: ${result.exception.toString()}');
@@ -167,9 +217,11 @@ class ProjectService {
       
       final data = result.data?['myProjects'];
       if (data == null) {
+        print('No projects data found');
         return [];
       }
       
+      print('Found ${data.length} projects');
       return List<Map<String, dynamic>>.from(data);
     } catch (e) {
       print('Get projects error: $e');

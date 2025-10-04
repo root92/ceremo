@@ -87,7 +87,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get organizations => 'Organizations';
 
   @override
-  String get manageOrganizations => 'Manage organizations';
+  String get manageOrganizations => 'Manage your organizations';
 
   @override
   String get reports => 'Reports';
@@ -160,4 +160,213 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get system => 'System';
+
+  @override
+  String get createProject => 'Create Project';
+
+  @override
+  String get projectName => 'Project Name';
+
+  @override
+  String get enterProjectName => 'Enter project name';
+
+  @override
+  String get projectDescription => 'Project Description';
+
+  @override
+  String get enterProjectDescription => 'Enter project description';
+
+  @override
+  String get projectType => 'Project Type';
+
+  @override
+  String get targetAmount => 'Target Amount';
+
+  @override
+  String get enterTargetAmount => 'Enter target amount';
+
+  @override
+  String get pleaseEnterProjectName => 'Please enter project name';
+
+  @override
+  String get projectNameMinLength => 'Project name must be at least 3 characters';
+
+  @override
+  String get pleaseEnterValidAmount => 'Please enter a valid amount';
+
+  @override
+  String get projectCreatedSuccessfully => 'Project created successfully!';
+
+  @override
+  String get projectCreationFailed => 'Project creation failed. Please try again.';
+
+  @override
+  String get projectDetails => 'Project Details';
+
+  @override
+  String get progress => 'Progress';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get completed => 'Completed';
+
+  @override
+  String get paused => 'Paused';
+
+  @override
+  String get cancelled => 'Cancelled';
+
+  @override
+  String get target => 'Target';
+
+  @override
+  String get currentBalance => 'Current Balance';
+
+  @override
+  String get financialInfo => 'Financial Information';
+
+  @override
+  String get projectInfo => 'Project Information';
+
+  @override
+  String get createdAt => 'Created At';
+
+  @override
+  String get updatedAt => 'Updated At';
+
+  @override
+  String get notAvailable => 'Not Available';
+
+  @override
+  String get noProjects => 'No projects yet';
+
+  @override
+  String get createFirstProject => 'Create your first project to get started';
+
+  @override
+  String get tryAgain => 'Try Again';
+
+  @override
+  String get projectNotFound => 'Project not found';
+
+  @override
+  String get noOrganizations => 'No organizations yet';
+
+  @override
+  String get createOrJoinOrganization => 'Create or join an organization to get started';
+
+  @override
+  String get createOrganization => 'Create Organization';
+
+  @override
+  String get organizationName => 'Organization Name';
+
+  @override
+  String get enterOrganizationName => 'Enter organization name';
+
+  @override
+  String get organizationDescription => 'Organization Description';
+
+  @override
+  String get enterOrganizationDescription => 'Enter organization description';
+
+  @override
+  String get organizationType => 'Organization Type';
+
+  @override
+  String get organizationSlug => 'Organization Slug';
+
+  @override
+  String get enterOrganizationSlug => 'Enter organization slug';
+
+  @override
+  String get slugHelperText => 'Used in URLs (e.g., my-company)';
+
+  @override
+  String get pleaseEnterOrganizationName => 'Please enter organization name';
+
+  @override
+  String get organizationNameMinLength => 'Organization name must be at least 3 characters';
+
+  @override
+  String get invalidSlugFormat => 'Slug can only contain lowercase letters, numbers, and hyphens';
+
+  @override
+  String get organizationCreatedSuccessfully => 'Organization created successfully!';
+
+  @override
+  String get organizationCreationFailed => 'Organization creation failed. Please try again.';
+
+  @override
+  String get join => 'Join';
+
+  @override
+  String get joinOrganization => 'Join Organization';
+
+  @override
+  String joinOrganizationMessage(Object organizationName) {
+    return 'Do you want to join $organizationName?';
+  }
+
+  @override
+  String get joinRequestSent => 'Join request sent successfully!';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get selectOrganization => 'Select Organization';
+
+  @override
+  String get personal => 'Personal';
+
+  @override
+  String get business => 'Business';
+
+  @override
+  String get ngo => 'NGO';
+
+  @override
+  String get government => 'Government';
+
+  @override
+  String get organization => 'Organization';
+
+  @override
+  String get viewAll => 'View All';
+
+  @override
+  String get recent => 'Recent';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get role => 'Role';
+
+  @override
+  String get logoutConfirmation => 'Are you sure you want to logout?';
+
+  @override
+  String get personalInformation => 'Personal Information';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get account => 'Account';
+
+  @override
+  String get theme => 'Theme';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get manageNotifications => 'Manage notification preferences';
 }

@@ -203,5 +203,114 @@
   "system": "System",
   "@system": {
     "description": "System theme option"
+  },
+  "myProjects": "My Projects",
+  "viewAllProjects": "View all your projects",
+  "createProject": "Create Project",
+  "projectName": "Project Name",
+  "enterProjectName": "Enter project name",
+  "projectDescription": "Project Description",
+  "enterProjectDescription": "Enter project description",
+  "projectType": "Project Type",
+  "targetAmount": "Target Amount",
+  "enterTargetAmount": "Enter target amount",
+  "pleaseEnterProjectName": "Please enter project name",
+  "projectNameMinLength": "Project name must be at least 3 characters",
+  "pleaseEnterValidAmount": "Please enter a valid amount",
+  "projectCreatedSuccessfully": "Project created successfully!",
+  "projectCreationFailed": "Project creation failed. Please try again.",
+  "projectDetails": "Project Details",
+  "progress": "Progress",
+  "active": "Active",
+  "completed": "Completed",
+  "paused": "Paused",
+  "cancelled": "Cancelled",
+  "target": "Target",
+  "currentBalance": "Current Balance",
+  "financialInfo": "Financial Information",
+  "projectInfo": "Project Information",
+  "createdAt": "Created At",
+  "updatedAt": "Updated At",
+  "notAvailable": "Not Available",
+  "noProjects": "No projects yet",
+  "createFirstProject": "Create your first project to get started",
+  "tryAgain": "Try Again",
+  "projectNotFound": "Project not found",
+  "organizations": "Organizations",
+  "manageOrganizations": "Manage your organizations",
+  "noOrganizations": "No organizations yet",
+  "createOrJoinOrganization": "Create or join an organization to get started",
+  "createOrganization": "Create Organization",
+  "organizationName": "Organization Name",
+  "enterOrganizationName": "Enter organization name",
+  "organizationDescription": "Organization Description",
+  "enterOrganizationDescription": "Enter organization description",
+  "organizationType": "Organization Type",
+  "organizationSlug": "Organization Slug",
+  "enterOrganizationSlug": "Enter organization slug",
+  "slugHelperText": "Used in URLs (e.g., my-company)",
+  "pleaseEnterOrganizationName": "Please enter organization name",
+  "organizationNameMinLength": "Organization name must be at least 3 characters",
+  "invalidSlugFormat": "Slug can only contain lowercase letters, numbers, and hyphens",
+  "organizationCreatedSuccessfully": "Organization created successfully!",
+  "organizationCreationFailed": "Organization creation failed. Please try again.",
+  "join": "Join",
+  "joinOrganization": "Join Organization",
+  "joinOrganizationMessage": "Do you want to join {organizationName}?",
+  "joinRequestSent": "Join request sent successfully!",
+  "cancel": "Cancel",
+  "selectOrganization": "Select Organization",
+  "personal": "Personal",
+  "business": "Business",
+  "ngo": "NGO",
+  "government": "Government",
+  "organization": "Organization",
+  "viewAll": "View All",
+  "@viewAll": {
+    "description": "View all button text"
+  },
+  "recent": "Recent",
+  "@recent": {
+    "description": "Recent section title"
+  },
+  "name": "Name",
+  "@name": {
+    "description": "Name field label"
+  },
+  "role": "Role",
+  "@role": {
+    "description": "Role field label"
+  },
+  "logoutConfirmation": "Are you sure you want to logout?",
+  "@logoutConfirmation": {
+    "description": "Logout confirmation message"
+  },
+  "personalInformation": "Personal Information",
+  "@personalInformation": {
+    "description": "Personal information section title"
+  },
+  "preferences": "Preferences",
+  "@preferences": {
+    "description": "Preferences section title"
+  },
+  "account": "Account",
+  "@account": {
+    "description": "Account section title"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme setting title"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting title"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notifications setting title"
+  },
+  "manageNotifications": "Manage notification preferences",
+  "@manageNotifications": {
+    "description": "Notifications setting subtitle"
   }
 }

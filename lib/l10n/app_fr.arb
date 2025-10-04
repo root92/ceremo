@@ -50,5 +50,114 @@
   "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
   "light": "Clair",
   "dark": "Sombre",
-  "system": "Système"
+  "system": "Système",
+  "myProjects": "Mes Projets",
+  "viewAllProjects": "Voir tous vos projets",
+  "createProject": "Créer un Projet",
+  "projectName": "Nom du Projet",
+  "enterProjectName": "Entrez le nom du projet",
+  "projectDescription": "Description du Projet",
+  "enterProjectDescription": "Entrez la description du projet",
+  "projectType": "Type de Projet",
+  "targetAmount": "Montant Cible",
+  "enterTargetAmount": "Entrez le montant cible",
+  "pleaseEnterProjectName": "Veuillez entrer le nom du projet",
+  "projectNameMinLength": "Le nom du projet doit contenir au moins 3 caractères",
+  "pleaseEnterValidAmount": "Veuillez entrer un montant valide",
+  "projectCreatedSuccessfully": "Projet créé avec succès !",
+  "projectCreationFailed": "Échec de la création du projet. Veuillez réessayer.",
+  "projectDetails": "Détails du Projet",
+  "progress": "Progrès",
+  "active": "Actif",
+  "completed": "Terminé",
+  "paused": "En pause",
+  "cancelled": "Annulé",
+  "target": "Cible",
+  "currentBalance": "Solde Actuel",
+  "financialInfo": "Informations Financières",
+  "projectInfo": "Informations du Projet",
+  "createdAt": "Créé le",
+  "updatedAt": "Mis à jour le",
+  "notAvailable": "Non Disponible",
+  "noProjects": "Aucun projet pour le moment",
+  "createFirstProject": "Créez votre premier projet pour commencer",
+  "tryAgain": "Réessayer",
+  "projectNotFound": "Projet non trouvé",
+  "organizations": "Organisations",
+  "manageOrganizations": "Gérer vos organisations",
+  "noOrganizations": "Aucune organisation pour le moment",
+  "createOrJoinOrganization": "Créez ou rejoignez une organisation pour commencer",
+  "createOrganization": "Créer une Organisation",
+  "organizationName": "Nom de l'Organisation",
+  "enterOrganizationName": "Entrez le nom de l'organisation",
+  "organizationDescription": "Description de l'Organisation",
+  "enterOrganizationDescription": "Entrez la description de l'organisation",
+  "organizationType": "Type d'Organisation",
+  "organizationSlug": "Slug de l'Organisation",
+  "enterOrganizationSlug": "Entrez le slug de l'organisation",
+  "slugHelperText": "Utilisé dans les URLs (ex: ma-entreprise)",
+  "pleaseEnterOrganizationName": "Veuillez entrer le nom de l'organisation",
+  "organizationNameMinLength": "Le nom de l'organisation doit contenir au moins 3 caractères",
+  "invalidSlugFormat": "Le slug ne peut contenir que des lettres minuscules, des chiffres et des tirets",
+  "organizationCreatedSuccessfully": "Organisation créée avec succès !",
+  "organizationCreationFailed": "Échec de la création de l'organisation. Veuillez réessayer.",
+  "join": "Rejoindre",
+  "joinOrganization": "Rejoindre l'Organisation",
+  "joinOrganizationMessage": "Voulez-vous rejoindre {organizationName} ?",
+  "joinRequestSent": "Demande d'adhésion envoyée avec succès !",
+  "cancel": "Annuler",
+  "selectOrganization": "Sélectionner une Organisation",
+  "personal": "Personnel",
+  "business": "Entreprise",
+  "ngo": "ONG",
+  "government": "Gouvernement",
+  "organization": "Organisation",
+  "viewAll": "Voir Tout",
+  "@viewAll": {
+    "description": "Texte du bouton voir tout"
+  },
+  "recent": "Récent",
+  "@recent": {
+    "description": "Titre de la section récente"
+  },
+  "name": "Nom",
+  "@name": {
+    "description": "Libellé du champ nom"
+  },
+  "role": "Rôle",
+  "@role": {
+    "description": "Libellé du champ rôle"
+  },
+  "logoutConfirmation": "Êtes-vous sûr de vouloir vous déconnecter ?",
+  "@logoutConfirmation": {
+    "description": "Message de confirmation de déconnexion"
+  },
+  "personalInformation": "Informations Personnelles",
+  "@personalInformation": {
+    "description": "Titre de la section informations personnelles"
+  },
+  "preferences": "Préférences",
+  "@preferences": {
+    "description": "Titre de la section préférences"
+  },
+  "account": "Compte",
+  "@account": {
+    "description": "Titre de la section compte"
+  },
+  "theme": "Thème",
+  "@theme": {
+    "description": "Titre du paramètre thème"
+  },
+  "language": "Langue",
+  "@language": {
+    "description": "Titre du paramètre langue"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Titre du paramètre notifications"
+  },
+  "manageNotifications": "Gérer les préférences de notification",
+  "@manageNotifications": {
+    "description": "Sous-titre du paramètre notifications"
+  }
 }
