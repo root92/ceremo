@@ -107,11 +107,6 @@ class ProjectService {
           status
           paymentMethod
           createdAt
-          contributor {
-            id
-            name
-            email
-          }
         }
         expenses {
           id
@@ -121,11 +116,6 @@ class ProjectService {
           description
           status
           createdAt
-          createdBy {
-            id
-            name
-            email
-          }
         }
       }
     }
@@ -150,6 +140,72 @@ class ProjectService {
           updatedAt
         }
         errors
+      }
+    }
+  ''';
+
+  static const String getProjectContributionsQuery = '''
+    query GetProjectContributions(\$projectId: ID!, \$limit: Int, \$offset: Int, \$orderBy: String) {
+      contributions(projectId: \$projectId, limit: \$limit, offset: \$offset, orderBy: \$orderBy) {
+        id
+        reference
+        amount
+        note
+        status
+        paymentMethod
+        transactionId
+        currency
+        createdAt
+        member {
+          id
+          role
+          user {
+            id
+            name
+            email
+          }
+        }
+      }
+    }
+  ''';
+
+  static const String getProjectExpensesQuery = '''
+    query GetProjectExpenses(\$projectId: ID!, \$limit: Int, \$offset: Int, \$orderBy: String) {
+      expenses(projectId: \$projectId, limit: \$limit, offset: \$offset, orderBy: \$orderBy) {
+        id
+        reference
+        amount
+        description
+        category
+        status
+        currency
+        createdAt
+        estimate {
+          id
+          description
+          estimatedAmount
+          category
+          priority
+          status
+          currency
+        }
+      }
+    }
+  ''';
+
+  static const String getProjectEstimatesQuery = '''
+    query GetProjectEstimates(\$projectId: ID!, \$limit: Int, \$offset: Int, \$orderBy: String) {
+      estimates(projectId: \$projectId, limit: \$limit, offset: \$offset, orderBy: \$orderBy) {
+        id
+        reference
+        description
+        estimatedAmount
+        category
+        priority
+        status
+        notes
+        currency
+        createdAt
       }
     }
   ''';
@@ -288,6 +344,99 @@ class ProjectService {
       return result.data?['project'];
     } catch (e) {
       print('Get project details error: $e');
+      rethrow;
+    }
+  }
+
+  static Future<List<Map<String, dynamic>>> getProjectContributions({
+    required String projectId,
+    int limit = 20,
+    int offset = 0,
+    String orderBy = '-createdAt',
+  }) async {
+    try {
+      final result = await CeremoGraphQLClient.client.query(
+        QueryOptions(
+          document: gql(getProjectContributionsQuery),
+          variables: {
+            'projectId': projectId,
+            'limit': limit,
+            'offset': offset,
+            'orderBy': orderBy,
+          },
+        ),
+      );
+      
+      if (result.hasException) {
+        throw Exception('Failed to get project contributions: ${result.exception.toString()}');
+      }
+      
+      final contributions = result.data?['contributions'] as List<dynamic>? ?? [];
+      return contributions.cast<Map<String, dynamic>>();
+    } catch (e) {
+      print('Get project contributions error: $e');
+      rethrow;
+    }
+  }
+
+  static Future<List<Map<String, dynamic>>> getProjectExpenses({
+    required String projectId,
+    int limit = 20,
+    int offset = 0,
+    String orderBy = '-createdAt',
+  }) async {
+    try {
+      final result = await CeremoGraphQLClient.client.query(
+        QueryOptions(
+          document: gql(getProjectExpensesQuery),
+          variables: {
+            'projectId': projectId,
+            'limit': limit,
+            'offset': offset,
+            'orderBy': orderBy,
+          },
+        ),
+      );
+      
+      if (result.hasException) {
+        throw Exception('Failed to get project expenses: ${result.exception.toString()}');
+      }
+      
+      final expenses = result.data?['expenses'] as List<dynamic>? ?? [];
+      return expenses.cast<Map<String, dynamic>>();
+    } catch (e) {
+      print('Get project expenses error: $e');
+      rethrow;
+    }
+  }
+
+  static Future<List<Map<String, dynamic>>> getProjectEstimates({
+    required String projectId,
+    int limit = 20,
+    int offset = 0,
+    String orderBy = '-createdAt',
+  }) async {
+    try {
+      final result = await CeremoGraphQLClient.client.query(
+        QueryOptions(
+          document: gql(getProjectEstimatesQuery),
+          variables: {
+            'projectId': projectId,
+            'limit': limit,
+            'offset': offset,
+            'orderBy': orderBy,
+          },
+        ),
+      );
+      
+      if (result.hasException) {
+        throw Exception('Failed to get project estimates: ${result.exception.toString()}');
+      }
+      
+      final estimates = result.data?['estimates'] as List<dynamic>? ?? [];
+      return estimates.cast<Map<String, dynamic>>();
+    } catch (e) {
+      print('Get project estimates error: $e');
       rethrow;
     }
   }

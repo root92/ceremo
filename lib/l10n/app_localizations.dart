@@ -814,6 +814,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Manage notification preferences'**
   String get manageNotifications;
+
+  /// All filter option
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// Search dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// Search projects placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Search projects...'**
+  String get searchProjects;
+
+  /// Clear button text
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clear;
+
+  /// Filter dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Filter'**
+  String get filter;
+
+  /// View details link text
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get viewDetails;
+
+  /// Home tab label
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// Contributions tab label
+  ///
+  /// In en, this message translates to:
+  /// **'Contributions'**
+  String get contributions;
+
+  /// Expenses tab label
+  ///
+  /// In en, this message translates to:
+  /// **'Expenses'**
+  String get expenses;
+
+  /// Estimate tab label
+  ///
+  /// In en, this message translates to:
+  /// **'Estimate'**
+  String get estimate;
+
+  /// Empty contributions message
+  ///
+  /// In en, this message translates to:
+  /// **'No Contributions Yet'**
+  String get noContributions;
+
+  /// Empty contributions subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Contributions will appear here once people start supporting your project'**
+  String get noContributionsSubtitle;
+
+  /// Empty expenses message
+  ///
+  /// In en, this message translates to:
+  /// **'No Expenses Yet'**
+  String get noExpenses;
+
+  /// Empty expenses subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Project expenses will be tracked here'**
+  String get noExpensesSubtitle;
+
+  /// Total contributions label
+  ///
+  /// In en, this message translates to:
+  /// **'Total Contributions'**
+  String get totalContributions;
+
+  /// Total expenses label
+  ///
+  /// In en, this message translates to:
+  /// **'Total Expenses'**
+  String get totalExpenses;
+
+  /// Net balance label
+  ///
+  /// In en, this message translates to:
+  /// **'Net Balance'**
+  String get netBalance;
+
+  /// Dashboard tab label
+  ///
+  /// In en, this message translates to:
+  /// **'Dashboard'**
+  String get dashboard;
+
+  /// Projects tab label
+  ///
+  /// In en, this message translates to:
+  /// **'Projects'**
+  String get projects;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

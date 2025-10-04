@@ -312,5 +312,81 @@
   "manageNotifications": "Manage notification preferences",
   "@manageNotifications": {
     "description": "Notifications setting subtitle"
+  },
+  "all": "All",
+  "@all": {
+    "description": "All filter option"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "Search dialog title"
+  },
+  "searchProjects": "Search projects...",
+  "@searchProjects": {
+    "description": "Search projects placeholder"
+  },
+  "clear": "Clear",
+  "@clear": {
+    "description": "Clear button text"
+  },
+  "filter": "Filter",
+  "@filter": {
+    "description": "Filter dialog title"
+  },
+  "viewDetails": "View Details",
+  "@viewDetails": {
+    "description": "View details link text"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home tab label"
+  },
+  "contributions": "Contributions",
+  "@contributions": {
+    "description": "Contributions tab label"
+  },
+  "expenses": "Expenses",
+  "@expenses": {
+    "description": "Expenses tab label"
+  },
+  "estimate": "Estimate",
+  "@estimate": {
+    "description": "Estimate tab label"
+  },
+  "noContributions": "No Contributions Yet",
+  "@noContributions": {
+    "description": "Empty contributions message"
+  },
+  "noContributionsSubtitle": "Contributions will appear here once people start supporting your project",
+  "@noContributionsSubtitle": {
+    "description": "Empty contributions subtitle"
+  },
+  "noExpenses": "No Expenses Yet",
+  "@noExpenses": {
+    "description": "Empty expenses message"
+  },
+  "noExpensesSubtitle": "Project expenses will be tracked here",
+  "@noExpensesSubtitle": {
+    "description": "Empty expenses subtitle"
+  },
+  "totalContributions": "Total Contributions",
+  "@totalContributions": {
+    "description": "Total contributions label"
+  },
+  "totalExpenses": "Total Expenses",
+  "@totalExpenses": {
+    "description": "Total expenses label"
+  },
+  "netBalance": "Net Balance",
+  "@netBalance": {
+    "description": "Net balance label"
+  },
+  "dashboard": "Dashboard",
+  "@dashboard": {
+    "description": "Dashboard tab label"
+  },
+  "projects": "Projects",
+  "@projects": {
+    "description": "Projects tab label"
   }
 }

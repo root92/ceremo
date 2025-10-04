@@ -369,4 +369,61 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get manageNotifications => 'Gérer les préférences de notification';
+
+  @override
+  String get all => 'Tous';
+
+  @override
+  String get search => 'Rechercher';
+
+  @override
+  String get searchProjects => 'Rechercher des projets...';
+
+  @override
+  String get clear => 'Effacer';
+
+  @override
+  String get filter => 'Filtrer';
+
+  @override
+  String get viewDetails => 'Voir les Détails';
+
+  @override
+  String get home => 'Accueil';
+
+  @override
+  String get contributions => 'Contributions';
+
+  @override
+  String get expenses => 'Dépenses';
+
+  @override
+  String get estimate => 'Estimation';
+
+  @override
+  String get noContributions => 'Aucune contribution pour le moment';
+
+  @override
+  String get noContributionsSubtitle => 'Les contributions apparaîtront ici une fois que les gens commenceront à soutenir votre projet';
+
+  @override
+  String get noExpenses => 'Aucune dépense pour le moment';
+
+  @override
+  String get noExpensesSubtitle => 'Les dépenses du projet seront suivies ici';
+
+  @override
+  String get totalContributions => 'Total des contributions';
+
+  @override
+  String get totalExpenses => 'Total des dépenses';
+
+  @override
+  String get netBalance => 'Solde net';
+
+  @override
+  String get dashboard => 'Tableau de bord';
+
+  @override
+  String get projects => 'Projets';
 }
