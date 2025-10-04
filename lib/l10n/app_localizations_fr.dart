@@ -78,7 +78,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get startNewCeremony => 'Démarrer un nouveau projet de cérémonie';
 
   @override
-  String get myProjects => 'Mes projets';
+  String get myProjects => 'Mes Projets';
 
   @override
   String get viewAllProjects => 'Voir tous vos projets';
@@ -160,4 +160,94 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get system => 'Système';
+
+  @override
+  String get createProject => 'Créer un Projet';
+
+  @override
+  String get projectName => 'Nom du Projet';
+
+  @override
+  String get enterProjectName => 'Entrez le nom du projet';
+
+  @override
+  String get projectDescription => 'Description du Projet';
+
+  @override
+  String get enterProjectDescription => 'Entrez la description du projet';
+
+  @override
+  String get projectType => 'Type de Projet';
+
+  @override
+  String get targetAmount => 'Montant Cible';
+
+  @override
+  String get enterTargetAmount => 'Entrez le montant cible';
+
+  @override
+  String get pleaseEnterProjectName => 'Veuillez entrer le nom du projet';
+
+  @override
+  String get projectNameMinLength => 'Le nom du projet doit contenir au moins 3 caractères';
+
+  @override
+  String get pleaseEnterValidAmount => 'Veuillez entrer un montant valide';
+
+  @override
+  String get projectCreatedSuccessfully => 'Projet créé avec succès !';
+
+  @override
+  String get projectCreationFailed => 'Échec de la création du projet. Veuillez réessayer.';
+
+  @override
+  String get projectDetails => 'Détails du Projet';
+
+  @override
+  String get progress => 'Progrès';
+
+  @override
+  String get active => 'Actif';
+
+  @override
+  String get completed => 'Terminé';
+
+  @override
+  String get paused => 'En pause';
+
+  @override
+  String get cancelled => 'Annulé';
+
+  @override
+  String get target => 'Cible';
+
+  @override
+  String get currentBalance => 'Solde Actuel';
+
+  @override
+  String get financialInfo => 'Informations Financières';
+
+  @override
+  String get projectInfo => 'Informations du Projet';
+
+  @override
+  String get createdAt => 'Créé le';
+
+  @override
+  String get updatedAt => 'Mis à jour le';
+
+  @override
+  String get notAvailable => 'Non Disponible';
+
+  @override
+  String get noProjects => 'Aucun projet pour le moment';
+
+  @override
+  String get createFirstProject => 'Créez votre premier projet pour commencer';
+
+  @override
+  String get tryAgain => 'Réessayer';
+
+  @override
+  String get projectNotFound => 'Projet non trouvé';
 }

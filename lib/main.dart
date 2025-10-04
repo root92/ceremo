@@ -6,6 +6,7 @@ import 'services/graphql_client.dart';
 import 'providers/auth_provider.dart';
 import 'providers/theme_provider.dart';
 import 'providers/locale_provider.dart';
+import 'providers/projects_provider.dart';
 import 'screens/login_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'widgets/loading_screen.dart';
@@ -27,11 +28,12 @@ class CeremoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => LocaleProvider()),
-      ],
+             providers: [
+               ChangeNotifierProvider(create: (_) => AuthProvider()),
+               ChangeNotifierProvider(create: (_) => ThemeProvider()),
+               ChangeNotifierProvider(create: (_) => LocaleProvider()),
+               ChangeNotifierProvider(create: (_) => ProjectsProvider()),
+             ],
       child: GraphQLProvider(
         client: ValueNotifier(CeremoGraphQLClient.client),
         child: Consumer2<ThemeProvider, LocaleProvider>(

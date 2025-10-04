@@ -5,6 +5,7 @@ import '../theme/app_colors.dart';
 import '../widgets/theme_toggle.dart';
 import '../widgets/language_toggle.dart';
 import '../l10n/app_localizations.dart';
+import 'projects_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -152,9 +153,13 @@ class DashboardScreen extends StatelessWidget {
                         title: AppLocalizations.of(context)!.myProjects,
                         subtitle: AppLocalizations.of(context)!.viewAllProjects,
                         color: Colors.green,
-                        onTap: () {
-                          // TODO: Navigate to projects list
-                        },
+                               onTap: () {
+                                 Navigator.of(context).push(
+                                   MaterialPageRoute(
+                                     builder: (context) => const ProjectsScreen(),
+                                   ),
+                                 );
+                               },
                       ),
                     ),
                   ],

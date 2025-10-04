@@ -160,4 +160,94 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get system => 'System';
+
+  @override
+  String get createProject => 'Create Project';
+
+  @override
+  String get projectName => 'Project Name';
+
+  @override
+  String get enterProjectName => 'Enter project name';
+
+  @override
+  String get projectDescription => 'Project Description';
+
+  @override
+  String get enterProjectDescription => 'Enter project description';
+
+  @override
+  String get projectType => 'Project Type';
+
+  @override
+  String get targetAmount => 'Target Amount';
+
+  @override
+  String get enterTargetAmount => 'Enter target amount';
+
+  @override
+  String get pleaseEnterProjectName => 'Please enter project name';
+
+  @override
+  String get projectNameMinLength => 'Project name must be at least 3 characters';
+
+  @override
+  String get pleaseEnterValidAmount => 'Please enter a valid amount';
+
+  @override
+  String get projectCreatedSuccessfully => 'Project created successfully!';
+
+  @override
+  String get projectCreationFailed => 'Project creation failed. Please try again.';
+
+  @override
+  String get projectDetails => 'Project Details';
+
+  @override
+  String get progress => 'Progress';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get completed => 'Completed';
+
+  @override
+  String get paused => 'Paused';
+
+  @override
+  String get cancelled => 'Cancelled';
+
+  @override
+  String get target => 'Target';
+
+  @override
+  String get currentBalance => 'Current Balance';
+
+  @override
+  String get financialInfo => 'Financial Information';
+
+  @override
+  String get projectInfo => 'Project Information';
+
+  @override
+  String get createdAt => 'Created At';
+
+  @override
+  String get updatedAt => 'Updated At';
+
+  @override
+  String get notAvailable => 'Not Available';
+
+  @override
+  String get noProjects => 'No projects yet';
+
+  @override
+  String get createFirstProject => 'Create your first project to get started';
+
+  @override
+  String get tryAgain => 'Try Again';
+
+  @override
+  String get projectNotFound => 'Project not found';
 }
