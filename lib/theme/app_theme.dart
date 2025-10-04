@@ -7,7 +7,7 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: ColorScheme.light(
         primary: AppColors.primary,
-        primaryContainer: AppColors.orange100,
+        primaryContainer: AppColors.primaryLight,
         secondary: AppColors.gray600,
         secondaryContainer: AppColors.gray100,
         surface: AppColors.white,
@@ -123,7 +123,7 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: ColorScheme.dark(
         primary: AppColors.primary,
-        primaryContainer: AppColors.orange800,
+        primaryContainer: AppColors.primaryDark,
         secondary: AppColors.gray400,
         secondaryContainer: AppColors.gray800,
         surface: AppColors.darkSurface,

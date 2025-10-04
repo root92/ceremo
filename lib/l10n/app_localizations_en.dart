@@ -369,4 +369,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get manageNotifications => 'Manage notification preferences';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get searchProjects => 'Search projects...';
+
+  @override
+  String get clear => 'Clear';
+
+  @override
+  String get filter => 'Filter';
+
+  @override
+  String get viewDetails => 'View Details';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get contributions => 'Contributions';
+
+  @override
+  String get expenses => 'Expenses';
+
+  @override
+  String get estimate => 'Estimate';
+
+  @override
+  String get noContributions => 'No Contributions Yet';
+
+  @override
+  String get noContributionsSubtitle => 'Contributions will appear here once people start supporting your project';
+
+  @override
+  String get noExpenses => 'No Expenses Yet';
+
+  @override
+  String get noExpensesSubtitle => 'Project expenses will be tracked here';
+
+  @override
+  String get totalContributions => 'Total Contributions';
+
+  @override
+  String get totalExpenses => 'Total Expenses';
+
+  @override
+  String get netBalance => 'Net Balance';
+
+  @override
+  String get dashboard => 'Dashboard';
+
+  @override
+  String get projects => 'Projects';
 }

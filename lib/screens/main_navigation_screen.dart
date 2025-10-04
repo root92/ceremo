@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../providers/auth_provider.dart';
-import '../providers/organization_context_provider.dart';
 import '../theme/app_colors.dart';
 import '../l10n/app_localizations.dart';
 import 'dashboard_screen.dart';
@@ -35,10 +32,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
+          color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withOpacity(0.05),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),
@@ -53,8 +50,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 _buildNavItem(
                   context,
                   index: 0,
-                  icon: Icons.dashboard_outlined,
-                  activeIcon: Icons.dashboard,
+                  icon: Icons.home_outlined,
+                  activeIcon: Icons.home,
                   label: AppLocalizations.of(context)!.dashboard,
                 ),
                 _buildNavItem(
@@ -93,40 +90,27 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     required IconData activeIcon,
     required String label,
   }) {
-    final isActive = _currentIndex == index;
+    final isSelected = _currentIndex == index;
     
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          _currentIndex = index;
-        });
-      },
+      onTap: () => setState(() => _currentIndex = index),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color: isActive 
-              ? AppColors.primary.withOpacity(0.1)
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(12),
-        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              isActive ? activeIcon : icon,
-              color: isActive 
-                  ? AppColors.primary 
-                  : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+              isSelected ? activeIcon : icon,
+              color: isSelected ? AppColors.primary : Colors.grey[400],
               size: 24,
             ),
             const SizedBox(height: 4),
             Text(
               label,
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: isActive 
-                    ? AppColors.primary 
-                    : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-                fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: isSelected ? AppColors.primary : Colors.grey[500],
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                fontSize: 12,
               ),
             ),
           ],

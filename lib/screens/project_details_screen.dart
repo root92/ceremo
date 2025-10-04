@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/projects_provider.dart';
+import '../services/project_service.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
+import '../utils/formatters.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final String projectId;
@@ -16,15 +18,140 @@ class ProjectDetailsScreen extends StatefulWidget {
   State<ProjectDetailsScreen> createState() => _ProjectDetailsScreenState();
 }
 
-class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
+class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with TickerProviderStateMixin {
   Map<String, dynamic>? _project;
   bool _isLoading = true;
   String? _error;
+  late TabController _tabController;
+  
+  // Data for each tab
+  List<Map<String, dynamic>> _contributions = [];
+  List<Map<String, dynamic>> _expenses = [];
+  List<Map<String, dynamic>> _estimates = [];
+  
+  // Loading states for each tab
+  bool _contributionsLoading = false;
+  bool _expensesLoading = false;
+  bool _estimatesLoading = false;
 
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+    _tabController.addListener(_onTabChanged);
     _loadProjectDetails();
+  }
+
+  void _onTabChanged() {
+    if (!_tabController.indexIsChanging) {
+      _loadTabData(_tabController.index);
+    }
+  }
+
+  Future<void> _loadTabData(int tabIndex) async {
+    if (_project == null) return;
+
+    switch (tabIndex) {
+      case 1: // Contributions tab
+        if (_contributions.isEmpty && !_contributionsLoading) {
+          await _loadContributions();
+        }
+        break;
+      case 2: // Expenses tab
+        if (_expenses.isEmpty && !_expensesLoading) {
+          await _loadExpenses();
+        }
+        break;
+      case 3: // Estimates tab
+        if (_estimates.isEmpty && !_estimatesLoading) {
+          await _loadEstimates();
+        }
+        break;
+    }
+  }
+
+  Future<void> _loadContributions() async {
+    setState(() {
+      _contributionsLoading = true;
+    });
+
+    try {
+      final contributions = await ProjectService.getProjectContributions(
+        projectId: widget.projectId,
+        limit: 50,
+      );
+      
+      if (mounted) {
+        setState(() {
+          _contributions = contributions;
+          _contributionsLoading = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _contributionsLoading = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _loadExpenses() async {
+    setState(() {
+      _expensesLoading = true;
+    });
+
+    try {
+      final expenses = await ProjectService.getProjectExpenses(
+        projectId: widget.projectId,
+        limit: 50,
+      );
+      
+      if (mounted) {
+        setState(() {
+          _expenses = expenses;
+          _expensesLoading = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _expensesLoading = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _loadEstimates() async {
+    setState(() {
+      _estimatesLoading = true;
+    });
+
+    try {
+      final estimates = await ProjectService.getProjectEstimates(
+        projectId: widget.projectId,
+        limit: 50,
+      );
+      
+      if (mounted) {
+        setState(() {
+          _estimates = estimates;
+          _estimatesLoading = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _estimatesLoading = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadProjectDetails() async {
@@ -117,245 +244,482 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
     }
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        title: Text(_project!['name'] ?? AppLocalizations.of(context)!.projectDetails),
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        title: Text(
+          _project!['name'] ?? AppLocalizations.of(context)!.projectDetails,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w600,
+            color: Colors.black87,
+          ),
+        ),
+        backgroundColor: Colors.white,
         elevation: 0,
+        surfaceTintColor: Colors.transparent,
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit),
+            icon: Icon(
+              Icons.edit,
+              color: Colors.grey[600],
+            ),
             onPressed: () {
               // TODO: Navigate to edit project
             },
           ),
         ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Project Header
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    AppColors.primary,
-                    AppColors.primaryDark,
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(16),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(40),
+          child: Container(
+            color: Colors.white,
+            child: TabBar(
+              controller: _tabController,
+              isScrollable: true,
+              indicatorColor: AppColors.primary,
+              labelColor: AppColors.primary,
+              unselectedLabelColor: Colors.grey[500],
+              labelStyle: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _project!['name'] ?? 'Untitled Project',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  if (_project!['description'] != null) ...[
-                    const SizedBox(height: 8),
-                    Text(
-                      _project!['description'],
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.white.withOpacity(0.9),
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          _project!['type']?.toString().toUpperCase() ?? 'PROJECT',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: _getStatusColor(_project!['status']).withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          _getStatusText(_project!['status']),
-                          style: TextStyle(
-                            color: _getStatusColor(_project!['status']),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+              unselectedLabelStyle: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
               ),
-            ),
-            
-            const SizedBox(height: 24),
-            
-            // Progress Section
-            Text(
-              AppLocalizations.of(context)!.progress,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.progress,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      Text(
-                        '${(_project!['progressPercentage'] ?? 0.0).toStringAsFixed(1)}%',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  LinearProgressIndicator(
-                    value: (_project!['progressPercentage'] ?? 0.0) / 100,
-                    backgroundColor: Colors.grey[300],
-                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
-                  ),
-                ],
-              ),
-            ),
-            
-            const SizedBox(height: 24),
-            
-            // Financial Information
-            Text(
-              AppLocalizations.of(context)!.financialInfo,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            
-            Row(
-              children: [
-                Expanded(
-                  child: _buildInfoCard(
-                    context,
-                    title: AppLocalizations.of(context)!.targetAmount,
-                    value: '${(_project!['targetAmount'] ?? 0.0).toStringAsFixed(0)} ${_project!['currency'] ?? 'USD'}',
-                    icon: Icons.flag,
-                    color: Colors.blue,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _buildInfoCard(
-                    context,
-                    title: AppLocalizations.of(context)!.currentBalance,
-                    value: '${(_project!['currentBalance'] ?? 0.0).toStringAsFixed(0)} ${_project!['currency'] ?? 'USD'}',
-                    icon: Icons.account_balance_wallet,
-                    color: Colors.green,
-                  ),
-                ),
+              tabs: [
+                Tab(text: AppLocalizations.of(context)!.home),
+                Tab(text: AppLocalizations.of(context)!.contributions),
+                Tab(text: AppLocalizations.of(context)!.expenses),
+                Tab(text: AppLocalizations.of(context)!.estimate),
               ],
             ),
-            
-            const SizedBox(height: 24),
-            
-            // Project Information
-            Text(
-              AppLocalizations.of(context)!.projectInfo,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  _buildInfoRow(
-                    context,
-                    label: AppLocalizations.of(context)!.createdAt,
-                    value: _formatDate(_project!['createdAt']),
-                    icon: Icons.calendar_today,
-                  ),
-                  const SizedBox(height: 12),
-                  _buildInfoRow(
-                    context,
-                    label: AppLocalizations.of(context)!.updatedAt,
-                    value: _formatDate(_project!['updatedAt']),
-                    icon: Icons.update,
-                  ),
-                  if (_project!['country'] != null) ...[
-                    const SizedBox(height: 12),
-                    _buildInfoRow(
-                      context,
-                      label: AppLocalizations.of(context)!.country,
-                      value: _project!['country'],
-                      icon: Icons.public,
-                    ),
-                  ],
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          _buildHomeTab(context),
+          _buildContributionsTab(context),
+          _buildExpensesTab(context),
+          _buildEstimateTab(context),
+        ],
       ),
     );
   }
 
+  // Tab Builders
+  Widget _buildHomeTab(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Project Header Card
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Colors.grey[200]!,
+                width: 1,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: _getProjectTypeColor(_project!['type']).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(
+                        _getProjectTypeIcon(_project!['type']),
+                        color: _getProjectTypeColor(_project!['type']),
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _project!['name'] ?? 'Untitled Project',
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            '${_project!['type'] ?? 'Project'} • ${_getStatusText(_project!['status'])}',
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: _getStatusColor(_project!['status']).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        _getStatusText(_project!['status']),
+                        style: TextStyle(
+                          color: _getStatusColor(_project!['status']),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                if (_project!['description'] != null) ...[
+                  const SizedBox(height: 16),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[50],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      _project!['description'],
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.black54,
+                        height: 1.4,
+                      ),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          
+          const SizedBox(height: 24),
+          
+          // Progress Section
+          Text(
+            AppLocalizations.of(context)!.progress,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Colors.grey[200]!,
+                width: 1,
+              ),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.progress,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Text(
+                      '${(_project!['progressPercentage'] ?? 0.0).toStringAsFixed(1)}%',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                LinearProgressIndicator(
+                  value: (_project!['progressPercentage'] ?? 0.0) / 100,
+                  backgroundColor: Colors.grey[300],
+                  valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                ),
+              ],
+            ),
+          ),
+          
+          const SizedBox(height: 24),
+          
+          // Financial Information
+          Text(
+            AppLocalizations.of(context)!.financialInfo,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          Row(
+            children: [
+              Expanded(
+                child: _buildInfoCard(
+                  context,
+                  title: AppLocalizations.of(context)!.targetAmount,
+                  value: '${(_project!['targetAmount'] ?? 0.0).toStringAsFixed(0)} ${_project!['currency'] ?? 'USD'}',
+                  icon: Icons.flag,
+                  color: Colors.blue,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildInfoCard(
+                  context,
+                  title: AppLocalizations.of(context)!.currentBalance,
+                  value: '${(_project!['currentBalance'] ?? 0.0).toStringAsFixed(0)} ${_project!['currency'] ?? 'USD'}',
+                  icon: Icons.account_balance_wallet,
+                  color: Colors.green,
+                ),
+              ),
+            ],
+          ),
+          
+          const SizedBox(height: 24),
+          
+          // Project Information
+          Text(
+            AppLocalizations.of(context)!.projectInfo,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Colors.grey[200]!,
+                width: 1,
+              ),
+            ),
+            child: Column(
+              children: [
+                _buildInfoRow(
+                  context,
+                  label: AppLocalizations.of(context)!.createdAt,
+                  value: Formatters.formatDate(_project!['createdAt'], context: context),
+                  icon: Icons.calendar_today,
+                ),
+                const SizedBox(height: 12),
+                _buildInfoRow(
+                  context,
+                  label: AppLocalizations.of(context)!.updatedAt,
+                  value: Formatters.formatDate(_project!['updatedAt'], context: context),
+                  icon: Icons.update,
+                ),
+                if (_project!['country'] != null) ...[
+                  const SizedBox(height: 12),
+                  _buildInfoRow(
+                    context,
+                    label: AppLocalizations.of(context)!.country,
+                    value: _project!['country'],
+                    icon: Icons.public,
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContributionsTab(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.contributions,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          if (_contributionsLoading)
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.all(40),
+                child: CircularProgressIndicator(),
+              ),
+            )
+          else if (_contributions.isEmpty)
+            _buildEmptyState(
+              context,
+              icon: Icons.people_outline,
+              title: AppLocalizations.of(context)!.noContributions,
+              subtitle: AppLocalizations.of(context)!.noContributionsSubtitle,
+            )
+          else
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: _contributions.length,
+              itemBuilder: (context, index) {
+                final contribution = _contributions[index];
+                return _buildContributionCard(context, contribution);
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExpensesTab(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.expenses,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          if (_expensesLoading)
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.all(40),
+                child: CircularProgressIndicator(),
+              ),
+            )
+          else if (_expenses.isEmpty)
+            _buildEmptyState(
+              context,
+              icon: Icons.receipt_long_outlined,
+              title: AppLocalizations.of(context)!.noExpenses,
+              subtitle: AppLocalizations.of(context)!.noExpensesSubtitle,
+            )
+          else
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: _expenses.length,
+              itemBuilder: (context, index) {
+                final expense = _expenses[index];
+                return _buildExpenseCard(context, expense);
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEstimateTab(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.estimate,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          // Financial Summary
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Colors.grey[200]!,
+                width: 1,
+              ),
+            ),
+            child: Column(
+              children: [
+                _buildEstimateRow(
+                  context,
+                  label: AppLocalizations.of(context)!.totalContributions,
+                  value: '${(_project!['totalContributions'] ?? 0.0).toStringAsFixed(0)} ${_project!['currency'] ?? 'USD'}',
+                  color: Colors.green,
+                ),
+                const SizedBox(height: 12),
+                _buildEstimateRow(
+                  context,
+                  label: AppLocalizations.of(context)!.totalExpenses,
+                  value: '${(_project!['totalExpenses'] ?? 0.0).toStringAsFixed(0)} ${_project!['currency'] ?? 'USD'}',
+                  color: Colors.red,
+                ),
+                const SizedBox(height: 12),
+                _buildEstimateRow(
+                  context,
+                  label: AppLocalizations.of(context)!.netBalance,
+                  value: '${((_project!['totalContributions'] ?? 0.0) - (_project!['totalExpenses'] ?? 0.0)).toStringAsFixed(0)} ${_project!['currency'] ?? 'USD'}',
+                  color: AppColors.primary,
+                ),
+              ],
+            ),
+          ),
+          
+          const SizedBox(height: 24),
+          
+          // Estimates List
+          Text(
+            'Project Estimates',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          if (_estimatesLoading)
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.all(40),
+                child: CircularProgressIndicator(),
+              ),
+            )
+          else if (_estimates.isEmpty)
+            _buildEmptyState(
+              context,
+              icon: Icons.analytics_outlined,
+              title: 'No Estimates',
+              subtitle: 'No estimates have been created for this project yet.',
+            )
+          else
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: _estimates.length,
+              itemBuilder: (context, index) {
+                final estimate = _estimates[index];
+                return _buildEstimateCard(context, estimate);
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
+  // Helper Widgets
   Widget _buildInfoCard(
     BuildContext context, {
     required String title,
@@ -438,6 +802,189 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
     );
   }
 
+  Widget _buildContributionCard(BuildContext context, Map<String, dynamic> contribution) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: Colors.grey[200]!,
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          // Amount section
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  Formatters.formatAmount(
+                    contribution['amount'],
+                    currency: contribution['currency'],
+                    projectCurrency: _project?['currency'],
+                  ),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  contribution['member']?['user']?['name'] ?? 'Unknown',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Status section
+          Expanded(
+            flex: 1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: _getContributionStatusColor(contribution['status']).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    contribution['status'] ?? 'Unknown',
+                    style: TextStyle(
+                      color: _getContributionStatusColor(contribution['status']),
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  Formatters.formatDate(contribution['createdAt'], context: context),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Colors.grey[500],
+                    fontSize: 11,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExpenseCard(BuildContext context, Map<String, dynamic> expense) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: Colors.grey[200]!,
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          // Amount section
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  Formatters.formatAmount(
+                    expense['amount'],
+                    currency: expense['currency'],
+                    projectCurrency: _project?['currency'],
+                  ),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  expense['description'] ?? expense['category'] ?? 'Expense',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Colors.grey[600],
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          // Status section
+          Expanded(
+            flex: 1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: _getExpenseStatusColor(expense['status']).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    expense['status'] ?? 'Unknown',
+                    style: TextStyle(
+                      color: _getExpenseStatusColor(expense['status']),
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  Formatters.formatDate(expense['createdAt'], context: context),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Colors.grey[500],
+                    fontSize: 11,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEstimateRow(
+    BuildContext context, {
+    required String label,
+    required String value,
+    required Color color,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        Text(
+          value,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: color,
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Helper Methods
   Color _getStatusColor(String? status) {
     switch (status?.toLowerCase()) {
       case 'active':
@@ -468,9 +1015,178 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
     }
   }
 
-  String _formatDate(dynamic date) {
-    if (date == null) return AppLocalizations.of(context)!.notAvailable;
-    // TODO: Implement proper date formatting
-    return date.toString();
+  Color _getContributionStatusColor(String? status) {
+    switch (status?.toLowerCase()) {
+      case 'completed':
+        return Colors.green;
+      case 'pending':
+        return Colors.orange;
+      case 'failed':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
   }
+
+  Color _getExpenseStatusColor(String? status) {
+    switch (status?.toLowerCase()) {
+      case 'approved':
+        return Colors.green;
+      case 'pending':
+        return Colors.orange;
+      case 'rejected':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
+
+  Color _getProjectTypeColor(String? type) {
+    switch (type?.toLowerCase()) {
+      case 'wedding':
+        return AppColors.wedding;
+      case 'birthday':
+        return AppColors.birthday;
+      case 'corporate':
+        return AppColors.corporate;
+      case 'religious':
+        return AppColors.religious;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  IconData _getProjectTypeIcon(String? type) {
+    switch (type?.toLowerCase()) {
+      case 'wedding':
+        return Icons.favorite;
+      case 'birthday':
+        return Icons.cake;
+      case 'corporate':
+        return Icons.business;
+      case 'religious':
+        return Icons.church;
+      default:
+        return Icons.event;
+    }
+  }
+
+  Widget _buildEmptyState(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+  }) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(40),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: 64,
+              color: Colors.grey[400],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              subtitle,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Colors.grey[500],
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEstimateCard(BuildContext context, Map<String, dynamic> estimate) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: Colors.grey[200]!,
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          // Amount section
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  Formatters.formatAmount(
+                    estimate['estimatedAmount'],
+                    currency: estimate['currency'],
+                    projectCurrency: _project?['currency'],
+                  ),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  estimate['description'] ?? estimate['category'] ?? 'Estimate',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Colors.grey[600],
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          // Status section
+          Expanded(
+            flex: 1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: _getStatusColor(estimate['status']).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    estimate['status'] ?? 'Unknown',
+                    style: TextStyle(
+                      color: _getStatusColor(estimate['status']),
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  Formatters.formatDate(estimate['createdAt'], context: context),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Colors.grey[500],
+                    fontSize: 11,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 }

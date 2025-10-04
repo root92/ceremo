@@ -159,5 +159,42 @@
   "manageNotifications": "Gérer les préférences de notification",
   "@manageNotifications": {
     "description": "Sous-titre du paramètre notifications"
-  }
+  },
+  "all": "Tous",
+  "@all": {
+    "description": "Option de filtre tous"
+  },
+  "search": "Rechercher",
+  "@search": {
+    "description": "Titre de la boîte de dialogue de recherche"
+  },
+  "searchProjects": "Rechercher des projets...",
+  "@searchProjects": {
+    "description": "Placeholder de recherche de projets"
+  },
+  "clear": "Effacer",
+  "@clear": {
+    "description": "Texte du bouton effacer"
+  },
+  "filter": "Filtrer",
+  "@filter": {
+    "description": "Titre de la boîte de dialogue de filtre"
+  },
+  "viewDetails": "Voir les Détails",
+  "@viewDetails": {
+    "description": "Texte du lien voir les détails"
+  },
+  "home": "Accueil",
+  "contributions": "Contributions",
+  "expenses": "Dépenses",
+  "estimate": "Estimation",
+  "noContributions": "Aucune contribution pour le moment",
+  "noContributionsSubtitle": "Les contributions apparaîtront ici une fois que les gens commenceront à soutenir votre projet",
+  "noExpenses": "Aucune dépense pour le moment",
+  "noExpensesSubtitle": "Les dépenses du projet seront suivies ici",
+  "totalContributions": "Total des contributions",
+  "totalExpenses": "Total des dépenses",
+  "netBalance": "Solde net",
+  "dashboard": "Tableau de bord",
+  "projects": "Projets"
 }
