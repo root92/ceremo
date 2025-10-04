@@ -18,11 +18,47 @@ class CeremoGraphQLClient {
     final AuthLink authLink = AuthLink(
       getToken: () async {
         final prefs = await SharedPreferences.getInstance();
-        return prefs.getString('access_token');
+        final token = prefs.getString('access_token');
+        print('GraphQL Client - Retrieved token: ${token != null ? '${token.substring(0, 20)}...' : 'null'}');
+        
+        // Validate token format
+        if (token != null && token.isNotEmpty) {
+          // Check if token looks like a JWT (has 3 parts separated by dots)
+          final parts = token.split('.');
+          if (parts.length != 3) {
+            print('GraphQL Client - Invalid token format, clearing token');
+            await prefs.remove('access_token');
+            return null;
+          }
+        }
+        
+        return token;
+      },
+    );
+
+    // Add request/response logging
+    final Link loggingLink = Link.function(
+      (request, [next]) {
+        print('GraphQL Request: ${request.operation?.operationName}');
+        print('GraphQL Variables: ${request.variables}');
+        
+        // Log the actual request being sent
+        if (request.operation != null) {
+          print('GraphQL Document: ${request.operation!.document}');
+        }
+        
+        return next!(request).map((response) {
+          print('GraphQL Response: ${response.data}');
+          if (response.errors != null && response.errors!.isNotEmpty) {
+            print('GraphQL Errors: ${response.errors}');
+          }
+          return response;
+        });
       },
     );
     
     final Link link = Link.from([
+      loggingLink,
       authLink,
       httpLink,
     ]);
@@ -39,5 +75,9 @@ class CeremoGraphQLClient {
     if (_client != null) {
       _client!.cache.store.reset();
     }
+  }
+
+  static void refreshClient() {
+    _client = null; // Force recreation of client with new token
   }
 }

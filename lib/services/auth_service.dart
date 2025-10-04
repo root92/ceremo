@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'graphql_client.dart';
@@ -112,8 +113,13 @@ class AuthService {
         data['refreshToken'],
       );
       
-      // Store user data
-      await _storeUserData(data['user']);
+      // Store user data (clean the data to remove GraphQL metadata)
+      final userData = Map<String, dynamic>.from(data['user']);
+      userData.remove('__typename'); // Remove GraphQL metadata
+      await _storeUserData(userData);
+      
+      // Refresh GraphQL client to use new token
+      CeremoGraphQLClient.refreshClient();
       
       return data;
     } catch (e) {
@@ -160,8 +166,13 @@ class AuthService {
         data['refreshToken'],
       );
       
-      // Store user data
-      await _storeUserData(data['user']);
+      // Store user data (clean the data to remove GraphQL metadata)
+      final userData = Map<String, dynamic>.from(data['user']);
+      userData.remove('__typename'); // Remove GraphQL metadata
+      await _storeUserData(userData);
+      
+      // Refresh GraphQL client to use new token
+      CeremoGraphQLClient.refreshClient();
       
       return data;
     } catch (e) {
@@ -243,6 +254,14 @@ class AuthService {
     await CeremoGraphQLClient.clearCache();
   }
   
+  // Clear corrupted data and force re-authentication
+  static Future<void> clearCorruptedData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_userKey);
+    await prefs.remove(_currentOrganizationKey);
+    print('AuthService: Cleared corrupted user data');
+  }
+  
   static Future<String?> getAccessToken() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_accessTokenKey);
@@ -252,9 +271,12 @@ class AuthService {
     final prefs = await SharedPreferences.getInstance();
     final userData = prefs.getString(_userKey);
     if (userData != null) {
-      return Map<String, dynamic>.from(
-        Uri.splitQueryString(userData),
-      );
+      try {
+        return Map<String, dynamic>.from(jsonDecode(userData));
+      } catch (e) {
+        print('Error parsing user data: $e');
+        return null;
+      }
     }
     return null;
   }
@@ -278,6 +300,8 @@ class AuthService {
   
   static Future<void> _storeUserData(Map<String, dynamic> user) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_userKey, user.toString());
+    // Store user data as proper JSON string
+    final userJson = jsonEncode(user);
+    await prefs.setString(_userKey, userJson);
   }
 }

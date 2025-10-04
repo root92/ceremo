@@ -1,6 +1,6 @@
 class ApiConfig {
   // Backend API configuration
-  static const String baseUrl = 'http://localhost:8001';
+  static const String baseUrl = 'https://c23534bb1b42.ngrok-free.app';
   static const String graphqlEndpoint = '$baseUrl/graphql/';
   
   // API endpoints

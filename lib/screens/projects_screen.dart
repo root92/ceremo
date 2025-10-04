@@ -5,6 +5,7 @@ import '../l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
 import 'create_project_screen.dart';
 import 'project_details_screen.dart';
+import 'organizations_screen.dart';
 
 class ProjectsScreen extends StatefulWidget {
   const ProjectsScreen({super.key});

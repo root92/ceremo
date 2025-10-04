@@ -19,11 +19,39 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
 
     try {
+      print('AuthProvider: Initializing authentication...');
       _isAuthenticated = await AuthService.isLoggedIn();
+      print('AuthProvider: Is logged in: $_isAuthenticated');
+      
       if (_isAuthenticated) {
-        _user = await AuthService.getCurrentUserData();
+        try {
+          _user = await AuthService.getCurrentUserData();
+          print('AuthProvider: User data loaded: ${_user != null}');
+          if (_user != null) {
+            print('AuthProvider: User email: ${_user!['email']}');
+          } else {
+            // If no user data found, try to fetch from server
+            print('AuthProvider: No user data found, fetching from server...');
+            try {
+              final serverUserData = await AuthService.getCurrentUser();
+              if (serverUserData != null) {
+                _user = serverUserData;
+                print('AuthProvider: User data fetched from server: ${_user!['email']}');
+              }
+            } catch (e) {
+              print('AuthProvider: Error fetching user from server: $e');
+            }
+          }
+        } catch (e) {
+          print('AuthProvider: Error loading user data: $e');
+          // Clear corrupted data and force re-authentication
+          await AuthService.clearCorruptedData();
+          _isAuthenticated = false;
+          _user = null;
+        }
       }
     } catch (e) {
+      print('AuthProvider: Initialization error: $e');
       _error = e.toString();
       _isAuthenticated = false;
     } finally {
@@ -42,20 +70,25 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
 
     try {
+      print('AuthProvider: Starting login for $email');
       final result = await AuthService.login(
         email: email,
         password: password,
       );
 
       if (result != null) {
+        print('AuthProvider: Login successful');
         _isAuthenticated = true;
         _user = result['user'];
         _error = null;
+        print('AuthProvider: User data: ${_user}');
         notifyListeners();
         return true;
       }
+      print('AuthProvider: Login failed - no result');
       return false;
     } catch (e) {
+      print('AuthProvider: Login error: $e');
       _error = e.toString();
       _isAuthenticated = false;
       notifyListeners();

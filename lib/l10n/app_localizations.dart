@@ -254,7 +254,7 @@ abstract class AppLocalizations {
   /// Organizations description
   ///
   /// In en, this message translates to:
-  /// **'Manage organizations'**
+  /// **'Manage your organizations'**
   String get manageOrganizations;
 
   /// Reports action
@@ -580,6 +580,240 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Project not found'**
   String get projectNotFound;
+
+  /// No description provided for @noOrganizations.
+  ///
+  /// In en, this message translates to:
+  /// **'No organizations yet'**
+  String get noOrganizations;
+
+  /// No description provided for @createOrJoinOrganization.
+  ///
+  /// In en, this message translates to:
+  /// **'Create or join an organization to get started'**
+  String get createOrJoinOrganization;
+
+  /// No description provided for @createOrganization.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Organization'**
+  String get createOrganization;
+
+  /// No description provided for @organizationName.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization Name'**
+  String get organizationName;
+
+  /// No description provided for @enterOrganizationName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter organization name'**
+  String get enterOrganizationName;
+
+  /// No description provided for @organizationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization Description'**
+  String get organizationDescription;
+
+  /// No description provided for @enterOrganizationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter organization description'**
+  String get enterOrganizationDescription;
+
+  /// No description provided for @organizationType.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization Type'**
+  String get organizationType;
+
+  /// No description provided for @organizationSlug.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization Slug'**
+  String get organizationSlug;
+
+  /// No description provided for @enterOrganizationSlug.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter organization slug'**
+  String get enterOrganizationSlug;
+
+  /// No description provided for @slugHelperText.
+  ///
+  /// In en, this message translates to:
+  /// **'Used in URLs (e.g., my-company)'**
+  String get slugHelperText;
+
+  /// No description provided for @pleaseEnterOrganizationName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter organization name'**
+  String get pleaseEnterOrganizationName;
+
+  /// No description provided for @organizationNameMinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization name must be at least 3 characters'**
+  String get organizationNameMinLength;
+
+  /// No description provided for @invalidSlugFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Slug can only contain lowercase letters, numbers, and hyphens'**
+  String get invalidSlugFormat;
+
+  /// No description provided for @organizationCreatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization created successfully!'**
+  String get organizationCreatedSuccessfully;
+
+  /// No description provided for @organizationCreationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization creation failed. Please try again.'**
+  String get organizationCreationFailed;
+
+  /// No description provided for @join.
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get join;
+
+  /// No description provided for @joinOrganization.
+  ///
+  /// In en, this message translates to:
+  /// **'Join Organization'**
+  String get joinOrganization;
+
+  /// No description provided for @joinOrganizationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to join {organizationName}?'**
+  String joinOrganizationMessage(Object organizationName);
+
+  /// No description provided for @joinRequestSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Join request sent successfully!'**
+  String get joinRequestSent;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @selectOrganization.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Organization'**
+  String get selectOrganization;
+
+  /// No description provided for @personal.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal'**
+  String get personal;
+
+  /// No description provided for @business.
+  ///
+  /// In en, this message translates to:
+  /// **'Business'**
+  String get business;
+
+  /// No description provided for @ngo.
+  ///
+  /// In en, this message translates to:
+  /// **'NGO'**
+  String get ngo;
+
+  /// No description provided for @government.
+  ///
+  /// In en, this message translates to:
+  /// **'Government'**
+  String get government;
+
+  /// No description provided for @organization.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization'**
+  String get organization;
+
+  /// View all button text
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get viewAll;
+
+  /// Recent section title
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get recent;
+
+  /// Name field label
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// Role field label
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get role;
+
+  /// Logout confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout?'**
+  String get logoutConfirmation;
+
+  /// Personal information section title
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Information'**
+  String get personalInformation;
+
+  /// Preferences section title
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get preferences;
+
+  /// Account section title
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
+  /// Theme setting title
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get theme;
+
+  /// Language setting title
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// Notifications setting title
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// Notifications setting subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Manage notification preferences'**
+  String get manageNotifications;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
