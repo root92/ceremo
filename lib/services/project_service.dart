@@ -486,6 +486,53 @@ class ProjectService {
     }
   }
 
+  // Project members query
+  static const String getProjectMembersQuery = '''
+    query GetProjectMembers(\$projectId: ID!, \$limit: Int, \$offset: Int, \$orderBy: String) {
+      projectMembers(projectId: \$projectId, limit: \$limit, offset: \$offset, orderBy: \$orderBy) {
+        id
+        role
+        createdAt
+        user {
+          id
+          name
+          email
+        }
+      }
+    }
+  ''';
+
+  static Future<List<Map<String, dynamic>>> getProjectMembers({
+    required String projectId,
+    int? limit,
+    int? offset,
+    String? orderBy,
+  }) async {
+    try {
+      final result = await CeremoGraphQLClient.client.query(
+        QueryOptions(
+          document: gql(getProjectMembersQuery),
+          variables: {
+            'projectId': projectId,
+            if (limit != null) 'limit': limit,
+            if (offset != null) 'offset': offset,
+            if (orderBy != null) 'orderBy': orderBy,
+          },
+        ),
+      );
+      
+      if (result.hasException) {
+        throw Exception('Failed to get project members: ${result.exception.toString()}');
+      }
+      
+      final members = result.data?['projectMembers'] as List<dynamic>?;
+      return members?.cast<Map<String, dynamic>>() ?? [];
+    } catch (e) {
+      print('Get project members error: $e');
+      rethrow;
+    }
+  }
+
   // Contribution mutations
   static const String updateContributionMutation = '''
     mutation UpdateContribution(\$input: UpdateContributionInput!) {

@@ -425,13 +425,13 @@ abstract class AppLocalizations {
   /// **'Payment Information'**
   String get paymentInfo;
 
-  /// Label for payment method
+  /// Payment method field label
   ///
   /// In en, this message translates to:
   /// **'Payment Method'**
   String get paymentMethod;
 
-  /// Label for transaction ID
+  /// Transaction ID field label
   ///
   /// In en, this message translates to:
   /// **'Transaction ID'**
@@ -538,6 +538,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No actions available for this contribution status'**
   String get noActionsAvailable;
+
+  /// Title for edit contribution screen
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Contribution'**
+  String get editContribution;
+
+  /// Member field label
+  ///
+  /// In en, this message translates to:
+  /// **'Member'**
+  String get member;
+
+  /// Note field label
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get note;
+
+  /// Save changes button text
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
+
+  /// Cancel button text
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// Select member dropdown placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Select Member'**
+  String get selectMember;
+
+  /// Select payment method dropdown placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Select Payment Method'**
+  String get selectPaymentMethod;
+
+  /// Amount input placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Amount'**
+  String get enterAmount;
+
+  /// Transaction ID input placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Transaction ID'**
+  String get enterTransactionId;
+
+  /// Note input placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Note (Optional)'**
+  String get enterNote;
+
+  /// Success message when contribution is updated
+  ///
+  /// In en, this message translates to:
+  /// **'Contribution updated successfully'**
+  String get contributionUpdated;
+
+  /// Error message when contribution update fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update contribution'**
+  String get updateContributionError;
+
+  /// Amount validation error message
+  ///
+  /// In en, this message translates to:
+  /// **'Amount is required'**
+  String get amountRequired;
+
+  /// Member validation error message
+  ///
+  /// In en, this message translates to:
+  /// **'Member is required'**
+  String get memberRequired;
+
+  /// Payment method validation error message
+  ///
+  /// In en, this message translates to:
+  /// **'Payment method is required'**
+  String get paymentMethodRequired;
+
+  /// Invalid amount validation error message
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid amount'**
+  String get invalidAmount;
 
   /// No description provided for @createProject.
   ///
@@ -838,12 +934,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Join request sent successfully!'**
   String get joinRequestSent;
-
-  /// No description provided for @cancel.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get cancel;
 
   /// No description provided for @selectOrganization.
   ///

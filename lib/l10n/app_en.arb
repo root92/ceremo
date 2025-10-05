@@ -296,6 +296,78 @@
   "@noActionsAvailable": {
     "description": "Message shown when no actions are available for the current contribution status"
   },
+  "editContribution": "Edit Contribution",
+  "@editContribution": {
+    "description": "Title for edit contribution screen"
+  },
+  "member": "Member",
+  "@member": {
+    "description": "Member field label"
+  },
+  "paymentMethod": "Payment Method",
+  "@paymentMethod": {
+    "description": "Payment method field label"
+  },
+  "transactionId": "Transaction ID",
+  "@transactionId": {
+    "description": "Transaction ID field label"
+  },
+  "note": "Note",
+  "@note": {
+    "description": "Note field label"
+  },
+  "saveChanges": "Save Changes",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "selectMember": "Select Member",
+  "@selectMember": {
+    "description": "Select member dropdown placeholder"
+  },
+  "selectPaymentMethod": "Select Payment Method",
+  "@selectPaymentMethod": {
+    "description": "Select payment method dropdown placeholder"
+  },
+  "enterAmount": "Enter Amount",
+  "@enterAmount": {
+    "description": "Amount input placeholder"
+  },
+  "enterTransactionId": "Enter Transaction ID",
+  "@enterTransactionId": {
+    "description": "Transaction ID input placeholder"
+  },
+  "enterNote": "Enter Note (Optional)",
+  "@enterNote": {
+    "description": "Note input placeholder"
+  },
+  "contributionUpdated": "Contribution updated successfully",
+  "@contributionUpdated": {
+    "description": "Success message when contribution is updated"
+  },
+  "updateContributionError": "Failed to update contribution",
+  "@updateContributionError": {
+    "description": "Error message when contribution update fails"
+  },
+  "amountRequired": "Amount is required",
+  "@amountRequired": {
+    "description": "Amount validation error message"
+  },
+  "memberRequired": "Member is required",
+  "@memberRequired": {
+    "description": "Member validation error message"
+  },
+  "paymentMethodRequired": "Payment method is required",
+  "@paymentMethodRequired": {
+    "description": "Payment method validation error message"
+  },
+  "invalidAmount": "Please enter a valid amount",
+  "@invalidAmount": {
+    "description": "Invalid amount validation error message"
+  },
   "myProjects": "My Projects",
   "viewAllProjects": "View all your projects",
   "createProject": "Create Project",

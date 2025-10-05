@@ -231,6 +231,54 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noActionsAvailable => 'Aucune action disponible pour ce statut de contribution';
 
   @override
+  String get editContribution => 'Modifier la Contribution';
+
+  @override
+  String get member => 'Membre';
+
+  @override
+  String get note => 'Note';
+
+  @override
+  String get saveChanges => 'Enregistrer';
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get selectMember => 'Sélectionner un Membre';
+
+  @override
+  String get selectPaymentMethod => 'Sélectionner une Méthode de Paiement';
+
+  @override
+  String get enterAmount => 'Entrer le Montant';
+
+  @override
+  String get enterTransactionId => 'Entrer l\'ID de Transaction';
+
+  @override
+  String get enterNote => 'Entrer une Note (Optionnel)';
+
+  @override
+  String get contributionUpdated => 'Contribution mise à jour avec succès';
+
+  @override
+  String get updateContributionError => 'Échec de la mise à jour de la contribution';
+
+  @override
+  String get amountRequired => 'Le montant est requis';
+
+  @override
+  String get memberRequired => 'Le membre est requis';
+
+  @override
+  String get paymentMethodRequired => 'La méthode de paiement est requise';
+
+  @override
+  String get invalidAmount => 'Veuillez entrer un montant valide';
+
+  @override
   String get createProject => 'Créer un Projet';
 
   @override
@@ -381,9 +429,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get joinRequestSent => 'Demande d\'adhésion envoyée avec succès !';
-
-  @override
-  String get cancel => 'Annuler';
 
   @override
   String get selectOrganization => 'Sélectionner une Organisation';

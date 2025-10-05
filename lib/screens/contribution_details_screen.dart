@@ -3,6 +3,7 @@ import '../services/project_service.dart';
 import '../theme/app_colors.dart';
 import '../l10n/app_localizations.dart';
 import '../utils/formatters.dart';
+import 'edit_contribution_screen.dart';
 
 class ContributionDetailsScreen extends StatefulWidget {
   final String contributionId;
@@ -918,13 +919,20 @@ class _ContributionDetailsScreenState extends State<ContributionDetailsScreen> {
   }
 
   void _editContribution() {
-    // TODO: Navigate to edit contribution screen
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Edit contribution functionality coming soon'),
-        backgroundColor: AppColors.primary,
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EditContributionScreen(
+          contributionId: widget.contributionId,
+          projectId: widget.projectId,
+          contribution: _contribution!,
+        ),
       ),
-    );
+    ).then((success) {
+      if (success == true) {
+        // Refresh the contribution details
+        _loadContribution();
+      }
+    });
   }
 
   void _markAsReceived() {
