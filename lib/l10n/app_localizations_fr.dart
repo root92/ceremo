@@ -69,10 +69,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get welcomeBack => 'Bon retour !';
 
   @override
-  String get quickActions => 'Actions rapides';
+  String get quickActions => 'Actions Rapides';
 
   @override
-  String get newProject => 'Nouveau projet';
+  String get newProject => 'Nouveau Projet';
 
   @override
   String get startNewCeremony => 'Démarrer un nouveau projet de cérémonie';
@@ -81,7 +81,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get myProjects => 'Mes Projets';
 
   @override
-  String get viewAllProjects => 'Voir tous vos projets';
+  String get viewAllProjects => 'Voir tous les projets';
 
   @override
   String get organizations => 'Organisations';
@@ -381,7 +381,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get projectNotFound => 'Projet non trouvé';
 
   @override
-  String get noOrganizations => 'Aucune organisation pour le moment';
+  String get noOrganizations => 'Aucune organisation';
 
   @override
   String get createOrJoinOrganization => 'Créez ou rejoignez une organisation pour commencer';
@@ -461,7 +461,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get organization => 'Organisation';
 
   @override
-  String get viewAll => 'Voir Tout';
+  String get viewAll => 'Voir tout';
 
   @override
   String get recent => 'Récent';
@@ -753,4 +753,40 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get monthlyReport => 'Rapport Mensuel';
+
+  @override
+  String get hiThere => 'Salut';
+
+  @override
+  String get user => 'Utilisateur';
+
+  @override
+  String get untitledProject => 'Projet sans titre';
+
+  @override
+  String get project => 'Projet';
+
+  @override
+  String get noProjectsYet => 'Aucun projet pour le moment';
+
+  @override
+  String get startByCreatingFirstProject => 'Commencez par créer votre premier projet';
+
+  @override
+  String get startCeremony => 'Commencer une cérémonie';
+
+  @override
+  String get manageTeams => 'Gérer les équipes';
+
+  @override
+  String get unknown => 'Inconnu';
+
+  @override
+  String get switchOrganization => 'Changer d\'Organisation';
+
+  @override
+  String get untitledOrganization => 'Organisation sans titre';
+
+  @override
+  String get createFirstOrganization => 'Créez votre première organisation pour commencer';
 }

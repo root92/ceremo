@@ -242,7 +242,7 @@ abstract class AppLocalizations {
   /// My projects description
   ///
   /// In en, this message translates to:
-  /// **'View all your projects'**
+  /// **'View all projects'**
   String get viewAllProjects;
 
   /// Organizations action
@@ -842,7 +842,7 @@ abstract class AppLocalizations {
   /// No description provided for @noOrganizations.
   ///
   /// In en, this message translates to:
-  /// **'No organizations yet'**
+  /// **'No organizations'**
   String get noOrganizations;
 
   /// No description provided for @createOrJoinOrganization.
@@ -998,7 +998,7 @@ abstract class AppLocalizations {
   /// View all button text
   ///
   /// In en, this message translates to:
-  /// **'View All'**
+  /// **'View all'**
   String get viewAll;
 
   /// Recent section title
@@ -1582,6 +1582,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Monthly Report'**
   String get monthlyReport;
+
+  /// No description provided for @hiThere.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi there'**
+  String get hiThere;
+
+  /// No description provided for @user.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get user;
+
+  /// No description provided for @untitledProject.
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled Project'**
+  String get untitledProject;
+
+  /// No description provided for @project.
+  ///
+  /// In en, this message translates to:
+  /// **'Project'**
+  String get project;
+
+  /// No description provided for @noProjectsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No projects yet'**
+  String get noProjectsYet;
+
+  /// No description provided for @startByCreatingFirstProject.
+  ///
+  /// In en, this message translates to:
+  /// **'Start by creating your first project'**
+  String get startByCreatingFirstProject;
+
+  /// No description provided for @startCeremony.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a ceremony'**
+  String get startCeremony;
+
+  /// No description provided for @manageTeams.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage teams'**
+  String get manageTeams;
+
+  /// No description provided for @unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknown;
+
+  /// No description provided for @switchOrganization.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Organization'**
+  String get switchOrganization;
+
+  /// No description provided for @untitledOrganization.
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled Organization'**
+  String get untitledOrganization;
+
+  /// No description provided for @createFirstOrganization.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your first organization to get started'**
+  String get createFirstOrganization;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

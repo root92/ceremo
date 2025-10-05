@@ -81,7 +81,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get myProjects => 'My Projects';
 
   @override
-  String get viewAllProjects => 'View all your projects';
+  String get viewAllProjects => 'View all projects';
 
   @override
   String get organizations => 'Organizations';
@@ -381,7 +381,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get projectNotFound => 'Project not found';
 
   @override
-  String get noOrganizations => 'No organizations yet';
+  String get noOrganizations => 'No organizations';
 
   @override
   String get createOrJoinOrganization => 'Create or join an organization to get started';
@@ -461,7 +461,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get organization => 'Organization';
 
   @override
-  String get viewAll => 'View All';
+  String get viewAll => 'View all';
 
   @override
   String get recent => 'Recent';
@@ -753,4 +753,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get monthlyReport => 'Monthly Report';
+
+  @override
+  String get hiThere => 'Hi there';
+
+  @override
+  String get user => 'User';
+
+  @override
+  String get untitledProject => 'Untitled Project';
+
+  @override
+  String get project => 'Project';
+
+  @override
+  String get noProjectsYet => 'No projects yet';
+
+  @override
+  String get startByCreatingFirstProject => 'Start by creating your first project';
+
+  @override
+  String get startCeremony => 'Start a ceremony';
+
+  @override
+  String get manageTeams => 'Manage teams';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get switchOrganization => 'Switch Organization';
+
+  @override
+  String get untitledOrganization => 'Untitled Organization';
+
+  @override
+  String get createFirstOrganization => 'Create your first organization to get started';
 }

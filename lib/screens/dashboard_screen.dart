@@ -5,6 +5,7 @@ import '../providers/organization_context_provider.dart';
 import '../providers/projects_provider.dart';
 import '../theme/app_colors.dart';
 import '../l10n/app_localizations.dart';
+import '../utils/formatters.dart';
 import 'projects_screen.dart';
 import 'organizations_screen.dart';
 import 'create_organization_screen.dart';
@@ -96,7 +97,7 @@ class DashboardScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hi there',
+                    AppLocalizations.of(context)!.hiThere,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
@@ -104,7 +105,7 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    authProvider.user?['name'] ?? 'User',
+                    authProvider.user?['name'] ?? AppLocalizations.of(context)!.user,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Colors.black54,
                     ),
@@ -138,7 +139,7 @@ class DashboardScreen extends StatelessWidget {
         Row(
           children: [
             Text(
-              'Projects',
+              AppLocalizations.of(context)!.projects,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.w600,
                 color: Colors.black87,
@@ -157,7 +158,7 @@ class DashboardScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  'View all',
+                  AppLocalizations.of(context)!.viewAll,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Colors.black54,
                     fontWeight: FontWeight.w500,
@@ -240,7 +241,7 @@ class DashboardScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      project['name'] ?? 'Untitled Project',
+                      project['name'] ?? AppLocalizations.of(context)!.untitledProject,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Colors.black87,
@@ -248,7 +249,7 @@ class DashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      '${project['type'] ?? 'Project'} • ${_getStatusText(project['status'])}',
+                      '${project['type'] ?? AppLocalizations.of(context)!.project} • ${_getStatusText(project['status'], context)}',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Colors.black54,
                       ),
@@ -257,7 +258,10 @@ class DashboardScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                '${(project['currentBalance'] ?? 0.0).toStringAsFixed(0)} ${project['currency'] ?? 'USD'}',
+                Formatters.formatAmountWithSymbol(
+                  project['currentBalance'] ?? 0.0,
+                  currency: project['currency'],
+                ),
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                   color: Colors.black87,
@@ -290,7 +294,7 @@ class DashboardScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'No projects yet',
+            AppLocalizations.of(context)!.noProjectsYet,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
               color: Colors.black87,
               fontWeight: FontWeight.w600,
@@ -298,7 +302,7 @@ class DashboardScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Start by creating your first project',
+            AppLocalizations.of(context)!.startByCreatingFirstProject,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: Colors.black54,
             ),
@@ -319,7 +323,7 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             child: Text(
-              'Create Project',
+              AppLocalizations.of(context)!.createProject,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
@@ -371,7 +375,7 @@ class DashboardScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'View all projects',
+              AppLocalizations.of(context)!.viewAllProjects,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Colors.black54,
                 fontWeight: FontWeight.w500,
@@ -394,7 +398,7 @@ class DashboardScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Quick Actions',
+          AppLocalizations.of(context)!.quickActions,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.w600,
             color: Colors.black87,
@@ -406,8 +410,8 @@ class DashboardScreen extends StatelessWidget {
             Expanded(
               child: _buildActionCard(
                 context,
-                title: 'New Project',
-                subtitle: 'Start a ceremony',
+                title: AppLocalizations.of(context)!.newProject,
+                subtitle: AppLocalizations.of(context)!.startCeremony,
                 icon: Icons.add_circle_outline,
                 color: AppColors.primary,
                 onTap: () => Navigator.push(
@@ -420,8 +424,8 @@ class DashboardScreen extends StatelessWidget {
             Expanded(
               child: _buildActionCard(
                 context,
-                title: 'Organizations',
-                subtitle: 'Manage teams',
+                title: AppLocalizations.of(context)!.organizations,
+                subtitle: AppLocalizations.of(context)!.manageTeams,
                 icon: Icons.business_outlined,
                 color: Colors.blue,
                 onTap: () => Navigator.push(
@@ -537,18 +541,18 @@ class DashboardScreen extends StatelessWidget {
     }
   }
 
-  String _getStatusText(String? status) {
+  String _getStatusText(String? status, BuildContext context) {
     switch (status?.toLowerCase()) {
       case 'active':
-        return 'Active';
+        return AppLocalizations.of(context)!.active;
       case 'completed':
-        return 'Completed';
+        return AppLocalizations.of(context)!.completed;
       case 'paused':
-        return 'Paused';
+        return AppLocalizations.of(context)!.paused;
       case 'cancelled':
-        return 'Cancelled';
+        return AppLocalizations.of(context)!.cancelled;
       default:
-        return status ?? 'Unknown';
+        return status ?? AppLocalizations.of(context)!.unknown;
     }
   }
 }
@@ -584,7 +588,7 @@ class _OrganizationBottomSheet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Switch Organization',
+                        AppLocalizations.of(context)!.switchOrganization,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w500,
                               color: Colors.black87,
@@ -614,7 +618,7 @@ class _OrganizationBottomSheet extends StatelessWidget {
                     child: OutlinedButton.icon(
                       icon: const Icon(Icons.logout, color: Colors.red),
                       label: Text(
-                        'Logout',
+                        AppLocalizations.of(context)!.logout,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: Colors.red,
                               fontWeight: FontWeight.w600,
@@ -690,7 +694,7 @@ class _OrganizationBottomSheet extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      org['name'] ?? 'Untitled Organization',
+                      org['name'] ?? AppLocalizations.of(context)!.untitledOrganization,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                             color: isSelected ? AppColors.primary : Colors.black87,
@@ -756,7 +760,7 @@ class _OrganizationBottomSheet extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'No organizations',
+                      AppLocalizations.of(context)!.noOrganizations,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                             color: AppColors.primary,
@@ -764,7 +768,7 @@ class _OrganizationBottomSheet extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Create your first organization to get started',
+                      AppLocalizations.of(context)!.createFirstOrganization,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Colors.black54,
                           ),
@@ -823,7 +827,7 @@ class _OrganizationBottomSheet extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                'Create Organization',
+                AppLocalizations.of(context)!.createOrganization,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: AppColors.primary,
