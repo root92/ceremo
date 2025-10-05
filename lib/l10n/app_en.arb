@@ -204,6 +204,98 @@
   "@system": {
     "description": "System theme option"
   },
+  "contributionDetails": "Contribution Details",
+  "@contributionDetails": {
+    "description": "Title for contribution details screen"
+  },
+  "contributionInfo": "Contribution Information",
+  "@contributionInfo": {
+    "description": "Section title for contribution information"
+  },
+  "contributor": "Contributor",
+  "@contributor": {
+    "description": "Label for contributor information"
+  },
+  "paymentInfo": "Payment Information",
+  "@paymentInfo": {
+    "description": "Section title for payment information"
+  },
+  "paymentMethod": "Payment Method",
+  "@paymentMethod": {
+    "description": "Label for payment method"
+  },
+  "transactionId": "Transaction ID",
+  "@transactionId": {
+    "description": "Label for transaction ID"
+  },
+  "notes": "Notes",
+  "@notes": {
+    "description": "Label for notes section"
+  },
+  "contributionNotFound": "Contribution not found",
+  "@contributionNotFound": {
+    "description": "Error message when contribution is not found"
+  },
+  "deleteContribution": "Delete Contribution",
+  "@deleteContribution": {
+    "description": "Title for delete contribution dialog"
+  },
+  "deleteContributionConfirmation": "Are you sure you want to delete this contribution? This action cannot be undone.",
+  "@deleteContributionConfirmation": {
+    "description": "Confirmation message for deleting contribution"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error label"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry button text"
+  },
+  "amount": "Amount",
+  "@amount": {
+    "description": "Amount label"
+  },
+  "reference": "Reference",
+  "@reference": {
+    "description": "Reference label"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Status label"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit action"
+  },
+  "share": "Share",
+  "@share": {
+    "description": "Share action"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete action"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Confirm action"
+  },
+  "markReceived": "Mark Received",
+  "@markReceived": {
+    "description": "Mark as received action"
+  },
+  "markPending": "Mark as Pending",
+  "@markPending": {
+    "description": "Mark as pending action"
+  },
+  "contributionActions": "Contribution Actions",
+  "@contributionActions": {
+    "description": "Title for contribution actions section"
+  },
+  "noActionsAvailable": "No actions available for this contribution status",
+  "@noActionsAvailable": {
+    "description": "Message shown when no actions are available for the current contribution status"
+  },
   "myProjects": "My Projects",
   "viewAllProjects": "View all your projects",
   "createProject": "Create Project",
