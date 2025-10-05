@@ -211,7 +211,12 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.projectDetails),
+          title: Text(
+            AppLocalizations.of(context)!.projectDetails,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           backgroundColor: Theme.of(context).colorScheme.surface,
           elevation: 0,
         ),
@@ -225,7 +230,12 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.projectDetails),
+          title: Text(
+            AppLocalizations.of(context)!.projectDetails,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           backgroundColor: Theme.of(context).colorScheme.surface,
           elevation: 0,
         ),
