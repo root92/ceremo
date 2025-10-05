@@ -240,7 +240,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get note => 'Note';
 
   @override
-  String get saveChanges => 'Enregistrer';
+  String get saveChanges => 'Enregistrer les Modifications';
 
   @override
   String get cancel => 'Annuler';
@@ -552,4 +552,73 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get projects => 'Projets';
+
+  @override
+  String get expenseDetails => 'Détails de la Dépense';
+
+  @override
+  String get expenseInformation => 'Informations sur la Dépense';
+
+  @override
+  String get expenseNotFound => 'Dépense introuvable';
+
+  @override
+  String get category => 'Catégorie';
+
+  @override
+  String get receiptUrl => 'URL du Reçu';
+
+  @override
+  String get actions => 'Actions';
+
+  @override
+  String get approve => 'Approuver';
+
+  @override
+  String get reject => 'Rejeter';
+
+  @override
+  String get editExpense => 'Modifier la Dépense';
+
+  @override
+  String get expenseUpdated => 'Dépense mise à jour avec succès';
+
+  @override
+  String get updateExpenseError => 'Échec de la mise à jour de la dépense';
+
+  @override
+  String get descriptionRequired => 'La description est requise';
+
+  @override
+  String get categoryRequired => 'La catégorie est requise';
+
+  @override
+  String get enterDescription => 'Entrer la Description';
+
+  @override
+  String get enterCategory => 'Entrer la Catégorie';
+
+  @override
+  String get enterReceiptUrl => 'Entrer l\'URL du Reçu (Optionnel)';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get estimateDetails => 'Détails de l\'Estimation';
+
+  @override
+  String get estimateInformation => 'Informations sur l\'Estimation';
+
+  @override
+  String get estimateNotFound => 'Estimation introuvable';
+
+  @override
+  String get estimatedAmount => 'Montant Estimé';
+
+  @override
+  String get priority => 'Priorité';
+
+  @override
+  String get estimatedAt => 'Estimé le';
 }

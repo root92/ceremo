@@ -552,4 +552,73 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get projects => 'Projects';
+
+  @override
+  String get expenseDetails => 'Expense Details';
+
+  @override
+  String get expenseInformation => 'Expense Information';
+
+  @override
+  String get expenseNotFound => 'Expense not found';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get receiptUrl => 'Receipt URL';
+
+  @override
+  String get actions => 'Actions';
+
+  @override
+  String get approve => 'Approve';
+
+  @override
+  String get reject => 'Reject';
+
+  @override
+  String get editExpense => 'Edit Expense';
+
+  @override
+  String get expenseUpdated => 'Expense updated successfully';
+
+  @override
+  String get updateExpenseError => 'Failed to update expense';
+
+  @override
+  String get descriptionRequired => 'Description is required';
+
+  @override
+  String get categoryRequired => 'Category is required';
+
+  @override
+  String get enterDescription => 'Enter Description';
+
+  @override
+  String get enterCategory => 'Enter Category';
+
+  @override
+  String get enterReceiptUrl => 'Enter Receipt URL (Optional)';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get estimateDetails => 'Estimate Details';
+
+  @override
+  String get estimateInformation => 'Estimate Information';
+
+  @override
+  String get estimateNotFound => 'Estimate not found';
+
+  @override
+  String get estimatedAmount => 'Estimated Amount';
+
+  @override
+  String get priority => 'Priority';
+
+  @override
+  String get estimatedAt => 'Estimated At';
 }

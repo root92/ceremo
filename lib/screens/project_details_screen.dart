@@ -7,6 +7,8 @@ import '../theme/app_colors.dart';
 import '../utils/formatters.dart';
 import 'contribution_details_screen.dart';
 import 'add_contribution_screen.dart';
+import 'expense_details_screen.dart';
+import 'estimate_details_screen.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final String projectId;
@@ -20,7 +22,7 @@ class ProjectDetailsScreen extends StatefulWidget {
   State<ProjectDetailsScreen> createState() => _ProjectDetailsScreenState();
 }
 
-class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with TickerProviderStateMixin {
+class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with TickerProviderStateMixin, WidgetsBindingObserver {
   Map<String, dynamic>? _project;
   bool _isLoading = true;
   String? _error;
@@ -41,13 +43,41 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
     _tabController.addListener(_onTabChanged);
+    WidgetsBinding.instance.addObserver(this);
     _loadProjectDetails();
   }
 
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      // Refresh all data when app resumes
+      _refreshAllData();
+    }
+  }
+
+
   void _onTabChanged() {
     if (!_tabController.indexIsChanging) {
+      // Trigger rebuild to update FAB per active tab
+      setState(() {});
       _loadTabData(_tabController.index);
     }
+  }
+
+  void _refreshAllData() {
+    // Refresh project details and all tab data
+    _loadProjectDetails();
+    _loadContributions();
+    _loadExpenses();
+    _loadEstimates();
   }
 
   Future<void> _loadTabData(int tabIndex) async {
@@ -55,17 +85,17 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
 
     switch (tabIndex) {
       case 1: // Contributions tab
-        if (_contributions.isEmpty && !_contributionsLoading) {
+        if (!_contributionsLoading) {
           await _loadContributions();
         }
         break;
       case 2: // Expenses tab
-        if (_expenses.isEmpty && !_expensesLoading) {
+        if (!_expensesLoading) {
           await _loadExpenses();
         }
         break;
       case 3: // Estimates tab
-        if (_estimates.isEmpty && !_estimatesLoading) {
+        if (!_estimatesLoading) {
           await _loadEstimates();
         }
         break;
@@ -151,10 +181,6 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
   }
 
   @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
 
   Future<void> _loadProjectDetails() async {
     try {
@@ -306,26 +332,50 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
           _buildEstimateTab(context),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => AddContributionScreen(
-                projectId: widget.projectId,
-                projectCurrency: _project!['currency'] ?? 'GNF',
-              ),
-            ),
-          ).then((success) {
-            if (success == true) {
-              // Refresh the project data
-              _loadProjectDetails();
-            }
-          });
-        },
-        backgroundColor: AppColors.primary,
-        child: const Icon(Icons.add, color: Colors.white),
-      ),
+      floatingActionButton: _buildFabForTab(_tabController.index),
     );
+  }
+
+  Widget? _buildFabForTab(int tabIndex) {
+    switch (tabIndex) {
+      case 1: // Contributions
+        return FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context)
+                .push(
+                  MaterialPageRoute(
+                    builder: (context) => AddContributionScreen(
+                      projectId: widget.projectId,
+                      projectCurrency: _project!['currency'] ?? 'GNF',
+                    ),
+                  ),
+                )
+                .then((success) {
+              if (success == true) {
+                _loadProjectDetails();
+                _loadContributions();
+              }
+            });
+          },
+          backgroundColor: AppColors.primary,
+          child: const Icon(Icons.add, color: Colors.white),
+        );
+      case 2: // Expenses
+        return FloatingActionButton(
+          onPressed: () {
+            // Placeholder until AddExpenseScreen is implemented
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Coming soon')),
+            );
+          },
+          backgroundColor: AppColors.primary,
+          child: const Icon(Icons.add, color: Colors.white),
+        );
+      case 3: // Estimates
+        return null; // No FAB for estimates tab
+      default:
+        return null; // No FAB on Home tab
+    }
   }
 
   // Tab Builders
@@ -564,11 +614,15 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
   }
 
   Widget _buildContributionsTab(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+    return RefreshIndicator(
+      onRefresh: () async {
+        await _loadContributions();
+      },
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           Text(
             AppLocalizations.of(context)!.contributions,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -603,15 +657,20 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
             ),
         ],
       ),
+    ),
     );
   }
 
   Widget _buildExpensesTab(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+    return RefreshIndicator(
+      onRefresh: () async {
+        await _loadExpenses();
+      },
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           Text(
             AppLocalizations.of(context)!.expenses,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -646,15 +705,20 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
             ),
         ],
       ),
+    ),
     );
   }
 
   Widget _buildEstimateTab(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+    return RefreshIndicator(
+      onRefresh: () async {
+        await _loadEstimates();
+      },
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           Text(
             AppLocalizations.of(context)!.estimate,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -737,6 +801,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
             ),
         ],
       ),
+    ),
     );
   }
 
@@ -834,7 +899,12 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
               projectId: widget.projectId,
             ),
           ),
-        );
+        ).then((success) {
+          if (success == true) {
+            // Refresh the contributions list when returning from contribution details
+            _loadContributions();
+          }
+        });
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
@@ -915,18 +985,35 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
   }
 
   Widget _buildExpenseCard(BuildContext context, Map<String, dynamic> expense) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Colors.grey[200]!,
-          width: 1,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ExpenseDetailsScreen(
+              expenseId: expense['id'],
+              projectId: widget.projectId,
+            ),
+          ),
+        ).then((success) {
+          if (success == true) {
+            // Refresh the expenses list when returning from expense details
+            _loadExpenses();
+          }
+        });
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Colors.grey[200]!,
+            width: 1,
+          ),
         ),
-      ),
-      child: Row(
+        child: Row(
         children: [
           // Amount section
           Expanded(
@@ -991,6 +1078,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
           ),
         ],
       ),
+    ),
     );
   }
 
@@ -1144,18 +1232,29 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
   }
 
   Widget _buildEstimateCard(BuildContext context, Map<String, dynamic> estimate) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Colors.grey[200]!,
-          width: 1,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => EstimateDetailsScreen(
+              estimateId: estimate['id'],
+              projectId: widget.projectId,
+            ),
+          ),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Colors.grey[200]!,
+            width: 1,
+          ),
         ),
-      ),
-      child: Row(
+        child: Row(
         children: [
           // Amount section
           Expanded(
@@ -1220,6 +1319,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
           ),
         ],
       ),
+    ),
     );
   }
 
