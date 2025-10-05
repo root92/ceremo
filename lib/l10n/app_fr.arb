@@ -339,5 +339,22 @@
   "untitledOrganization": "Organisation sans titre",
   "noOrganizations": "Aucune organisation",
   "createFirstOrganization": "Créez votre première organisation pour commencer",
-  "createOrganization": "Créer une Organisation"
+  "createOrganization": "Créer une Organisation",
+  "addExpense": "Ajouter une Dépense",
+  "expenseAdded": "Dépense ajoutée avec succès",
+  "addExpenseError": "Échec de l'ajout de la dépense",
+  "enterAmount": "Entrer le Montant",
+  "enterDescription": "Entrer la Description",
+  "enterReceiptUrl": "Entrer l'URL du Reçu (Optionnel)",
+  "receiptUrl": "URL du Reçu",
+  "officeSupplies": "Fournitures de Bureau",
+  "travel": "Voyage",
+  "meals": "Repas",
+  "equipment": "Équipement",
+  "marketing": "Marketing",
+  "utilities": "Services Publics",
+  "rent": "Loyer",
+  "professionalServices": "Services Professionnels",
+  "software": "Logiciel",
+  "other": "Autre"
 }

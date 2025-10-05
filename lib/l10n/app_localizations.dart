@@ -1654,6 +1654,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create your first organization to get started'**
   String get createFirstOrganization;
+
+  /// No description provided for @addExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Expense'**
+  String get addExpense;
+
+  /// No description provided for @expenseAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense added successfully'**
+  String get expenseAdded;
+
+  /// No description provided for @addExpenseError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add expense'**
+  String get addExpenseError;
+
+  /// No description provided for @officeSupplies.
+  ///
+  /// In en, this message translates to:
+  /// **'Office Supplies'**
+  String get officeSupplies;
+
+  /// No description provided for @travel.
+  ///
+  /// In en, this message translates to:
+  /// **'Travel'**
+  String get travel;
+
+  /// No description provided for @meals.
+  ///
+  /// In en, this message translates to:
+  /// **'Meals'**
+  String get meals;
+
+  /// No description provided for @equipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Equipment'**
+  String get equipment;
+
+  /// No description provided for @marketing.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketing'**
+  String get marketing;
+
+  /// No description provided for @utilities.
+  ///
+  /// In en, this message translates to:
+  /// **'Utilities'**
+  String get utilities;
+
+  /// No description provided for @rent.
+  ///
+  /// In en, this message translates to:
+  /// **'Rent'**
+  String get rent;
+
+  /// No description provided for @professionalServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Professional Services'**
+  String get professionalServices;
+
+  /// No description provided for @software.
+  ///
+  /// In en, this message translates to:
+  /// **'Software'**
+  String get software;
+
+  /// No description provided for @other.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get other;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

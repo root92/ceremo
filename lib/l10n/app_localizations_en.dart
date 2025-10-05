@@ -789,4 +789,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createFirstOrganization => 'Create your first organization to get started';
+
+  @override
+  String get addExpense => 'Add Expense';
+
+  @override
+  String get expenseAdded => 'Expense added successfully';
+
+  @override
+  String get addExpenseError => 'Failed to add expense';
+
+  @override
+  String get officeSupplies => 'Office Supplies';
+
+  @override
+  String get travel => 'Travel';
+
+  @override
+  String get meals => 'Meals';
+
+  @override
+  String get equipment => 'Equipment';
+
+  @override
+  String get marketing => 'Marketing';
+
+  @override
+  String get utilities => 'Utilities';
+
+  @override
+  String get rent => 'Rent';
+
+  @override
+  String get professionalServices => 'Professional Services';
+
+  @override
+  String get software => 'Software';
+
+  @override
+  String get other => 'Other';
 }

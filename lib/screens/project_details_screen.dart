@@ -7,6 +7,7 @@ import '../theme/app_colors.dart';
 import '../utils/formatters.dart';
 import 'contribution_details_screen.dart';
 import 'add_contribution_screen.dart';
+import 'add_expense_screen.dart';
 import 'expense_details_screen.dart';
 import 'estimate_details_screen.dart';
 
@@ -363,10 +364,19 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
       case 2: // Expenses
         return FloatingActionButton(
           onPressed: () {
-            // Placeholder until AddExpenseScreen is implemented
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Coming soon')),
-            );
+            Navigator.of(context)
+                .push(
+                  MaterialPageRoute(
+                    builder: (context) => AddExpenseScreen(
+                      projectId: widget.projectId,
+                      projectCurrency: _project!['currency'] ?? 'GNF',
+                    ),
+                  ),
+                )
+                .then((_) {
+                  // Refresh expenses when returning from add expense
+                  _loadExpenses();
+                });
           },
           backgroundColor: AppColors.primary,
           child: const Icon(Icons.add, color: Colors.white),

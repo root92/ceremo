@@ -240,7 +240,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get note => 'Note';
 
   @override
-  String get saveChanges => 'Enregistrer';
+  String get saveChanges => 'Enregistrer les Modifications';
 
   @override
   String get cancel => 'Annuler';
@@ -288,7 +288,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get addContributionError => 'Échec de l\'ajout de la contribution';
 
   @override
-  String get addNewContribution => 'Enregistrer';
+  String get addNewContribution => 'Ajouter une Nouvelle Contribution';
 
   @override
   String get createProject => 'Créer un Projet';
@@ -789,4 +789,43 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get createFirstOrganization => 'Créez votre première organisation pour commencer';
+
+  @override
+  String get addExpense => 'Ajouter une Dépense';
+
+  @override
+  String get expenseAdded => 'Dépense ajoutée avec succès';
+
+  @override
+  String get addExpenseError => 'Échec de l\'ajout de la dépense';
+
+  @override
+  String get officeSupplies => 'Fournitures de Bureau';
+
+  @override
+  String get travel => 'Voyage';
+
+  @override
+  String get meals => 'Repas';
+
+  @override
+  String get equipment => 'Équipement';
+
+  @override
+  String get marketing => 'Marketing';
+
+  @override
+  String get utilities => 'Services Publics';
+
+  @override
+  String get rent => 'Loyer';
+
+  @override
+  String get professionalServices => 'Services Professionnels';
+
+  @override
+  String get software => 'Logiciel';
+
+  @override
+  String get other => 'Autre';
 }

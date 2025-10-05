@@ -650,6 +650,25 @@ class ProjectService {
     }
   ''';
 
+  static const String createExpenseMutation = '''
+    mutation CreateExpense(\$input: CreateExpenseInput!) {
+      createExpense(input: \$input) {
+        success
+        expense {
+          id
+          amount
+          description
+          category
+          receiptUrl
+          currency
+          status
+          createdAt
+        }
+        errors
+      }
+    }
+  ''';
+
   static Future<Map<String, dynamic>> updateContribution({
     required String contributionId,
     required String memberId,
@@ -792,6 +811,50 @@ class ProjectService {
       }
       
       return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<Map<String, dynamic>> createExpense({
+    required String projectId,
+    required double amount,
+    required String description,
+    required String category,
+    String? estimateId,
+    String? receiptUrl,
+    String? currency,
+    String? status,
+  }) async {
+    try {
+      final result = await CeremoGraphQLClient.client.mutate(
+        MutationOptions(
+          document: gql(createExpenseMutation),
+          variables: {
+            'input': {
+              'project_id': projectId,
+              'amount': amount,
+              'description': description,
+              'category': category,
+              if (estimateId != null) 'estimate_id': estimateId,
+              if (receiptUrl != null) 'receipt_url': receiptUrl,
+              if (currency != null) 'currency': currency,
+              if (status != null) 'status': status,
+            },
+          },
+        ),
+      );
+      
+      if (result.hasException) {
+        throw Exception('Failed to create expense: ${result.exception.toString()}');
+      }
+      
+      final data = result.data?['createExpense'];
+      if (data == null || !data['success']) {
+        throw Exception('Create expense failed: ${data?['errors']?.join(', ') ?? 'Unknown error'}');
+      }
+      
+      return data['expense'];
     } catch (e) {
       rethrow;
     }
