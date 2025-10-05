@@ -36,7 +36,6 @@ class AuthProvider with ChangeNotifier {
             }
           }
         } catch (e) {
-          print('AuthProvider: Error loading user data: $e');
           // Clear corrupted data and force re-authentication
           await AuthService.clearCorruptedData();
           _isAuthenticated = false;
@@ -44,7 +43,6 @@ class AuthProvider with ChangeNotifier {
         }
       }
     } catch (e) {
-      print('AuthProvider: Initialization error: $e');
       _error = e.toString();
       _isAuthenticated = false;
     } finally {
@@ -63,7 +61,6 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      print('AuthProvider: Starting login for $email');
       final result = await AuthService.login(
         email: email,
         password: password,

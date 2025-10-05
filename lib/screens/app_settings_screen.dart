@@ -4,7 +4,7 @@ import '../providers/theme_provider.dart';
 import '../providers/locale_provider.dart';
 import '../theme/app_colors.dart';
 import '../l10n/app_localizations.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+// import 'package:package_info_plus/package_info_plus.dart';
 
 class AppSettingsScreen extends StatefulWidget {
   const AppSettingsScreen({super.key});
@@ -14,7 +14,7 @@ class AppSettingsScreen extends StatefulWidget {
 }
 
 class _AppSettingsScreenState extends State<AppSettingsScreen> {
-  PackageInfo? _packageInfo;
+  // PackageInfo? _packageInfo;
   bool _autoSync = true;
   bool _offlineMode = false;
   bool _biometricAuth = false;
@@ -38,15 +38,20 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    _loadPackageInfo();
+    // _loadPackageInfo();
   }
 
-  Future<void> _loadPackageInfo() async {
-    final packageInfo = await PackageInfo.fromPlatform();
-    setState(() {
-      _packageInfo = packageInfo;
-    });
-  }
+  // Future<void> _loadPackageInfo() async {
+  //   try {
+  //     final packageInfo = await PackageInfo.fromPlatform();
+  //     setState(() {
+  //       _packageInfo = packageInfo;
+  //     });
+  //   } catch (e) {
+  //     print('Error loading package info: $e');
+  //     // Continue without package info - the app will still work
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -71,55 +76,55 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // General Settings
-            _buildSection(
-              context,
-              title: AppLocalizations.of(context)!.generalSettings,
-              children: [
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.sync,
-                  title: AppLocalizations.of(context)!.autoSync,
-                  subtitle: 'Automatically sync data with server',
-                  value: _autoSync,
-                  onChanged: (value) {
-                    setState(() {
-                      _autoSync = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.offline_bolt,
-                  title: AppLocalizations.of(context)!.offlineMode,
-                  subtitle: 'Work without internet connection',
-                  value: _offlineMode,
-                  onChanged: (value) {
-                    setState(() {
-                      _offlineMode = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.fingerprint,
-                  title: AppLocalizations.of(context)!.biometricAuth,
-                  subtitle: 'Use fingerprint or face recognition',
-                  value: _biometricAuth,
-                  onChanged: (value) {
-                    setState(() {
-                      _biometricAuth = value;
-                    });
-                  },
-                ),
-                _buildListTile(
-                  context,
-                  icon: Icons.schedule,
-                  title: AppLocalizations.of(context)!.syncFrequency,
-                  subtitle: _getSyncFrequencyLabel(),
-                  onTap: () => _showSyncFrequencyDialog(context),
-                ),
-              ],
-            ),
+            // _buildSection(
+            //   context,
+            //   title: AppLocalizations.of(context)!.generalSettings,
+            //   children: [
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.sync,
+            //       title: AppLocalizations.of(context)!.autoSync,
+            //       subtitle: 'Automatically sync data with server',
+            //       value: _autoSync,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _autoSync = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.offline_bolt,
+            //       title: AppLocalizations.of(context)!.offlineMode,
+            //       subtitle: 'Work without internet connection',
+            //       value: _offlineMode,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _offlineMode = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.fingerprint,
+            //       title: AppLocalizations.of(context)!.biometricAuth,
+            //       subtitle: 'Use fingerprint or face recognition',
+            //       value: _biometricAuth,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _biometricAuth = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildListTile(
+            //       context,
+            //       icon: Icons.schedule,
+            //       title: AppLocalizations.of(context)!.syncFrequency,
+            //       subtitle: _getSyncFrequencyLabel(),
+            //       onTap: () => _showSyncFrequencyDialog(context),
+            //     ),
+            //   ],
+            // ),
             
             const SizedBox(height: 24),
             
@@ -155,180 +160,156 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
             const SizedBox(height: 24),
             
             // Notification Settings
-            _buildSection(
-              context,
-              title: AppLocalizations.of(context)!.notificationSettings,
-              children: [
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.notifications,
-                  title: AppLocalizations.of(context)!.pushNotifications,
-                  subtitle: 'Receive push notifications',
-                  value: _pushNotifications,
-                  onChanged: (value) {
-                    setState(() {
-                      _pushNotifications = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.email,
-                  title: AppLocalizations.of(context)!.emailNotifications,
-                  subtitle: 'Receive email notifications',
-                  value: _emailNotifications,
-                  onChanged: (value) {
-                    setState(() {
-                      _emailNotifications = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.sms,
-                  title: AppLocalizations.of(context)!.smsNotifications,
-                  subtitle: 'Receive SMS notifications',
-                  value: _smsNotifications,
-                  onChanged: (value) {
-                    setState(() {
-                      _smsNotifications = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.campaign,
-                  title: AppLocalizations.of(context)!.marketingEmails,
-                  subtitle: 'Receive marketing emails',
-                  value: _marketingEmails,
-                  onChanged: (value) {
-                    setState(() {
-                      _marketingEmails = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.security,
-                  title: AppLocalizations.of(context)!.securityAlerts,
-                  subtitle: 'Security and login alerts',
-                  value: _securityAlerts,
-                  onChanged: (value) {
-                    setState(() {
-                      _securityAlerts = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.work,
-                  title: AppLocalizations.of(context)!.projectUpdates,
-                  subtitle: 'Project updates and changes',
-                  value: _projectUpdates,
-                  onChanged: (value) {
-                    setState(() {
-                      _projectUpdates = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.attach_money,
-                  title: AppLocalizations.of(context)!.contributionReminders,
-                  subtitle: 'Contribution reminders',
-                  value: _contributionReminders,
-                  onChanged: (value) {
-                    setState(() {
-                      _contributionReminders = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.receipt,
-                  title: AppLocalizations.of(context)!.expenseAlerts,
-                  subtitle: 'Expense alerts and notifications',
-                  value: _expenseAlerts,
-                  onChanged: (value) {
-                    setState(() {
-                      _expenseAlerts = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.analytics,
-                  title: AppLocalizations.of(context)!.estimateNotifications,
-                  subtitle: 'Estimate notifications',
-                  value: _estimateNotifications,
-                  onChanged: (value) {
-                    setState(() {
-                      _estimateNotifications = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.group,
-                  title: AppLocalizations.of(context)!.organizationInvites,
-                  subtitle: 'Organization invitations',
-                  value: _organizationInvites,
-                  onChanged: (value) {
-                    setState(() {
-                      _organizationInvites = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.calendar_today,
-                  title: AppLocalizations.of(context)!.weeklyDigest,
-                  subtitle: 'Weekly summary emails',
-                  value: _weeklyDigest,
-                  onChanged: (value) {
-                    setState(() {
-                      _weeklyDigest = value;
-                    });
-                  },
-                ),
-                _buildSwitchTile(
-                  context,
-                  icon: Icons.assessment,
-                  title: AppLocalizations.of(context)!.monthlyReport,
-                  subtitle: 'Monthly reports',
-                  value: _monthlyReport,
-                  onChanged: (value) {
-                    setState(() {
-                      _monthlyReport = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-            
-            const SizedBox(height: 24),
-            
-            // Data & Storage
-            _buildSection(
-              context,
-              title: AppLocalizations.of(context)!.dataUsage,
-              children: [
-                _buildInfoTile(
-                  context,
-                  icon: Icons.storage,
-                  title: AppLocalizations.of(context)!.cacheSize,
-                  value: '12.5 MB',
-                ),
-                _buildActionTile(
-                  context,
-                  icon: Icons.clear_all,
-                  title: AppLocalizations.of(context)!.clearCache,
-                  subtitle: 'Free up storage space',
-                  onTap: () => _showClearCacheDialog(context),
-                ),
-              ],
-            ),
-            
+            // _buildSection(
+            //   context,
+            //   title: AppLocalizations.of(context)!.notificationSettings,
+            //   children: [
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.notifications,
+            //       title: AppLocalizations.of(context)!.pushNotifications,
+            //       subtitle: 'Receive push notifications',
+            //       value: _pushNotifications,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _pushNotifications = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.email,
+            //       title: AppLocalizations.of(context)!.emailNotifications,
+            //       subtitle: 'Receive email notifications',
+            //       value: _emailNotifications,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _emailNotifications = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.sms,
+            //       title: AppLocalizations.of(context)!.smsNotifications,
+            //       subtitle: 'Receive SMS notifications',
+            //       value: _smsNotifications,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _smsNotifications = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.campaign,
+            //       title: AppLocalizations.of(context)!.marketingEmails,
+            //       subtitle: 'Receive marketing emails',
+            //       value: _marketingEmails,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _marketingEmails = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.security,
+            //       title: AppLocalizations.of(context)!.securityAlerts,
+            //       subtitle: 'Security and login alerts',
+            //       value: _securityAlerts,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _securityAlerts = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.work,
+            //       title: AppLocalizations.of(context)!.projectUpdates,
+            //       subtitle: 'Project updates and changes',
+            //       value: _projectUpdates,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _projectUpdates = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.attach_money,
+            //       title: AppLocalizations.of(context)!.contributionReminders,
+            //       subtitle: 'Contribution reminders',
+            //       value: _contributionReminders,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _contributionReminders = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.receipt,
+            //       title: AppLocalizations.of(context)!.expenseAlerts,
+            //       subtitle: 'Expense alerts and notifications',
+            //       value: _expenseAlerts,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _expenseAlerts = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.analytics,
+            //       title: AppLocalizations.of(context)!.estimateNotifications,
+            //       subtitle: 'Estimate notifications',
+            //       value: _estimateNotifications,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _estimateNotifications = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.group,
+            //       title: AppLocalizations.of(context)!.organizationInvites,
+            //       subtitle: 'Organization invitations',
+            //       value: _organizationInvites,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _organizationInvites = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.calendar_today,
+            //       title: AppLocalizations.of(context)!.weeklyDigest,
+            //       subtitle: 'Weekly summary emails',
+            //       value: _weeklyDigest,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _weeklyDigest = value;
+            //         });
+            //       },
+            //     ),
+            //     _buildSwitchTile(
+            //       context,
+            //       icon: Icons.assessment,
+            //       title: AppLocalizations.of(context)!.monthlyReport,
+            //       subtitle: 'Monthly reports',
+            //       value: _monthlyReport,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           _monthlyReport = value;
+            //         });
+            //       },
+            //     ),
+            //   ],
+            // ),
             const SizedBox(height: 24),
             
             // About App
@@ -336,31 +317,11 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
               context,
               title: AppLocalizations.of(context)!.aboutApp,
               children: [
-                if (_packageInfo != null) ...[
-                  _buildInfoTile(
-                    context,
-                    icon: Icons.info,
-                    title: AppLocalizations.of(context)!.version,
-                    value: _packageInfo!.version,
-                  ),
-                  _buildInfoTile(
-                    context,
-                    icon: Icons.build,
-                    title: AppLocalizations.of(context)!.buildNumber,
-                    value: _packageInfo!.buildNumber,
-                  ),
-                ],
-                _buildActionTile(
+                _buildInfoTile(
                   context,
-                  icon: Icons.star,
-                  title: AppLocalizations.of(context)!.rateApp,
-                  subtitle: 'Rate us on the App Store',
-                  onTap: () {
-                    // TODO: Implement rate app
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Rate app functionality coming soon')),
-                    );
-                  },
+                  icon: Icons.info,
+                  title: AppLocalizations.of(context)!.version,
+                  value: '1.0.0',
                 ),
                 _buildActionTile(
                   context,
@@ -371,54 +332,6 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
                     // TODO: Implement share app
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Share app functionality coming soon')),
-                    );
-                  },
-                ),
-                _buildActionTile(
-                  context,
-                  icon: Icons.feedback,
-                  title: AppLocalizations.of(context)!.feedback,
-                  subtitle: 'Send us your feedback',
-                  onTap: () {
-                    // TODO: Implement feedback
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Feedback functionality coming soon')),
-                    );
-                  },
-                ),
-                _buildActionTile(
-                  context,
-                  icon: Icons.help,
-                  title: AppLocalizations.of(context)!.support,
-                  subtitle: 'Get help and support',
-                  onTap: () {
-                    // TODO: Implement support
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Support functionality coming soon')),
-                    );
-                  },
-                ),
-                _buildActionTile(
-                  context,
-                  icon: Icons.privacy_tip,
-                  title: AppLocalizations.of(context)!.privacyPolicy,
-                  subtitle: 'Read our privacy policy',
-                  onTap: () {
-                    // TODO: Implement privacy policy
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Privacy policy functionality coming soon')),
-                    );
-                  },
-                ),
-                _buildActionTile(
-                  context,
-                  icon: Icons.description,
-                  title: AppLocalizations.of(context)!.termsOfService,
-                  subtitle: 'Read our terms of service',
-                  onTap: () {
-                    // TODO: Implement terms of service
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Terms of service functionality coming soon')),
                     );
                   },
                 ),

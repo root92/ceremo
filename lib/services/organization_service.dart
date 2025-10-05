@@ -107,38 +107,23 @@ class OrganizationService {
   // Organization methods
   static Future<List<Map<String, dynamic>>> getMyOrganizations() async {
     try {
-      print('OrganizationService: Attempting to fetch organizations...');
-      
-      // Check if user is authenticated
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('access_token');
-      print('OrganizationService: User token exists: ${token != null}');
-      
       final result = await CeremoGraphQLClient.client.query(
         QueryOptions(
           document: gql(myOrganizationsQuery),
           fetchPolicy: FetchPolicy.networkOnly,
         ),
       );
-      
-      print('OrganizationService: GraphQL result: ${result.data}');
-      print('OrganizationService: GraphQL exceptions: ${result.exception}');
-      print('OrganizationService: Raw response: ${result.data?['myOrganizations']}');
-      
       if (result.hasException) {
         throw Exception('Failed to get organizations: ${result.exception.toString()}');
       }
       
       final data = result.data?['myOrganizations'];
       if (data == null) {
-        print('OrganizationService: No organizations data found');
         return [];
       }
       
-      print('OrganizationService: Found ${data.length} organizations');
       return List<Map<String, dynamic>>.from(data);
     } catch (e) {
-      print('OrganizationService: Get organizations error: $e');
       rethrow;
     }
   }
@@ -185,15 +170,12 @@ class OrganizationService {
 
       return data['organization'];
     } catch (e) {
-      print('Create organization error: $e');
       rethrow;
     }
   }
 
   static Future<Map<String, dynamic>?> createPersonalOrganization() async {
     try {
-      print('OrganizationService: Creating personal organization...');
-      
       // Get user info to create personal organization name
       final prefs = await SharedPreferences.getInstance();
       final userData = prefs.getString('user_data');
@@ -242,9 +224,6 @@ class OrganizationService {
         ),
       );
 
-      print('OrganizationService: Create personal organization result: ${result.data}');
-      print('OrganizationService: Create personal organization exceptions: ${result.exception}');
-
       if (result.hasException) {
         throw Exception('Failed to create personal organization: ${result.exception.toString()}');
       }
@@ -253,11 +232,8 @@ class OrganizationService {
       if (data == null || !data['success']) {
         throw Exception('Create personal organization failed: ${data?['errors']?.join(', ') ?? 'Unknown error'}');
       }
-
-      print('OrganizationService: Personal organization created successfully');
       return data['organization'];
     } catch (e) {
-      print('OrganizationService: Create personal organization error: $e');
       rethrow;
     }
   }
@@ -284,7 +260,6 @@ class OrganizationService {
       
       return List<Map<String, dynamic>>.from(data);
     } catch (e) {
-      print('Get organization members error: $e');
       rethrow;
     }
   }

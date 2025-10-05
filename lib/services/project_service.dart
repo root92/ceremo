@@ -213,7 +213,6 @@ class ProjectService {
   // Organization methods
   static Future<List<Map<String, dynamic>>> getMyOrganizations() async {
     try {
-      print('Attempting to fetch organizations...');
       final result = await CeremoGraphQLClient.client.query(
         QueryOptions(
           document: gql(myOrganizationsQuery),
@@ -221,23 +220,17 @@ class ProjectService {
         ),
       );
       
-      print('Organizations result: ${result.data}');
-      print('Organizations exceptions: ${result.exception}');
-      
       if (result.hasException) {
         throw Exception('Failed to get organizations: ${result.exception.toString()}');
       }
       
       final data = result.data?['myOrganizations'];
       if (data == null) {
-        print('No organizations data found');
         return [];
       }
       
-      print('Found ${data.length} organizations');
       return List<Map<String, dynamic>>.from(data);
     } catch (e) {
-      print('Get organizations error: $e');
       rethrow;
     }
   }
@@ -245,17 +238,12 @@ class ProjectService {
   // Project methods
   static Future<List<Map<String, dynamic>>> getMyProjects() async {
     try {
-      print('Attempting to fetch projects...');
       
       // First, check if user has organizations
       final organizations = await getMyOrganizations();
       if (organizations.isEmpty) {
-        print('User has no organizations, cannot access projects');
         throw Exception('You need to be part of an organization to access projects. Please join an organization first.');
       }
-      
-      print('User has ${organizations.length} organizations, fetching projects...');
-      
       // Now try to get projects
       final result = await CeremoGraphQLClient.client.query(
         QueryOptions(
@@ -315,7 +303,6 @@ class ProjectService {
       
       return data['project'];
     } catch (e) {
-      print('Create project error: $e');
       rethrow;
     }
   }
@@ -367,7 +354,6 @@ class ProjectService {
       final contributions = result.data?['contributions'] as List<dynamic>? ?? [];
       return contributions.cast<Map<String, dynamic>>();
     } catch (e) {
-      print('Get project contributions error: $e');
       rethrow;
     }
   }
@@ -428,7 +414,6 @@ class ProjectService {
       final estimates = result.data?['estimates'] as List<dynamic>? ?? [];
       return estimates.cast<Map<String, dynamic>>();
     } catch (e) {
-      print('Get project estimates error: $e');
       rethrow;
     }
   }
@@ -778,7 +763,6 @@ class ProjectService {
       
       return data['expense'];
     } catch (e) {
-      print('Update expense error: $e');
       rethrow;
     }
   }
@@ -809,7 +793,6 @@ class ProjectService {
       
       return true;
     } catch (e) {
-      print('Delete expense error: $e');
       rethrow;
     }
   }

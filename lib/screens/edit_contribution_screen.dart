@@ -201,7 +201,6 @@ class _EditContributionScreenState extends State<EditContributionScreen> {
         Navigator.of(context).pop(true); // Return true to indicate success
       }
     } catch (e) {
-      print('Update contribution error: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

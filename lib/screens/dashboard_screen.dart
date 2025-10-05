@@ -9,6 +9,7 @@ import 'projects_screen.dart';
 import 'organizations_screen.dart';
 import 'create_organization_screen.dart';
 import 'project_details_screen.dart';
+import 'app_settings_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -52,6 +53,17 @@ class DashboardScreen extends StatelessWidget {
             icon: Icon(Icons.chat_bubble_outline, color: Colors.grey[600]),
             onPressed: () {
               // TODO: Implement chat/notification functionality
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.settings_outlined, color: Colors.grey[600]),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AppSettingsScreen(),
+                ),
+              );
             },
           ),
         ],

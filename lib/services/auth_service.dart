@@ -123,7 +123,6 @@ class AuthService {
       
       return data;
     } catch (e) {
-      print('Login error: $e');
       rethrow;
     }
   }
@@ -176,7 +175,6 @@ class AuthService {
       
       return data;
     } catch (e) {
-      print('Registration error: $e');
       rethrow;
     }
   }
@@ -195,7 +193,6 @@ class AuthService {
       
       return result.data?['me'];
     } catch (e) {
-      print('Get current user error: $e');
       rethrow;
     }
   }
@@ -234,7 +231,6 @@ class AuthService {
       
       return true;
     } catch (e) {
-      print('Refresh token error: $e');
       return false;
     }
   }
@@ -259,7 +255,6 @@ class AuthService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_userKey);
     await prefs.remove(_currentOrganizationKey);
-    print('AuthService: Cleared corrupted user data');
   }
   
   static Future<String?> getAccessToken() async {
@@ -274,7 +269,6 @@ class AuthService {
       try {
         return Map<String, dynamic>.from(jsonDecode(userData));
       } catch (e) {
-        print('Error parsing user data: $e');
         return null;
       }
     }
