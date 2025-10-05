@@ -485,4 +485,116 @@ class ProjectService {
       rethrow;
     }
   }
+
+  // Contribution mutations
+  static const String updateContributionMutation = '''
+    mutation UpdateContribution(\$input: UpdateContributionInput!) {
+      updateContribution(input: \$input) {
+        success
+        contribution {
+          id
+          amount
+          paymentMethod
+          transactionId
+          note
+          currency
+          status
+          createdAt
+          member {
+            id
+            role
+            user {
+              id
+              name
+              email
+            }
+          }
+        }
+        errors
+      }
+    }
+  ''';
+
+  static const String deleteContributionMutation = '''
+    mutation DeleteContribution(\$id: ID!) {
+      deleteContribution(id: \$id) {
+        success
+        errors
+      }
+    }
+  ''';
+
+  static Future<Map<String, dynamic>> updateContribution({
+    required String contributionId,
+    required String memberId,
+    required double amount,
+    String? paymentMethod,
+    String? transactionId,
+    String? note,
+    String? currency,
+    String? status,
+  }) async {
+    try {
+      final result = await CeremoGraphQLClient.client.mutate(
+        MutationOptions(
+          document: gql(updateContributionMutation),
+          variables: {
+            'input': {
+              'contributionId': contributionId,
+              'memberId': memberId,
+              'amount': amount,
+              if (paymentMethod != null) 'paymentMethod': paymentMethod,
+              if (transactionId != null) 'transactionId': transactionId,
+              if (note != null) 'note': note,
+              if (currency != null) 'currency': currency,
+              if (status != null) 'status': status,
+            },
+          },
+        ),
+      );
+      
+      if (result.hasException) {
+        throw Exception('Failed to update contribution: ${result.exception.toString()}');
+      }
+      
+      final data = result.data?['updateContribution'];
+      if (data == null || !data['success']) {
+        throw Exception('Update contribution failed: ${data?['errors']?.join(', ') ?? 'Unknown error'}');
+      }
+      
+      return data['contribution'];
+    } catch (e) {
+      print('Update contribution error: $e');
+      rethrow;
+    }
+  }
+
+  static Future<bool> deleteContribution({
+    required String contributionId,
+  }) async {
+    try {
+      final result = await CeremoGraphQLClient.client.mutate(
+        MutationOptions(
+          document: gql(deleteContributionMutation),
+          variables: {
+            'id': contributionId,
+          },
+        ),
+      );
+      
+      if (result.hasException) {
+        throw Exception('Failed to delete contribution: ${result.exception.toString()}');
+      }
+      
+      final data = result.data?['deleteContribution'];
+      if (data == null || !data['success']) {
+        throw Exception('Delete contribution failed: ${data?['errors']?.join(', ') ?? 'Unknown error'}');
+      }
+      
+      return true;
+    } catch (e) {
+      print('Delete contribution error: $e');
+      rethrow;
+    }
+  }
 }

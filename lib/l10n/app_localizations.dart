@@ -401,6 +401,144 @@ abstract class AppLocalizations {
   /// **'System'**
   String get system;
 
+  /// Title for contribution details screen
+  ///
+  /// In en, this message translates to:
+  /// **'Contribution Details'**
+  String get contributionDetails;
+
+  /// Section title for contribution information
+  ///
+  /// In en, this message translates to:
+  /// **'Contribution Information'**
+  String get contributionInfo;
+
+  /// Label for contributor information
+  ///
+  /// In en, this message translates to:
+  /// **'Contributor'**
+  String get contributor;
+
+  /// Section title for payment information
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Information'**
+  String get paymentInfo;
+
+  /// Label for payment method
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Method'**
+  String get paymentMethod;
+
+  /// Label for transaction ID
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction ID'**
+  String get transactionId;
+
+  /// Label for notes section
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get notes;
+
+  /// Error message when contribution is not found
+  ///
+  /// In en, this message translates to:
+  /// **'Contribution not found'**
+  String get contributionNotFound;
+
+  /// Title for delete contribution dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Contribution'**
+  String get deleteContribution;
+
+  /// Confirmation message for deleting contribution
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this contribution? This action cannot be undone.'**
+  String get deleteContributionConfirmation;
+
+  /// Error label
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
+
+  /// Retry button text
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// Amount label
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get amount;
+
+  /// Reference label
+  ///
+  /// In en, this message translates to:
+  /// **'Reference'**
+  String get reference;
+
+  /// Status label
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// Edit action
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// Share action
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get share;
+
+  /// Delete action
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// Confirm action
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// Mark as received action
+  ///
+  /// In en, this message translates to:
+  /// **'Mark Received'**
+  String get markReceived;
+
+  /// Mark as pending action
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as Pending'**
+  String get markPending;
+
+  /// Title for contribution actions section
+  ///
+  /// In en, this message translates to:
+  /// **'Contribution Actions'**
+  String get contributionActions;
+
+  /// Message shown when no actions are available for the current contribution status
+  ///
+  /// In en, this message translates to:
+  /// **'No actions available for this contribution status'**
+  String get noActionsAvailable;
+
   /// No description provided for @createProject.
   ///
   /// In en, this message translates to:

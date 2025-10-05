@@ -162,6 +162,75 @@ class AppLocalizationsEn extends AppLocalizations {
   String get system => 'System';
 
   @override
+  String get contributionDetails => 'Contribution Details';
+
+  @override
+  String get contributionInfo => 'Contribution Information';
+
+  @override
+  String get contributor => 'Contributor';
+
+  @override
+  String get paymentInfo => 'Payment Information';
+
+  @override
+  String get paymentMethod => 'Payment Method';
+
+  @override
+  String get transactionId => 'Transaction ID';
+
+  @override
+  String get notes => 'Notes';
+
+  @override
+  String get contributionNotFound => 'Contribution not found';
+
+  @override
+  String get deleteContribution => 'Delete Contribution';
+
+  @override
+  String get deleteContributionConfirmation => 'Are you sure you want to delete this contribution? This action cannot be undone.';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get amount => 'Amount';
+
+  @override
+  String get reference => 'Reference';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get share => 'Share';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get markReceived => 'Mark Received';
+
+  @override
+  String get markPending => 'Mark as Pending';
+
+  @override
+  String get contributionActions => 'Contribution Actions';
+
+  @override
+  String get noActionsAvailable => 'No actions available for this contribution status';
+
+  @override
   String get createProject => 'Create Project';
 
   @override

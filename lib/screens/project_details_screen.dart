@@ -5,6 +5,7 @@ import '../services/project_service.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
 import '../utils/formatters.dart';
+import 'contribution_details_screen.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final String projectId;
@@ -550,7 +551,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
         children: [
           Text(
             AppLocalizations.of(context)!.contributions,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -803,79 +804,92 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
   }
 
   Widget _buildContributionCard(BuildContext context, Map<String, dynamic> contribution) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Colors.grey[200]!,
-          width: 1,
-        ),
-      ),
-      child: Row(
-        children: [
-          // Amount section
-          Expanded(
-            flex: 2,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  Formatters.formatAmount(
-                    contribution['amount'],
-                    currency: contribution['currency'],
-                    projectCurrency: _project?['currency'],
-                  ),
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  contribution['member']?['user']?['name'] ?? 'Unknown',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
-                  ),
-                ),
-              ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ContributionDetailsScreen(
+              contributionId: contribution['id'],
+              projectId: widget.projectId,
             ),
           ),
-          // Status section
-          Expanded(
-            flex: 1,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: _getContributionStatusColor(contribution['status']).withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Text(
-                    contribution['status'] ?? 'Unknown',
-                    style: TextStyle(
-                      color: _getContributionStatusColor(contribution['status']),
-                      fontSize: 11,
-                      fontWeight: FontWeight.w500,
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Colors.grey[200]!,
+            width: 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            // Amount section
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    Formatters.formatAmount(
+                      contribution['amount'],
+                      currency: contribution['currency'],
+                      projectCurrency: _project?['currency'],
+                    ),
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
                     ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  Formatters.formatDate(contribution['createdAt'], context: context),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[500],
-                    fontSize: 11,
+                  const SizedBox(height: 4),
+                  Text(
+                    contribution['member']?['user']?['name'] ?? 'Unknown',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.grey[600],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+            // Status section
+            Expanded(
+              flex: 1,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: _getContributionStatusColor(contribution['status']).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      contribution['status'] ?? 'Unknown',
+                      style: TextStyle(
+                        color: _getContributionStatusColor(contribution['status']),
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    Formatters.formatDate(contribution['createdAt'], context: context),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.grey[500],
+                      fontSize: 11,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

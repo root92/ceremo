@@ -162,6 +162,75 @@ class AppLocalizationsFr extends AppLocalizations {
   String get system => 'Système';
 
   @override
+  String get contributionDetails => 'Détails de la Contribution';
+
+  @override
+  String get contributionInfo => 'Informations sur la Contribution';
+
+  @override
+  String get contributor => 'Contributeur';
+
+  @override
+  String get paymentInfo => 'Informations de Paiement';
+
+  @override
+  String get paymentMethod => 'Méthode de Paiement';
+
+  @override
+  String get transactionId => 'ID de Transaction';
+
+  @override
+  String get notes => 'Notes';
+
+  @override
+  String get contributionNotFound => 'Contribution introuvable';
+
+  @override
+  String get deleteContribution => 'Supprimer la Contribution';
+
+  @override
+  String get deleteContributionConfirmation => 'Êtes-vous sûr de vouloir supprimer cette contribution ? Cette action ne peut pas être annulée.';
+
+  @override
+  String get error => 'Erreur';
+
+  @override
+  String get retry => 'Réessayer';
+
+  @override
+  String get amount => 'Montant';
+
+  @override
+  String get reference => 'Référence';
+
+  @override
+  String get status => 'Statut';
+
+  @override
+  String get edit => 'Modifier';
+
+  @override
+  String get share => 'Partager';
+
+  @override
+  String get delete => 'Supprimer';
+
+  @override
+  String get confirm => 'Confirmer';
+
+  @override
+  String get markReceived => 'Marquer comme Reçu';
+
+  @override
+  String get markPending => 'Marquer comme En Attente';
+
+  @override
+  String get contributionActions => 'Actions de Contribution';
+
+  @override
+  String get noActionsAvailable => 'Aucune action disponible pour ce statut de contribution';
+
+  @override
   String get createProject => 'Créer un Projet';
 
   @override
