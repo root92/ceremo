@@ -491,7 +491,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
           // Progress Section
           Text(
             AppLocalizations.of(context)!.progress,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -540,7 +540,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
           // Financial Information
           Text(
             AppLocalizations.of(context)!.financialInfo,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -552,7 +552,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
                 child: _buildInfoCard(
                   context,
                   title: AppLocalizations.of(context)!.targetAmount,
-                  value: '${(_project!['targetAmount'] ?? 0.0).toStringAsFixed(0)} ${_project!['currency'] ?? 'USD'}',
+                  value: Formatters.formatAmount(
+                    _project!['targetAmount'] ?? 0.0,
+                    currency: _project!['currency'] ?? 'USD',
+                  ),
                   icon: Icons.flag,
                   color: Colors.blue,
                 ),
@@ -562,7 +565,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
                 child: _buildInfoCard(
                   context,
                   title: AppLocalizations.of(context)!.currentBalance,
-                  value: '${(_project!['currentBalance'] ?? 0.0).toStringAsFixed(0)} ${_project!['currency'] ?? 'USD'}',
+                  value: Formatters.formatAmount(
+                    _project!['currentBalance'] ?? 0.0,
+                    currency: _project!['currency'] ?? 'USD',
+                  ),
                   icon: Icons.account_balance_wallet,
                   color: Colors.green,
                 ),
@@ -575,7 +581,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
           // Project Information
           Text(
             AppLocalizations.of(context)!.projectInfo,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
