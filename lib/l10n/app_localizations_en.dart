@@ -231,6 +231,54 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noActionsAvailable => 'No actions available for this contribution status';
 
   @override
+  String get editContribution => 'Edit Contribution';
+
+  @override
+  String get member => 'Member';
+
+  @override
+  String get note => 'Note';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get selectMember => 'Select Member';
+
+  @override
+  String get selectPaymentMethod => 'Select Payment Method';
+
+  @override
+  String get enterAmount => 'Enter Amount';
+
+  @override
+  String get enterTransactionId => 'Enter Transaction ID';
+
+  @override
+  String get enterNote => 'Enter Note (Optional)';
+
+  @override
+  String get contributionUpdated => 'Contribution updated successfully';
+
+  @override
+  String get updateContributionError => 'Failed to update contribution';
+
+  @override
+  String get amountRequired => 'Amount is required';
+
+  @override
+  String get memberRequired => 'Member is required';
+
+  @override
+  String get paymentMethodRequired => 'Payment method is required';
+
+  @override
+  String get invalidAmount => 'Please enter a valid amount';
+
+  @override
   String get createProject => 'Create Project';
 
   @override
@@ -381,9 +429,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get joinRequestSent => 'Join request sent successfully!';
-
-  @override
-  String get cancel => 'Cancel';
 
   @override
   String get selectOrganization => 'Select Organization';
