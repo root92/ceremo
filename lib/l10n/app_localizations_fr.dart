@@ -240,7 +240,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get note => 'Note';
 
   @override
-  String get saveChanges => 'Enregistrer les Modifications';
+  String get saveChanges => 'Enregistrer';
 
   @override
   String get cancel => 'Annuler';
@@ -288,7 +288,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get addContributionError => 'Échec de l\'ajout de la contribution';
 
   @override
-  String get addNewContribution => 'Ajouter une Nouvelle Contribution';
+  String get addNewContribution => 'Enregistrer';
 
   @override
   String get createProject => 'Créer un Projet';

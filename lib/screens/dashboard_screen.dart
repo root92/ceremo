@@ -51,12 +51,6 @@ class DashboardScreen extends StatelessWidget {
         surfaceTintColor: Colors.transparent,
         actions: [
           IconButton(
-            icon: Icon(Icons.chat_bubble_outline, color: Colors.grey[600]),
-            onPressed: () {
-              // TODO: Implement chat/notification functionality
-            },
-          ),
-          IconButton(
             icon: Icon(Icons.settings_outlined, color: Colors.grey[600]),
             onPressed: () {
               Navigator.push(
@@ -111,19 +105,6 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-            ),
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Icon(
-                Icons.chat_bubble_outline,
-                color: Colors.black54,
-                size: 20,
               ),
             ),
           ],
