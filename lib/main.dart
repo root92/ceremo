@@ -83,11 +83,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
       
       // Only initialize organization context if user is authenticated
       if (context.read<AuthProvider>().isAuthenticated) {
-        print('Main: User is authenticated, initializing organization context...');
         await context.read<OrganizationContextProvider>().initialize();
-        
-        // Initialize projects provider after organization context is set
-        print('Main: Initializing projects provider...');
         await context.read<ProjectsProvider>().loadProjects();
       } else {
         print('Main: User is not authenticated, skipping organization context initialization');

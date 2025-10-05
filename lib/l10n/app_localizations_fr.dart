@@ -621,4 +621,136 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get estimatedAt => 'Estimé le';
+
+  @override
+  String get appSettings => 'Paramètres de l\'Application';
+
+  @override
+  String get generalSettings => 'Paramètres Généraux';
+
+  @override
+  String get displaySettings => 'Paramètres d\'Affichage';
+
+  @override
+  String get notificationSettings => 'Paramètres de Notification';
+
+  @override
+  String get privacySettings => 'Paramètres de Confidentialité';
+
+  @override
+  String get aboutApp => 'À Propos de l\'Application';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get buildNumber => 'Numéro de Build';
+
+  @override
+  String get lastUpdated => 'Dernière Mise à Jour';
+
+  @override
+  String get developer => 'Développeur';
+
+  @override
+  String get support => 'Support';
+
+  @override
+  String get feedback => 'Commentaires';
+
+  @override
+  String get rateApp => 'Évaluer l\'Application';
+
+  @override
+  String get shareApp => 'Partager l\'Application';
+
+  @override
+  String get privacyPolicy => 'Politique de Confidentialité';
+
+  @override
+  String get termsOfService => 'Conditions d\'Utilisation';
+
+  @override
+  String get dataUsage => 'Utilisation des Données';
+
+  @override
+  String get cacheSize => 'Taille du Cache';
+
+  @override
+  String get clearCache => 'Vider le Cache';
+
+  @override
+  String get autoSync => 'Synchronisation Automatique';
+
+  @override
+  String get syncFrequency => 'Fréquence de Synchronisation';
+
+  @override
+  String get offlineMode => 'Mode Hors Ligne';
+
+  @override
+  String get biometricAuth => 'Authentification Biométrique';
+
+  @override
+  String get darkMode => 'Mode Sombre';
+
+  @override
+  String get systemTheme => 'Thème Système';
+
+  @override
+  String get lightTheme => 'Thème Clair';
+
+  @override
+  String get darkTheme => 'Thème Sombre';
+
+  @override
+  String get fontSize => 'Taille de Police';
+
+  @override
+  String get small => 'Petit';
+
+  @override
+  String get medium => 'Moyen';
+
+  @override
+  String get large => 'Grand';
+
+  @override
+  String get extraLarge => 'Très Grand';
+
+  @override
+  String get pushNotifications => 'Notifications Push';
+
+  @override
+  String get emailNotifications => 'Notifications Email';
+
+  @override
+  String get smsNotifications => 'Notifications SMS';
+
+  @override
+  String get marketingEmails => 'Emails Marketing';
+
+  @override
+  String get securityAlerts => 'Alertes de Sécurité';
+
+  @override
+  String get projectUpdates => 'Mises à Jour de Projet';
+
+  @override
+  String get contributionReminders => 'Rappels de Contribution';
+
+  @override
+  String get expenseAlerts => 'Alertes de Dépenses';
+
+  @override
+  String get estimateNotifications => 'Notifications d\'Estimation';
+
+  @override
+  String get organizationInvites => 'Invitations d\'Organisation';
+
+  @override
+  String get weeklyDigest => 'Résumé Hebdomadaire';
+
+  @override
+  String get monthlyReport => 'Rapport Mensuel';
 }

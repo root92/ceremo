@@ -264,23 +264,17 @@ class ProjectService {
         ),
       );
       
-      print('GraphQL result: ${result.data}');
-      print('GraphQL exceptions: ${result.exception}');
-      
       if (result.hasException) {
         throw Exception('Failed to get projects: ${result.exception.toString()}');
       }
       
       final data = result.data?['myProjects'];
       if (data == null) {
-        print('No projects data found');
         return [];
       }
       
-      print('Found ${data.length} projects');
       return List<Map<String, dynamic>>.from(data);
     } catch (e) {
-      print('Get projects error: $e');
       rethrow;
     }
   }
@@ -343,7 +337,6 @@ class ProjectService {
       
       return result.data?['project'];
     } catch (e) {
-      print('Get project details error: $e');
       rethrow;
     }
   }
@@ -405,7 +398,6 @@ class ProjectService {
       final expenses = result.data?['expenses'] as List<dynamic>? ?? [];
       return expenses.cast<Map<String, dynamic>>();
     } catch (e) {
-      print('Get project expenses error: $e');
       rethrow;
     }
   }
@@ -481,7 +473,6 @@ class ProjectService {
       
       return data['project'];
     } catch (e) {
-      print('Update project error: $e');
       rethrow;
     }
   }
@@ -533,7 +524,6 @@ class ProjectService {
       final members = project['members'] as List<dynamic>?;
       return members?.cast<Map<String, dynamic>>() ?? [];
     } catch (e) {
-      print('Get project members error: $e');
       rethrow;
     }
   }
@@ -605,7 +595,6 @@ class ProjectService {
       
       return data['contribution'];
     } catch (e) {
-      print('Create contribution error: $e');
       rethrow;
     }
   }
@@ -716,7 +705,6 @@ class ProjectService {
       
       return data['contribution'];
     } catch (e) {
-      print('Update contribution error: $e');
       rethrow;
     }
   }
@@ -745,7 +733,6 @@ class ProjectService {
       
       return true;
     } catch (e) {
-      print('Delete contribution error: $e');
       rethrow;
     }
   }
