@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 
 /// Modern banking app color palette - clean and sophisticated
 class AppColors {
-  // Primary colors - Modern blue
-  static const Color primary = Color(0xFF2563EB); // Professional blue
-  static const Color primaryDark = Color(0xFF1D4ED8);
-  static const Color primaryLight = Color(0xFFDBEAFE);
-  
-  // Secondary colors - Purple accent
-  static const Color secondary = Color(0xFF7C3AED);
-  static const Color secondaryDark = Color(0xFF6D28D9);
-  static const Color secondaryLight = Color(0xFFEDE9FE);
-  
-  // Accent colors - Green for success
+  // Primary colors — Tailwind Orange
+  // 500 = #F97316, 600 = #EA580C, 100 = #FFEDD5
+  static const Color primary = Color(0xFFF97316);       // Orange 500
+  static const Color primaryDark = Color(0xFFEA580C);   // Orange 600
+  static const Color primaryLight = Color(0xFFFFEDD5);  // Orange 100
+
+  // Secondary colors — Purple accent (Tailwind Violet)
+  // 600 = #7C3AED, 700 = #6D28D9, 100 = #EDE9FE
+  static const Color secondary = Color(0xFF7C3AED);       // Violet 600
+  static const Color secondaryDark = Color(0xFF6D28D9);   // Violet 700
+  static const Color secondaryLight = Color(0xFFEDE9FE);  // Violet 100
+
+  // Accent colors — Green for success (Tailwind Emerald-ish)
   static const Color accent = Color(0xFF059669);
   static const Color accentDark = Color(0xFF047857);
   static const Color accentLight = Color(0xFFD1FAE5);
-  
-  // Neutral colors - Clean grays
+
+  // Neutrals — Slate/Gray mix
   static const Color white = Color(0xFFFFFFFF);
   static const Color gray50 = Color(0xFFF8FAFC);
   static const Color gray100 = Color(0xFFF1F5F9);
@@ -29,57 +31,57 @@ class AppColors {
   static const Color gray700 = Color(0xFF334155);
   static const Color gray800 = Color(0xFF1E293B);
   static const Color gray900 = Color(0xFF0F172A);
-  
-  // Status colors - Professional
+
+  // Status colors
   static const Color success = Color(0xFF059669);
   static const Color warning = Color(0xFFD97706);
   static const Color error = Color(0xFFDC2626);
-  static const Color info = Color(0xFF2563EB);
-  
-  // Background colors
+  static const Color info = Color(0xFF2563EB); // Blue 600
+
+  // Backgrounds
   static const Color background = gray50;
   static const Color surface = white;
   static const Color surfaceVariant = gray100;
-  
-  // Dark theme colors
+
+  // Dark theme surfaces
   static const Color darkBackground = gray900;
   static const Color darkSurface = gray800;
   static const Color darkSurfaceVariant = gray700;
-  
+
   // Text colors
   static const Color textPrimary = gray900;
   static const Color textSecondary = gray600;
   static const Color textTertiary = gray400;
   static const Color textInverse = white;
-  
-  // Dark theme text colors
+
+  // Dark text colors
   static const Color darkTextPrimary = white;
   static const Color darkTextSecondary = gray300;
   static const Color darkTextTertiary = gray500;
   static const Color darkTextInverse = gray900;
-  
-  // Border colors
+
+  // Borders
   static const Color border = gray200;
   static const Color borderLight = gray100;
   static const Color borderDark = gray300;
-  
-  // Shadow colors - Minimal and clean
-  static const Color shadow = Color(0x0A000000); // 4% opacity
-  static const Color shadowLight = Color(0x05000000); // 2% opacity
-  static const Color shadowDark = Color(0x15000000); // 8% opacity
-  
-  // Card colors
+
+  // Shadows (ARGB with low opacity)
+  static const Color shadow = Color(0x0A000000);      // ~4% opacity
+  static const Color shadowLight = Color(0x05000000); // ~2% opacity
+  static const Color shadowDark = Color(0x15000000);  // ~8% opacity
+
+  // Cards
   static const Color cardBackground = white;
   static const Color cardBorder = gray200;
-  
-  // Interactive colors
+
+  // Interactive
   static const Color interactive = primary;
   static const Color interactiveHover = primaryDark;
-  static const Color interactivePressed = Color(0xFF1E40AF);
-  
+  static const Color interactivePressed = Color(0xFF1E40AF); // Blue 800
+
   // Project type colors
-  static const Color wedding = Color(0xFFEC4899); // Pink
-  static const Color birthday = Color(0xFF3B82F6); // Blue
-  static const Color corporate = Color(0xFF059669); // Green
-  static const Color religious = Color(0xFF7C3AED); // Purple
+  static const Color wedding = Color(0xFFEC4899);   // Pink 500
+  static const Color birthday = Color(0xFF3B82F6);  // Blue 500
+  static const Color corporate = Color(0xFF059669); // Green 600
+  static const Color religious = Color(0xFF7C3AED); // Purple 600
 }

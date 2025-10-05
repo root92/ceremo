@@ -4,9 +4,8 @@ import '../providers/auth_provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/locale_provider.dart';
 import '../theme/app_colors.dart';
-import '../widgets/theme_toggle.dart';
-import '../widgets/language_toggle.dart';
 import '../l10n/app_localizations.dart';
+import 'app_settings_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -171,6 +170,20 @@ class ProfileScreen extends StatelessWidget {
                       subtitle: AppLocalizations.of(context)!.manageNotifications,
                       onTap: () {
                         // TODO: Navigate to notification settings
+                      },
+                    ),
+                    _buildSettingsTile(
+                      context,
+                      icon: Icons.settings_outlined,
+                      title: AppLocalizations.of(context)!.appSettings,
+                      subtitle: 'Manage app preferences',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AppSettingsScreen(),
+                          ),
+                        );
                       },
                     ),
                   ],

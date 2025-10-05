@@ -18,7 +18,6 @@ class OrganizationContextProvider with ChangeNotifier {
   static const String _currentOrganizationKey = 'current_organization';
 
   Future<void> initialize() async {
-    print('OrganizationContextProvider: Initializing...');
     _isLoading = true;
     notifyListeners();
 
@@ -32,7 +31,6 @@ class OrganizationContextProvider with ChangeNotifier {
       // Auto-select default organization if none is selected
       await _autoSelectDefaultOrganization();
     } catch (e) {
-      print('OrganizationContextProvider: Initialization error: $e');
       _error = e.toString();
     } finally {
       _isLoading = false;
@@ -42,14 +40,8 @@ class OrganizationContextProvider with ChangeNotifier {
 
   Future<void> _loadOrganizations() async {
     try {
-      print('OrganizationContextProvider: Loading organizations...');
       _organizations = await OrganizationService.getMyOrganizations();
-      print('OrganizationContextProvider: Loaded ${_organizations.length} organizations');
-      for (var org in _organizations) {
-        print('OrganizationContextProvider: Organization: ${org['name']} (${org['id']})');
-      }
     } catch (e) {
-      print('OrganizationContextProvider: Error loading organizations: $e');
       _organizations = [];
     }
   }
@@ -68,11 +60,9 @@ class OrganizationContextProvider with ChangeNotifier {
             orElse: () => _organizations.first,
           );
           _currentOrganization = foundOrg;
-          print('Restored saved organization: ${foundOrg['name']}');
         }
       }
     } catch (e) {
-      print('Error loading saved organization: $e');
       // Clear invalid saved organization
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove(_currentOrganizationKey);
@@ -98,22 +88,17 @@ class OrganizationContextProvider with ChangeNotifier {
       
       if (defaultOrg.isNotEmpty) {
         await switchOrganization(defaultOrg);
-        print('Auto-selected default organization: ${defaultOrg['name']}');
       }
     } else {
-      // User has no organizations, create a personal one automatically (like the frontend does)
-      print('No organizations found - creating personal organization...');
       try {
         final personalOrg = await OrganizationService.createPersonalOrganization();
         if (personalOrg != null) {
           _organizations = [personalOrg];
           await switchOrganization(personalOrg);
-          print('Personal organization created and set as default: ${personalOrg['name']}');
         } else {
           _error = 'Failed to create personal organization. Please try again.';
         }
       } catch (e) {
-        print('Error creating personal organization: $e');
         _error = 'Failed to create personal organization: $e';
       }
     }

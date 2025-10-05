@@ -26,7 +26,6 @@ class CeremoGraphQLClient {
           // Check if token looks like a JWT (has 3 parts separated by dots)
           final parts = token.split('.');
           if (parts.length != 3) {
-            print('GraphQL Client - Invalid token format, clearing token');
             await prefs.remove('access_token');
             return null;
           }
@@ -39,8 +38,6 @@ class CeremoGraphQLClient {
     // Add request/response logging
     final Link loggingLink = Link.function(
       (request, [next]) {
-        print('GraphQL Request: ${request.operation?.operationName}');
-        print('GraphQL Variables: ${request.variables}');
         
         // Log the actual request being sent
         if (request.operation != null) {
@@ -48,7 +45,6 @@ class CeremoGraphQLClient {
         }
         
         return next!(request).map((response) {
-          print('GraphQL Response: ${response.data}');
           if (response.errors != null && response.errors!.isNotEmpty) {
             print('GraphQL Errors: ${response.errors}');
           }

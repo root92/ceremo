@@ -69,10 +69,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get welcomeBack => 'Bon retour !';
 
   @override
-  String get quickActions => 'Actions rapides';
+  String get quickActions => 'Actions Rapides';
 
   @override
-  String get newProject => 'Nouveau projet';
+  String get newProject => 'Nouveau Projet';
 
   @override
   String get startNewCeremony => 'Démarrer un nouveau projet de cérémonie';
@@ -81,7 +81,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get myProjects => 'Mes Projets';
 
   @override
-  String get viewAllProjects => 'Voir tous vos projets';
+  String get viewAllProjects => 'Voir tous les projets';
 
   @override
   String get organizations => 'Organisations';
@@ -240,7 +240,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get note => 'Note';
 
   @override
-  String get saveChanges => 'Enregistrer les Modifications';
+  String get saveChanges => 'Enregistrer';
 
   @override
   String get cancel => 'Annuler';
@@ -288,7 +288,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get addContributionError => 'Échec de l\'ajout de la contribution';
 
   @override
-  String get addNewContribution => 'Ajouter une Nouvelle Contribution';
+  String get addNewContribution => 'Enregistrer';
 
   @override
   String get createProject => 'Créer un Projet';
@@ -381,7 +381,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get projectNotFound => 'Projet non trouvé';
 
   @override
-  String get noOrganizations => 'Aucune organisation pour le moment';
+  String get noOrganizations => 'Aucune organisation';
 
   @override
   String get createOrJoinOrganization => 'Créez ou rejoignez une organisation pour commencer';
@@ -461,7 +461,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get organization => 'Organisation';
 
   @override
-  String get viewAll => 'Voir Tout';
+  String get viewAll => 'Voir tout';
 
   @override
   String get recent => 'Récent';
@@ -621,4 +621,172 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get estimatedAt => 'Estimé le';
+
+  @override
+  String get appSettings => 'Paramètres de l\'Application';
+
+  @override
+  String get generalSettings => 'Paramètres Généraux';
+
+  @override
+  String get displaySettings => 'Paramètres d\'Affichage';
+
+  @override
+  String get notificationSettings => 'Paramètres de Notification';
+
+  @override
+  String get privacySettings => 'Paramètres de Confidentialité';
+
+  @override
+  String get aboutApp => 'À Propos de l\'Application';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get buildNumber => 'Numéro de Build';
+
+  @override
+  String get lastUpdated => 'Dernière Mise à Jour';
+
+  @override
+  String get developer => 'Développeur';
+
+  @override
+  String get support => 'Support';
+
+  @override
+  String get feedback => 'Commentaires';
+
+  @override
+  String get rateApp => 'Évaluer l\'Application';
+
+  @override
+  String get shareApp => 'Partager l\'Application';
+
+  @override
+  String get privacyPolicy => 'Politique de Confidentialité';
+
+  @override
+  String get termsOfService => 'Conditions d\'Utilisation';
+
+  @override
+  String get dataUsage => 'Utilisation des Données';
+
+  @override
+  String get cacheSize => 'Taille du Cache';
+
+  @override
+  String get clearCache => 'Vider le Cache';
+
+  @override
+  String get autoSync => 'Synchronisation Automatique';
+
+  @override
+  String get syncFrequency => 'Fréquence de Synchronisation';
+
+  @override
+  String get offlineMode => 'Mode Hors Ligne';
+
+  @override
+  String get biometricAuth => 'Authentification Biométrique';
+
+  @override
+  String get darkMode => 'Mode Sombre';
+
+  @override
+  String get systemTheme => 'Thème Système';
+
+  @override
+  String get lightTheme => 'Thème Clair';
+
+  @override
+  String get darkTheme => 'Thème Sombre';
+
+  @override
+  String get fontSize => 'Taille de Police';
+
+  @override
+  String get small => 'Petit';
+
+  @override
+  String get medium => 'Moyen';
+
+  @override
+  String get large => 'Grand';
+
+  @override
+  String get extraLarge => 'Très Grand';
+
+  @override
+  String get pushNotifications => 'Notifications Push';
+
+  @override
+  String get emailNotifications => 'Notifications Email';
+
+  @override
+  String get smsNotifications => 'Notifications SMS';
+
+  @override
+  String get marketingEmails => 'Emails Marketing';
+
+  @override
+  String get securityAlerts => 'Alertes de Sécurité';
+
+  @override
+  String get projectUpdates => 'Mises à Jour de Projet';
+
+  @override
+  String get contributionReminders => 'Rappels de Contribution';
+
+  @override
+  String get expenseAlerts => 'Alertes de Dépenses';
+
+  @override
+  String get estimateNotifications => 'Notifications d\'Estimation';
+
+  @override
+  String get organizationInvites => 'Invitations d\'Organisation';
+
+  @override
+  String get weeklyDigest => 'Résumé Hebdomadaire';
+
+  @override
+  String get monthlyReport => 'Rapport Mensuel';
+
+  @override
+  String get hiThere => 'Salut';
+
+  @override
+  String get user => 'Utilisateur';
+
+  @override
+  String get untitledProject => 'Projet sans titre';
+
+  @override
+  String get project => 'Projet';
+
+  @override
+  String get noProjectsYet => 'Aucun projet pour le moment';
+
+  @override
+  String get startByCreatingFirstProject => 'Commencez par créer votre premier projet';
+
+  @override
+  String get startCeremony => 'Commencer une cérémonie';
+
+  @override
+  String get manageTeams => 'Gérer les équipes';
+
+  @override
+  String get unknown => 'Inconnu';
+
+  @override
+  String get switchOrganization => 'Changer d\'Organisation';
+
+  @override
+  String get untitledOrganization => 'Organisation sans titre';
+
+  @override
+  String get createFirstOrganization => 'Créez votre première organisation pour commencer';
 }

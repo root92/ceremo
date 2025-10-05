@@ -70,7 +70,6 @@ class _AddContributionScreenState extends State<AddContributionScreen> {
         }
       });
     } catch (e) {
-      print('Error loading members: $e');
       // Show error but don't crash the screen
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -162,7 +161,6 @@ class _AddContributionScreenState extends State<AddContributionScreen> {
         Navigator.of(context).pop(true); // Return true to indicate success
       }
     } catch (e) {
-      print('Add contribution error: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
