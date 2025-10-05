@@ -23,12 +23,14 @@ class _ContributionDetailsScreenState extends State<ContributionDetailsScreen> {
   Map<String, dynamic>? _contribution;
   bool _isLoading = true;
   String? _error;
+  bool _hasChanges = false;
 
   @override
   void initState() {
     super.initState();
     _loadContribution();
   }
+
 
   Future<void> _loadContribution() async {
     setState(() {
@@ -69,7 +71,7 @@ class _ContributionDetailsScreenState extends State<ContributionDetailsScreen> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black87),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.of(context).pop(_hasChanges),
         ),
         title: Text(
           AppLocalizations.of(context)!.contributionDetails,
@@ -929,8 +931,9 @@ class _ContributionDetailsScreenState extends State<ContributionDetailsScreen> {
       ),
     ).then((success) {
       if (success == true) {
-        // Refresh the contribution details
+        // Refresh the contribution details and mark as changed
         _loadContribution();
+        _hasChanges = true;
       }
     });
   }
@@ -1028,6 +1031,7 @@ class _ContributionDetailsScreenState extends State<ContributionDetailsScreen> {
       // Update local state with the updated contribution data
       setState(() {
         _contribution = updatedContribution;
+        _hasChanges = true; // Mark as changed
       });
 
       // Show success message
@@ -1074,8 +1078,8 @@ class _ContributionDetailsScreenState extends State<ContributionDetailsScreen> {
       // Close loading dialog
       Navigator.pop(context);
 
-      // Navigate back to project details
-      Navigator.pop(context);
+      // Navigate back to project details with changes flag
+      Navigator.pop(context, true);
 
       // Show success message
       ScaffoldMessenger.of(context).showSnackBar(

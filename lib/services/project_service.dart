@@ -647,6 +647,35 @@ class ProjectService {
     }
   ''';
 
+  // Expense mutations
+  static const String updateExpenseMutation = '''
+    mutation UpdateExpense(\$input: UpdateExpenseInput!) {
+      updateExpense(input: \$input) {
+        success
+        expense {
+          id
+          amount
+          description
+          category
+          receiptUrl
+          currency
+          status
+          createdAt
+        }
+        errors
+      }
+    }
+  ''';
+
+  static const String deleteExpenseMutation = '''
+    mutation DeleteExpense(\$input: DeleteExpenseInput!) {
+      deleteExpense(input: \$input) {
+        success
+        errors
+      }
+    }
+  ''';
+
   static Future<Map<String, dynamic>> updateContribution({
     required String contributionId,
     required String memberId,
@@ -717,6 +746,83 @@ class ProjectService {
       return true;
     } catch (e) {
       print('Delete contribution error: $e');
+      rethrow;
+    }
+  }
+
+  // Expense methods
+  static Future<Map<String, dynamic>> updateExpense({
+    required String expenseId,
+    required double amount,
+    required String description,
+    required String category,
+    String? estimateId,
+    String? receiptUrl,
+    String? currency,
+    String? status,
+  }) async {
+    try {
+      final result = await CeremoGraphQLClient.client.mutate(
+        MutationOptions(
+          document: gql(updateExpenseMutation),
+          variables: {
+            'input': {
+              'expenseId': expenseId,
+              'amount': amount,
+              'description': description,
+              'category': category,
+              if (estimateId != null) 'estimateId': estimateId,
+              if (receiptUrl != null) 'receiptUrl': receiptUrl,
+              if (currency != null) 'currency': currency,
+              if (status != null) 'status': status,
+            },
+          },
+        ),
+      );
+      
+      if (result.hasException) {
+        throw Exception('Failed to update expense: ${result.exception.toString()}');
+      }
+      
+      final data = result.data?['updateExpense'];
+      if (data == null || !data['success']) {
+        throw Exception('Update expense failed: ${data?['errors']?.join(', ') ?? 'Unknown error'}');
+      }
+      
+      return data['expense'];
+    } catch (e) {
+      print('Update expense error: $e');
+      rethrow;
+    }
+  }
+
+  static Future<bool> deleteExpense({
+    required String expenseId,
+  }) async {
+    try {
+      final result = await CeremoGraphQLClient.client.mutate(
+        MutationOptions(
+          document: gql(deleteExpenseMutation),
+          variables: {
+            'input': {
+              'expenseId': expenseId,
+            },
+          },
+        ),
+      );
+      
+      if (result.hasException) {
+        throw Exception('Failed to delete expense: ${result.exception.toString()}');
+      }
+      
+      final data = result.data?['deleteExpense'];
+      if (data == null || !data['success']) {
+        throw Exception('Delete expense failed: ${data?['errors']?.join(', ') ?? 'Unknown error'}');
+      }
+      
+      return true;
+    } catch (e) {
+      print('Delete expense error: $e');
       rethrow;
     }
   }

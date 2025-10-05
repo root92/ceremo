@@ -1180,6 +1180,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Projects'**
   String get projects;
+
+  /// No description provided for @expenseDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense Details'**
+  String get expenseDetails;
+
+  /// No description provided for @expenseInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense Information'**
+  String get expenseInformation;
+
+  /// No description provided for @expenseNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense not found'**
+  String get expenseNotFound;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get category;
+
+  /// No description provided for @receiptUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt URL'**
+  String get receiptUrl;
+
+  /// No description provided for @actions.
+  ///
+  /// In en, this message translates to:
+  /// **'Actions'**
+  String get actions;
+
+  /// No description provided for @approve.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get approve;
+
+  /// No description provided for @reject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
+
+  /// No description provided for @editExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Expense'**
+  String get editExpense;
+
+  /// No description provided for @expenseUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense updated successfully'**
+  String get expenseUpdated;
+
+  /// No description provided for @updateExpenseError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update expense'**
+  String get updateExpenseError;
+
+  /// No description provided for @descriptionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Description is required'**
+  String get descriptionRequired;
+
+  /// No description provided for @categoryRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Category is required'**
+  String get categoryRequired;
+
+  /// No description provided for @enterDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Description'**
+  String get enterDescription;
+
+  /// No description provided for @enterCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Category'**
+  String get enterCategory;
+
+  /// No description provided for @enterReceiptUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Receipt URL (Optional)'**
+  String get enterReceiptUrl;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @estimateDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimate Details'**
+  String get estimateDetails;
+
+  /// No description provided for @estimateInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimate Information'**
+  String get estimateInformation;
+
+  /// No description provided for @estimateNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimate not found'**
+  String get estimateNotFound;
+
+  /// No description provided for @estimatedAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated Amount'**
+  String get estimatedAmount;
+
+  /// No description provided for @priority.
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get priority;
+
+  /// No description provided for @estimatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated At'**
+  String get estimatedAt;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
