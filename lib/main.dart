@@ -20,7 +20,6 @@ void main() async {
   
   // Initialize GraphQL
   await initHiveForFlutter();
-  
   runApp(const CeremoApp());
 }
 
@@ -48,6 +47,7 @@ class CeremoApp extends StatelessWidget {
               darkTheme: AppTheme.darkTheme,
               themeMode: themeProvider.themeMode,
               locale: localeProvider.locale,
+              debugShowCheckedModeBanner: false,
               localizationsDelegates: const [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
