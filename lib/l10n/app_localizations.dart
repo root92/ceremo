@@ -635,6 +635,30 @@ abstract class AppLocalizations {
   /// **'Please enter a valid amount'**
   String get invalidAmount;
 
+  /// Title for add contribution screen
+  ///
+  /// In en, this message translates to:
+  /// **'Add Contribution'**
+  String get addContribution;
+
+  /// Success message when contribution is added
+  ///
+  /// In en, this message translates to:
+  /// **'Contribution added successfully'**
+  String get contributionAdded;
+
+  /// Error message when contribution addition fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add contribution'**
+  String get addContributionError;
+
+  /// Button text for adding new contribution
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Contribution'**
+  String get addNewContribution;
+
   /// No description provided for @createProject.
   ///
   /// In en, this message translates to:

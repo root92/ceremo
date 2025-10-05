@@ -2,23 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:ceremo/l10n/app_localizations.dart';
 import 'package:ceremo/services/project_service.dart';
 
-class EditContributionScreen extends StatefulWidget {
-  final String contributionId;
+class AddContributionScreen extends StatefulWidget {
   final String projectId;
-  final Map<String, dynamic> contribution;
+  final String projectCurrency;
 
-  const EditContributionScreen({
+  const AddContributionScreen({
     Key? key,
-    required this.contributionId,
     required this.projectId,
-    required this.contribution,
+    required this.projectCurrency,
   }) : super(key: key);
 
   @override
-  State<EditContributionScreen> createState() => _EditContributionScreenState();
+  State<AddContributionScreen> createState() => _AddContributionScreenState();
 }
 
-class _EditContributionScreenState extends State<EditContributionScreen> {
+class _AddContributionScreenState extends State<AddContributionScreen> {
   final _formKey = GlobalKey<FormState>();
   final _amountController = TextEditingController();
   final _transactionIdController = TextEditingController();
@@ -44,30 +42,7 @@ class _EditContributionScreenState extends State<EditContributionScreen> {
   @override
   void initState() {
     super.initState();
-    _initializeForm();
     _loadMembers();
-  }
-
-  void _initializeForm() {
-    final contribution = widget.contribution;
-    _amountController.text = contribution['amount']?.toString() ?? '';
-    _transactionIdController.text = contribution['transactionId']?.toString() ?? '';
-    _noteController.text = contribution['note']?.toString() ?? '';
-    _selectedMemberId = contribution['member']?['id']?.toString();
-    
-    // Normalize payment method value to match our dropdown options
-    final paymentMethodValue = contribution['paymentMethod']?.toString();
-    if (paymentMethodValue != null) {
-      final paymentMethod = paymentMethodValue.toLowerCase();
-      if (_paymentMethods.contains(paymentMethod)) {
-        _selectedPaymentMethod = paymentMethod;
-      } else {
-        // If the payment method doesn't match our options, default to 'other'
-        _selectedPaymentMethod = 'other';
-      }
-    } else {
-      _selectedPaymentMethod = 'other';
-    }
   }
 
   Future<void> _loadMembers() async {
@@ -83,43 +58,28 @@ class _EditContributionScreenState extends State<EditContributionScreen> {
           'email': member['user']?['email'],
           'role': member['role'],
         }).toList();
-      });
-      
-      // Ensure the selected member is still valid after loading
-      if (_selectedMemberId != null) {
-        final memberExists = _members.any((member) => member['id']?.toString() == _selectedMemberId);
-        if (!memberExists) {
-          // If the selected member is not in the list, add it as a fallback
-          final currentMember = widget.contribution['member'];
-          if (currentMember != null) {
-            setState(() {
-              _members.insert(0, {
-                'id': currentMember['id'],
-                'name': currentMember['name'],
-                'email': currentMember['email'],
-                'role': currentMember['role'],
-              });
-            });
-          }
-        }
-      } else {
-        // If no member is selected, try to select the first one
-        if (_members.isNotEmpty) {
+        
+        // Auto-select the first member if available
+        if (_members.isNotEmpty && _selectedMemberId == null) {
           _selectedMemberId = _members.first['id']?.toString();
         }
-      }
+        
+        // Auto-select a default payment method if none selected
+        if (_selectedPaymentMethod == null) {
+          _selectedPaymentMethod = 'cash'; // Default to cash
+        }
+      });
     } catch (e) {
       print('Error loading members: $e');
-      // Fallback to current member if loading fails
-      setState(() {
-        _members = [
-          {
-            'id': widget.contribution['member']?['id'],
-            'name': widget.contribution['member']?['name'],
-            'email': widget.contribution['member']?['email'],
-          }
-        ];
-      });
+      // Show error but don't crash the screen
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to load project members. Please try again.'),
+            backgroundColor: Colors.orange,
+          ),
+        );
+      }
     }
   }
 
@@ -150,7 +110,7 @@ class _EditContributionScreenState extends State<EditContributionScreen> {
     return member['name'] ?? member['email'] ?? 'Unknown Member';
   }
 
-  Future<void> _saveChanges() async {
+  Future<void> _addContribution() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
@@ -182,30 +142,31 @@ class _EditContributionScreenState extends State<EditContributionScreen> {
     try {
       final amount = double.parse(_amountController.text);
       
-      await ProjectService.updateContribution(
-        contributionId: widget.contributionId,
+      await ProjectService.createContribution(
+        projectId: widget.projectId,
         memberId: _selectedMemberId!,
         amount: amount,
         paymentMethod: _selectedPaymentMethod!,
         transactionId: _transactionIdController.text.isNotEmpty ? _transactionIdController.text : null,
         note: _noteController.text.isNotEmpty ? _noteController.text : null,
+        currency: widget.projectCurrency,
       );
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.contributionUpdated),
+            content: Text(AppLocalizations.of(context)!.contributionAdded),
             backgroundColor: Colors.green,
           ),
         );
         Navigator.of(context).pop(true); // Return true to indicate success
       }
     } catch (e) {
-      print('Update contribution error: $e');
+      print('Add contribution error: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.updateContributionError),
+            content: Text(AppLocalizations.of(context)!.addContributionError),
             backgroundColor: Colors.red,
           ),
         );
@@ -231,7 +192,7 @@ class _EditContributionScreenState extends State<EditContributionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.editContribution),
+        title: Text(AppLocalizations.of(context)!.addContribution),
         backgroundColor: Theme.of(context).colorScheme.surface,
         foregroundColor: Theme.of(context).colorScheme.onSurface,
         elevation: 0,
@@ -316,7 +277,7 @@ class _EditContributionScreenState extends State<EditContributionScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                  prefixText: '${widget.contribution['currency'] ?? 'GNF'} ',
+                  prefixText: '${widget.projectCurrency} ',
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -436,7 +397,7 @@ class _EditContributionScreenState extends State<EditContributionScreen> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: _isLoading ? null : _saveChanges,
+                      onPressed: _isLoading ? null : _addContribution,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         foregroundColor: Colors.white,
@@ -454,7 +415,7 @@ class _EditContributionScreenState extends State<EditContributionScreen> {
                                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                               ),
                             )
-                          : Text(AppLocalizations.of(context)!.saveChanges),
+                          : Text(AppLocalizations.of(context)!.addNewContribution),
                     ),
                   ),
                 ],

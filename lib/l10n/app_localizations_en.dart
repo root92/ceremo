@@ -279,6 +279,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invalidAmount => 'Please enter a valid amount';
 
   @override
+  String get addContribution => 'Add Contribution';
+
+  @override
+  String get contributionAdded => 'Contribution added successfully';
+
+  @override
+  String get addContributionError => 'Failed to add contribution';
+
+  @override
+  String get addNewContribution => 'Add New Contribution';
+
+  @override
   String get createProject => 'Create Project';
 
   @override
