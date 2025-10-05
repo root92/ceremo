@@ -1,6 +1,6 @@
 class ApiConfig {
   // Backend API configuration
-  static const String baseUrl = 'https://c23534bb1b42.ngrok-free.app';
+  static const String baseUrl = 'https://haaju-backend.onrender.com';
   static const String graphqlEndpoint = '$baseUrl/graphql/';
   
   // API endpoints
