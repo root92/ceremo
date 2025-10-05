@@ -112,7 +112,12 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.createProject),
+        title: Text(
+          AppLocalizations.of(context)!.createProject,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
       ),

@@ -92,7 +92,7 @@ class DashboardScreen extends StatelessWidget {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.hiThere,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
                     ),
