@@ -240,7 +240,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get note => 'Note';
 
   @override
-  String get saveChanges => 'Enregistrer';
+  String get saveChanges => 'Enregistrer les Modifications';
 
   @override
   String get cancel => 'Annuler';
@@ -288,7 +288,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get addContributionError => 'Échec de l\'ajout de la contribution';
 
   @override
-  String get addNewContribution => 'Enregistrer';
+  String get addNewContribution => 'Ajouter une Nouvelle Contribution';
 
   @override
   String get createProject => 'Créer un Projet';
@@ -789,4 +789,49 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get createFirstOrganization => 'Créez votre première organisation pour commencer';
+
+  @override
+  String get addExpense => 'Ajouter une Dépense';
+
+  @override
+  String get expenseAdded => 'Dépense ajoutée avec succès';
+
+  @override
+  String get addExpenseError => 'Échec de l\'ajout de la dépense';
+
+  @override
+  String get venue => 'Lieu';
+
+  @override
+  String get food => 'Nourriture & Traiteur';
+
+  @override
+  String get transport => 'Transport';
+
+  @override
+  String get decoration => 'Décoration';
+
+  @override
+  String get entertainment => 'Divertissement';
+
+  @override
+  String get utilities => 'Services Publics';
+
+  @override
+  String get clothing => 'Vêtements Traditionnels';
+
+  @override
+  String get gifts => 'Cadeaux & Souvenirs';
+
+  @override
+  String get ceremonyItems => 'Articles de Cérémonie';
+
+  @override
+  String get security => 'Sécurité';
+
+  @override
+  String get photography => 'Photographie & Vidéo';
+
+  @override
+  String get miscellaneous => 'Divers';
 }

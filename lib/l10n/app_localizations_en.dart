@@ -789,4 +789,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createFirstOrganization => 'Create your first organization to get started';
+
+  @override
+  String get addExpense => 'Add Expense';
+
+  @override
+  String get expenseAdded => 'Expense added successfully';
+
+  @override
+  String get addExpenseError => 'Failed to add expense';
+
+  @override
+  String get venue => 'Venue';
+
+  @override
+  String get food => 'Food & Catering';
+
+  @override
+  String get transport => 'Transport';
+
+  @override
+  String get decoration => 'Decoration';
+
+  @override
+  String get entertainment => 'Entertainment';
+
+  @override
+  String get utilities => 'Utilities';
+
+  @override
+  String get clothing => 'Traditional Clothing';
+
+  @override
+  String get gifts => 'Gifts & Souvenirs';
+
+  @override
+  String get ceremonyItems => 'Ceremony Items';
+
+  @override
+  String get security => 'Security';
+
+  @override
+  String get photography => 'Photography & Video';
+
+  @override
+  String get miscellaneous => 'Miscellaneous';
 }
