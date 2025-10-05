@@ -1673,35 +1673,35 @@ abstract class AppLocalizations {
   /// **'Failed to add expense'**
   String get addExpenseError;
 
-  /// No description provided for @officeSupplies.
+  /// No description provided for @venue.
   ///
   /// In en, this message translates to:
-  /// **'Office Supplies'**
-  String get officeSupplies;
+  /// **'Venue'**
+  String get venue;
 
-  /// No description provided for @travel.
+  /// No description provided for @food.
   ///
   /// In en, this message translates to:
-  /// **'Travel'**
-  String get travel;
+  /// **'Food & Catering'**
+  String get food;
 
-  /// No description provided for @meals.
+  /// No description provided for @transport.
   ///
   /// In en, this message translates to:
-  /// **'Meals'**
-  String get meals;
+  /// **'Transport'**
+  String get transport;
 
-  /// No description provided for @equipment.
+  /// No description provided for @decoration.
   ///
   /// In en, this message translates to:
-  /// **'Equipment'**
-  String get equipment;
+  /// **'Decoration'**
+  String get decoration;
 
-  /// No description provided for @marketing.
+  /// No description provided for @entertainment.
   ///
   /// In en, this message translates to:
-  /// **'Marketing'**
-  String get marketing;
+  /// **'Entertainment'**
+  String get entertainment;
 
   /// No description provided for @utilities.
   ///
@@ -1709,29 +1709,41 @@ abstract class AppLocalizations {
   /// **'Utilities'**
   String get utilities;
 
-  /// No description provided for @rent.
+  /// No description provided for @clothing.
   ///
   /// In en, this message translates to:
-  /// **'Rent'**
-  String get rent;
+  /// **'Traditional Clothing'**
+  String get clothing;
 
-  /// No description provided for @professionalServices.
+  /// No description provided for @gifts.
   ///
   /// In en, this message translates to:
-  /// **'Professional Services'**
-  String get professionalServices;
+  /// **'Gifts & Souvenirs'**
+  String get gifts;
 
-  /// No description provided for @software.
+  /// No description provided for @ceremonyItems.
   ///
   /// In en, this message translates to:
-  /// **'Software'**
-  String get software;
+  /// **'Ceremony Items'**
+  String get ceremonyItems;
 
-  /// No description provided for @other.
+  /// No description provided for @security.
   ///
   /// In en, this message translates to:
-  /// **'Other'**
-  String get other;
+  /// **'Security'**
+  String get security;
+
+  /// No description provided for @photography.
+  ///
+  /// In en, this message translates to:
+  /// **'Photography & Video'**
+  String get photography;
+
+  /// No description provided for @miscellaneous.
+  ///
+  /// In en, this message translates to:
+  /// **'Miscellaneous'**
+  String get miscellaneous;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

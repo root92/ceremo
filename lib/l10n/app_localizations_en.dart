@@ -800,32 +800,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addExpenseError => 'Failed to add expense';
 
   @override
-  String get officeSupplies => 'Office Supplies';
+  String get venue => 'Venue';
 
   @override
-  String get travel => 'Travel';
+  String get food => 'Food & Catering';
 
   @override
-  String get meals => 'Meals';
+  String get transport => 'Transport';
 
   @override
-  String get equipment => 'Equipment';
+  String get decoration => 'Decoration';
 
   @override
-  String get marketing => 'Marketing';
+  String get entertainment => 'Entertainment';
 
   @override
   String get utilities => 'Utilities';
 
   @override
-  String get rent => 'Rent';
+  String get clothing => 'Traditional Clothing';
 
   @override
-  String get professionalServices => 'Professional Services';
+  String get gifts => 'Gifts & Souvenirs';
 
   @override
-  String get software => 'Software';
+  String get ceremonyItems => 'Ceremony Items';
 
   @override
-  String get other => 'Other';
+  String get security => 'Security';
+
+  @override
+  String get photography => 'Photography & Video';
+
+  @override
+  String get miscellaneous => 'Miscellaneous';
 }

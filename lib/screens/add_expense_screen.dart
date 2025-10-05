@@ -28,16 +28,18 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   bool _isLoading = false;
 
   final List<String> _expenseCategories = [
-    'office_supplies',
-    'travel',
-    'meals',
-    'equipment',
-    'marketing',
+    'venue',
+    'food',
+    'transport',
+    'decoration',
+    'entertainment',
     'utilities',
-    'rent',
-    'professional_services',
-    'software',
-    'other',
+    'clothing',
+    'gifts',
+    'ceremony_items',
+    'security',
+    'photography',
+    'miscellaneous',
   ];
 
   @override
@@ -51,26 +53,30 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
   String _getCategoryLabel(String category) {
     switch (category) {
-      case 'office_supplies':
-        return AppLocalizations.of(context)!.officeSupplies;
-      case 'travel':
-        return AppLocalizations.of(context)!.travel;
-      case 'meals':
-        return AppLocalizations.of(context)!.meals;
-      case 'equipment':
-        return AppLocalizations.of(context)!.equipment;
-      case 'marketing':
-        return AppLocalizations.of(context)!.marketing;
+      case 'venue':
+        return AppLocalizations.of(context)!.venue;
+      case 'food':
+        return AppLocalizations.of(context)!.food;
+      case 'transport':
+        return AppLocalizations.of(context)!.transport;
+      case 'decoration':
+        return AppLocalizations.of(context)!.decoration;
+      case 'entertainment':
+        return AppLocalizations.of(context)!.entertainment;
       case 'utilities':
         return AppLocalizations.of(context)!.utilities;
-      case 'rent':
-        return AppLocalizations.of(context)!.rent;
-      case 'professional_services':
-        return AppLocalizations.of(context)!.professionalServices;
-      case 'software':
-        return AppLocalizations.of(context)!.software;
-      case 'other':
-        return AppLocalizations.of(context)!.other;
+      case 'clothing':
+        return AppLocalizations.of(context)!.clothing;
+      case 'gifts':
+        return AppLocalizations.of(context)!.gifts;
+      case 'ceremony_items':
+        return AppLocalizations.of(context)!.ceremonyItems;
+      case 'security':
+        return AppLocalizations.of(context)!.security;
+      case 'photography':
+        return AppLocalizations.of(context)!.photography;
+      case 'miscellaneous':
+        return AppLocalizations.of(context)!.miscellaneous;
       default:
         return category;
     }
@@ -108,11 +114,17 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         Navigator.of(context).pop(true);
       }
     } catch (e) {
+      print('Add expense error: $e');
+      print('Error type: ${e.runtimeType}');
+      if (e.toString().contains('GraphQL')) {
+        print('GraphQL error details: $e');
+      }
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('${AppLocalizations.of(context)!.addExpenseError}: $e'),
             backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
           ),
         );
       }

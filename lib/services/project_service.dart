@@ -827,35 +827,58 @@ class ProjectService {
     String? status,
   }) async {
     try {
+      print('Creating expense with data:');
+      print('  projectId: $projectId');
+      print('  amount: $amount');
+      print('  description: $description');
+      print('  category: $category');
+      print('  estimateId: $estimateId');
+      print('  receiptUrl: $receiptUrl');
+      print('  currency: $currency');
+      print('  status: $status');
+      
+      final variables = {
+        'input': {
+          'projectId': projectId,
+          'amount': amount,
+          'description': description,
+          'category': category,
+          if (estimateId != null) 'estimateId': estimateId,
+          if (receiptUrl != null) 'receiptUrl': receiptUrl,
+          if (currency != null) 'currency': currency,
+          if (status != null) 'status': status,
+        },
+      };
+      
+      print('GraphQL Variables: $variables');
+      
       final result = await CeremoGraphQLClient.client.mutate(
         MutationOptions(
           document: gql(createExpenseMutation),
-          variables: {
-            'input': {
-              'project_id': projectId,
-              'amount': amount,
-              'description': description,
-              'category': category,
-              if (estimateId != null) 'estimate_id': estimateId,
-              if (receiptUrl != null) 'receipt_url': receiptUrl,
-              if (currency != null) 'currency': currency,
-              if (status != null) 'status': status,
-            },
-          },
+          variables: variables,
         ),
       );
       
+      print('GraphQL Response: ${result.data}');
+      
       if (result.hasException) {
+        print('GraphQL Exception: ${result.exception}');
         throw Exception('Failed to create expense: ${result.exception.toString()}');
       }
       
       final data = result.data?['createExpense'];
+      print('Create expense data: $data');
+      
       if (data == null || !data['success']) {
+        print('Create expense failed with errors: ${data?['errors']}');
         throw Exception('Create expense failed: ${data?['errors']?.join(', ') ?? 'Unknown error'}');
       }
       
+      print('Expense created successfully: ${data['expense']}');
       return data['expense'];
     } catch (e) {
+      print('Create expense error: $e');
+      print('Error type: ${e.runtimeType}');
       rethrow;
     }
   }

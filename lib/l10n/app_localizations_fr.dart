@@ -800,32 +800,38 @@ class AppLocalizationsFr extends AppLocalizations {
   String get addExpenseError => 'Échec de l\'ajout de la dépense';
 
   @override
-  String get officeSupplies => 'Fournitures de Bureau';
+  String get venue => 'Lieu';
 
   @override
-  String get travel => 'Voyage';
+  String get food => 'Nourriture & Traiteur';
 
   @override
-  String get meals => 'Repas';
+  String get transport => 'Transport';
 
   @override
-  String get equipment => 'Équipement';
+  String get decoration => 'Décoration';
 
   @override
-  String get marketing => 'Marketing';
+  String get entertainment => 'Divertissement';
 
   @override
   String get utilities => 'Services Publics';
 
   @override
-  String get rent => 'Loyer';
+  String get clothing => 'Vêtements Traditionnels';
 
   @override
-  String get professionalServices => 'Services Professionnels';
+  String get gifts => 'Cadeaux & Souvenirs';
 
   @override
-  String get software => 'Logiciel';
+  String get ceremonyItems => 'Articles de Cérémonie';
 
   @override
-  String get other => 'Autre';
+  String get security => 'Sécurité';
+
+  @override
+  String get photography => 'Photographie & Vidéo';
+
+  @override
+  String get miscellaneous => 'Divers';
 }
