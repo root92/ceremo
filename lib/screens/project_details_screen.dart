@@ -6,6 +6,7 @@ import '../l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
 import '../utils/formatters.dart';
 import 'contribution_details_screen.dart';
+import 'add_contribution_screen.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final String projectId;
@@ -304,6 +305,25 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> with Ticker
           _buildExpensesTab(context),
           _buildEstimateTab(context),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AddContributionScreen(
+                projectId: widget.projectId,
+                projectCurrency: _project!['currency'] ?? 'GNF',
+              ),
+            ),
+          ).then((success) {
+            if (success == true) {
+              // Refresh the project data
+              _loadProjectDetails();
+            }
+          });
+        },
+        backgroundColor: AppColors.primary,
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }

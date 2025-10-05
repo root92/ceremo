@@ -368,6 +368,22 @@
   "@invalidAmount": {
     "description": "Invalid amount validation error message"
   },
+  "addContribution": "Add Contribution",
+  "@addContribution": {
+    "description": "Title for add contribution screen"
+  },
+  "contributionAdded": "Contribution added successfully",
+  "@contributionAdded": {
+    "description": "Success message when contribution is added"
+  },
+  "addContributionError": "Failed to add contribution",
+  "@addContributionError": {
+    "description": "Error message when contribution addition fails"
+  },
+  "addNewContribution": "Add New Contribution",
+  "@addNewContribution": {
+    "description": "Button text for adding new contribution"
+  },
   "myProjects": "My Projects",
   "viewAllProjects": "View all your projects",
   "createProject": "Create Project",

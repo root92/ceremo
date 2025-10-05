@@ -352,7 +352,7 @@ class ProjectService {
     required String projectId,
     int limit = 20,
     int offset = 0,
-    String orderBy = '-createdAt',
+    String orderBy = '-created_at',
   }) async {
     try {
       final result = await CeremoGraphQLClient.client.query(
@@ -383,7 +383,7 @@ class ProjectService {
     required String projectId,
     int limit = 20,
     int offset = 0,
-    String orderBy = '-createdAt',
+    String orderBy = '-created_at',
   }) async {
     try {
       final result = await CeremoGraphQLClient.client.query(
@@ -414,7 +414,7 @@ class ProjectService {
     required String projectId,
     int limit = 20,
     int offset = 0,
-    String orderBy = '-createdAt',
+    String orderBy = '-created_at',
   }) async {
     try {
       final result = await CeremoGraphQLClient.client.query(
@@ -488,15 +488,18 @@ class ProjectService {
 
   // Project members query
   static const String getProjectMembersQuery = '''
-    query GetProjectMembers(\$projectId: ID!, \$limit: Int, \$offset: Int, \$orderBy: String) {
-      projectMembers(projectId: \$projectId, limit: \$limit, offset: \$offset, orderBy: \$orderBy) {
+    query GetProject(\$id: ID!) {
+      project(id: \$id) {
         id
-        role
-        createdAt
-        user {
+        members {
           id
-          name
-          email
+          role
+          createdAt
+          user {
+            id
+            name
+            email
+          }
         }
       }
     }
@@ -513,10 +516,7 @@ class ProjectService {
         QueryOptions(
           document: gql(getProjectMembersQuery),
           variables: {
-            'projectId': projectId,
-            if (limit != null) 'limit': limit,
-            if (offset != null) 'offset': offset,
-            if (orderBy != null) 'orderBy': orderBy,
+            'id': projectId,
           },
         ),
       );
@@ -525,7 +525,12 @@ class ProjectService {
         throw Exception('Failed to get project members: ${result.exception.toString()}');
       }
       
-      final members = result.data?['projectMembers'] as List<dynamic>?;
+      final project = result.data?['project'];
+      if (project == null) {
+        throw Exception('Project not found');
+      }
+      
+      final members = project['members'] as List<dynamic>?;
       return members?.cast<Map<String, dynamic>>() ?? [];
     } catch (e) {
       print('Get project members error: $e');
@@ -534,6 +539,77 @@ class ProjectService {
   }
 
   // Contribution mutations
+  static const String createContributionMutation = '''
+    mutation CreateContribution(\$input: CreateContributionInput!) {
+      createContribution(input: \$input) {
+        success
+        contribution {
+          id
+          amount
+          paymentMethod
+          transactionId
+          note
+          currency
+          status
+          createdAt
+          member {
+            id
+            role
+            user {
+              id
+              name
+              email
+            }
+          }
+        }
+        errors
+      }
+    }
+  ''';
+
+  static Future<Map<String, dynamic>> createContribution({
+    required String projectId,
+    required String memberId,
+    required double amount,
+    required String paymentMethod,
+    String? transactionId,
+    String? note,
+    String? currency,
+  }) async {
+    try {
+      final result = await CeremoGraphQLClient.client.mutate(
+        MutationOptions(
+          document: gql(createContributionMutation),
+          variables: {
+            'input': {
+              'projectId': projectId,
+              'memberId': memberId,
+              'amount': amount,
+              'paymentMethod': paymentMethod,
+              if (transactionId != null) 'transactionId': transactionId,
+              if (note != null) 'note': note,
+              if (currency != null) 'currency': currency,
+            },
+          },
+        ),
+      );
+      
+      if (result.hasException) {
+        throw Exception('Failed to create contribution: ${result.exception.toString()}');
+      }
+      
+      final data = result.data?['createContribution'];
+      if (data == null || !data['success']) {
+        throw Exception('Create contribution failed: ${data?['errors']?.join(', ') ?? 'Unknown error'}');
+      }
+      
+      return data['contribution'];
+    } catch (e) {
+      print('Create contribution error: $e');
+      rethrow;
+    }
+  }
+
   static const String updateContributionMutation = '''
     mutation UpdateContribution(\$input: UpdateContributionInput!) {
       updateContribution(input: \$input) {
