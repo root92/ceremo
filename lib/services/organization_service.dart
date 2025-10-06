@@ -206,7 +206,7 @@ class OrganizationService {
       }
       
       // Create personal organization using regular createOrganization mutation
-      final orgName = "$userName's Personal Organization";
+      final orgName = "$userName's Ceremo";
       final orgSlug = "${userEmail.split('@')[0]}-personal-${DateTime.now().millisecondsSinceEpoch}";
       
       final result = await CeremoGraphQLClient.client.mutate(
@@ -216,7 +216,7 @@ class OrganizationService {
             'input': {
               'name': orgName,
               'slug': orgSlug,
-              'description': 'Personal organization for $userName',
+              'description': 'Ceremo for $userName',
               'orgType': 'personal',
               'email': userEmail,
             },
