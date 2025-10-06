@@ -73,16 +73,16 @@ class OrganizationContextProvider with ChangeNotifier {
     if (_currentOrganization != null) return;
     
     if (_organizations.isNotEmpty) {
-      // Try to find user's default organization or personal organization
+      // Try to find user's default organization or Ceremo
       Map<String, dynamic>? defaultOrg;
       
-      // First, try to find a personal organization
+      // First, try to find a Ceremo (personal org)
       try {
         defaultOrg = _organizations.firstWhere(
           (org) => org['orgType'] == 'personal',
         );
       } catch (e) {
-        // No personal organization found, use the first one
+        // No Ceremo found, use the first one
         defaultOrg = _organizations.first;
       }
       
@@ -96,10 +96,10 @@ class OrganizationContextProvider with ChangeNotifier {
           _organizations = [personalOrg];
           await switchOrganization(personalOrg);
         } else {
-          _error = 'Failed to create personal organization. Please try again.';
+          _error = 'Failed to create Ceremo. Please try again.';
         }
       } catch (e) {
-        _error = 'Failed to create personal organization: $e';
+        _error = 'Failed to create Ceremo: $e';
       }
     }
   }
